@@ -5,6 +5,12 @@
  */
 package br.senai.sc.trabalhoFinalSA;
 
+import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
+import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Aluno
@@ -16,6 +22,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
      */
     public trabalhoFinalFrame() {
         initComponents();
+        
+        painelPrincipal.add(painelLogin, "telaPadrao");
+        
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "telaPadrao");
     }
 
     /**
@@ -27,7 +38,14 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        painelPrincipal = new javax.swing.JPanel();
+        painelLogin = new javax.swing.JPanel();
+        LabelTituloLogin = new javax.swing.JLabel();
+        LabelUsuario = new javax.swing.JLabel();
+        cpUsuario = new javax.swing.JTextField();
+        LabelSenha = new javax.swing.JLabel();
+        cpSenha = new javax.swing.JTextField();
+        btnEntrar = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
         menuManterColaborador = new javax.swing.JMenu();
         menuCadastrarColaborador = new javax.swing.JMenuItem();
@@ -49,6 +67,75 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         menuAgendaEquipe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        painelPrincipal.setLayout(new java.awt.CardLayout());
+
+        LabelTituloLogin.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabelTituloLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelTituloLogin.setText("GESTÃO DE PESSOAS");
+
+        LabelUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LabelUsuario.setText("Usuário:");
+
+        cpUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cpUsuarioActionPerformed(evt);
+            }
+        });
+
+        LabelSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LabelSenha.setText("Senha:");
+
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout painelLoginLayout = new javax.swing.GroupLayout(painelLogin);
+        painelLogin.setLayout(painelLoginLayout);
+        painelLoginLayout.setHorizontalGroup(
+            painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelTituloLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(painelLoginLayout.createSequentialGroup()
+                .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(painelLoginLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(painelLoginLayout.createSequentialGroup()
+                                .addComponent(LabelUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cpUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(painelLoginLayout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(LabelSenha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cpSenha))))
+                    .addGroup(painelLoginLayout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(btnEntrar)))
+                .addContainerGap(160, Short.MAX_VALUE))
+        );
+        painelLoginLayout.setVerticalGroup(
+            painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelLoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(LabelTituloLogin)
+                .addGap(59, 59, 59)
+                .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelUsuario)
+                    .addComponent(cpUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelSenha)
+                    .addComponent(cpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addComponent(btnEntrar)
+                .addContainerGap(141, Short.MAX_VALUE))
+        );
+
+        painelPrincipal.add(painelLogin, "card2");
 
         menuManterColaborador.setText("Colaborador");
 
@@ -140,11 +227,15 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+            .addGap(0, 520, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+            .addGap(0, 359, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,7 +250,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuEditarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarColaboradorActionPerformed
-        // TODO add your handling code here:
+
+
+        
     }//GEN-LAST:event_menuEditarColaboradorActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
@@ -169,6 +262,21 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void menuEditarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarEquipeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuEditarEquipeActionPerformed
+
+    private void cpUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cpUsuarioActionPerformed
+
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        ColaboradorDao cl = new ColaboradorDao();
+
+        try {
+            cl.checar(cpUsuario.getText(),cpSenha.getText());
+        } catch (SQLException ex) {
+            Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,7 +316,12 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel LabelSenha;
+    private javax.swing.JLabel LabelTituloLogin;
+    private javax.swing.JLabel LabelUsuario;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JTextField cpSenha;
+    private javax.swing.JTextField cpUsuario;
     private javax.swing.JMenuItem menuAdicionarTarefa;
     private javax.swing.JMenuItem menuAgendaColaborador;
     private javax.swing.JMenuItem menuAgendaEquipe;
@@ -227,5 +340,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private javax.swing.JMenu menuManterColaborador;
     private javax.swing.JMenu menuManterEquipe;
     private javax.swing.JMenu menuVerAgenda;
+    private javax.swing.JPanel painelLogin;
+    private javax.swing.JPanel painelPrincipal;
     // End of variables declaration//GEN-END:variables
 }

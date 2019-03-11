@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ColaboradorDao extends ConnectionFactory {
     
@@ -52,7 +54,24 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
 
-   
+   public boolean checar(String usuario,String senha)throws SQLException {
+         String sql = "select * from colaborador where usuCol = ? and senCol = ?;";
+        List<br.senai.sc.trabalhoFinalSA.modelo.Colaborador> colaboradores = null;
+
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+        st.setString(1, usuario);
+        st.setString(2, senha);
+            
+         
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro na autenticação do Usuario e Senha");
+          
+            return false;
+        }
+        
+           return true;
+   }
+    
     public void eliminar(int estCol) throws SQLException {
 
         String sql = "update colaborador set estCol = 0";
@@ -117,17 +136,18 @@ public class ColaboradorDao extends ConnectionFactory {
                 col.setRuaCol(rs.getString("ruaCol"));
                 col.setBaiCol(rs.getString("baiCol"));
                 col.setNumCol(rs.getString("numCol"));
-                col.setCepCol(rs.getLong("cepCol"));
-                col.setCidCol(rs.getString("cidCol"));
-                col.setCelCol(rs.getLong("celCol"));
-                col.setDddCol(rs.getInt("dddCol"));
-                col.setTipCol(rs.getInt("tipCol"));
-                col.setUsuCol(rs.getString("usuCol"));
-                col.setSenCol(rs.getString("senCol"));
-                col.setEmaCol(rs.getString("emaCol"));
-                col.setUtiCol(rs.getString("utiCol"));
-                col.setDatCol(rs.getString("datCol"));
-                col.setEstCol(rs.getInt("estCol"));
+       
+                 col.setCepCol(rs.getLong("cepCol"));
+                    col.setCidCol(rs.getString("cidCol"));
+                    col.setCelCol(rs.getLong("celcli"));
+                    col.setDddCol(rs.getInt("dddCol"));
+                    col.setTipCol(rs.getInt("tipCol"));
+                    col.setUsuCol(rs.getString("usuCol"));
+                    col.setSenCol(rs.getString("senCol"));
+                    col.setEmaCol(rs.getString("emaCol"));
+                    col.setUtiCol(rs.getString("utiCol"));
+                    col.setDatCol(rs.getString("datCol"));
+                     col.setEstCol(rs.getInt("estCol"));
                 
                 colaboradores.add(col);
             }
@@ -142,7 +162,11 @@ public class ColaboradorDao extends ConnectionFactory {
     }
 
     public Colaborador getColaborador(int codCol) throws SQLException {
+
         String sql = "select * from colaborador where codCol = ?";
+
+        
+
         Colaborador colaborador = null;
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
