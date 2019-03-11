@@ -16,8 +16,10 @@ import java.util.List;
  *
  * @author Aluno
  */
+
+
 public class EquipeDao extends ConnectionFactory{
-    
+   /** 
     
     private Connection con;
 
@@ -141,5 +143,5 @@ public class EquipeDao extends ConnectionFactory{
         this.con.close();
         return cliente;
     }
-    
+    */
 }
