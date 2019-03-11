@@ -12,13 +12,13 @@ public class Colaborador {
     private String cidCol;
     private long celCol;
     private int dddCol;
-    private int tipCol;
+    private int tipCol; //colaborador  tipo ="1" Gestor,  otros colaboradores tipo ="2"
     private String usuCol;
     private String senCol;
     private String emaCol;
     private String utiCol;
     private String datCol;
-    private int estCol;
+    private int estCol;   //Etatos ="1"  colaborador ativo, Inativo Etatos ="2"
 
     public String getNomCol() {
         return nomCol;
