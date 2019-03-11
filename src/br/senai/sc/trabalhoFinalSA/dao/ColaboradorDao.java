@@ -56,7 +56,7 @@ public class ColaboradorDao extends ConnectionFactory {
     public void eliminar(int estCol) throws SQLException {
 
         String sql = "update colaborador set estCol = 0";
-//estatus = 0 signiufica que o colaborador esta inativel
+//estatus = 0 significa que o colaborador esta inativel
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setInt(1, estCol);
             st.execute();
@@ -70,27 +70,27 @@ public class ColaboradorDao extends ConnectionFactory {
 
     public void alterar(Colaborador col) throws SQLException {
 
-        String sql = "update colaborador set ruaCol = ?, baiCol = ?, "
+        String sql = "update colaborador set nomCol = ?, ruaCol = ?, baiCol = ?, "
                 + "numCol = ?, cepCol = ?, cidCol = ?, celCol = ?, dddCol = ?,"
                 + "tipCol = ?, usuCol = ?, senCol = ?, emaCol = ?, utiCol = ?,"
-                + " datCol = ?, estCol = ?,nomCol = ?, where codCol = ?";
+                + " datCol = ?, estCol = ?, where codCol = ?";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-           st.setString(1, col.getRuaCol());
-            st.setString(2, col.getBaiCol());
-            st.setString(3, col.getNumCol());
-            st.setLong(4, col.getCepCol());
-            st.setString(5, col.getCidCol());
-            st.setLong(6, col.getCelCol());
-            st.setInt(7, col.getDddCol());
-            st.setInt(8, col.getTipCol());
-            st.setString(9, col.getUsuCol());
-            st.setString(10, col.getSenCol());
-            st.setString(11, col.getEmaCol());
-            st.setString(12, col.getUtiCol());
-            st.setString(13, col.getDatCol());
-            st.setInt(14, col.getEstCol());
-            st.setString(15, col.getNomCol());
+            st.setString(1, col.getNomCol());
+           st.setString(2, col.getRuaCol());
+            st.setString(3, col.getBaiCol());
+            st.setString(4, col.getNumCol());
+            st.setLong(5, col.getCepCol());
+            st.setString(6, col.getCidCol());
+            st.setLong(7, col.getCelCol());
+            st.setInt(8, col.getDddCol());
+            st.setInt(9, col.getTipCol());
+            st.setString(10, col.getUsuCol());
+            st.setString(11, col.getSenCol());
+            st.setString(12, col.getEmaCol());
+            st.setString(13, col.getUtiCol());
+            st.setString(14, col.getDatCol());
+            st.setInt(15, col.getEstCol());
             st.setInt(16, col.getCodCol());
 
             st.execute();
@@ -117,18 +117,17 @@ public class ColaboradorDao extends ConnectionFactory {
                 col.setRuaCol(rs.getString("ruaCol"));
                 col.setBaiCol(rs.getString("baiCol"));
                 col.setNumCol(rs.getString("numCol"));
-                //Esta FINALIZADO ??
-                 col.setCepCol(rs.getLong("cepCol"));
-                    col.setCidCol(rs.getString("cidCol"));
-                    col.setCelCol(rs.getLong("celcli"));
-                    col.setDddCol(rs.getInt("dddCol"));
-                    col.setTipCol(rs.getInt("tipCol"));
-                    col.setUsuCol(rs.getString("usuCol"));
-                    col.setSenCol(rs.getString("senCol"));
-                    col.setEmaCol(rs.getString("emaCol"));
-                    col.setUtiCol(rs.getString("utiCol"));
-                    col.setDatCol(rs.getString("datCol"));
-                     col.setEstCol(rs.getInt("estCol"));
+                col.setCepCol(rs.getLong("cepCol"));
+                col.setCidCol(rs.getString("cidCol"));
+                col.setCelCol(rs.getLong("celCol"));
+                col.setDddCol(rs.getInt("dddCol"));
+                col.setTipCol(rs.getInt("tipCol"));
+                col.setUsuCol(rs.getString("usuCol"));
+                col.setSenCol(rs.getString("senCol"));
+                col.setEmaCol(rs.getString("emaCol"));
+                col.setUtiCol(rs.getString("utiCol"));
+                col.setDatCol(rs.getString("datCol"));
+                col.setEstCol(rs.getInt("estCol"));
                 
                 colaboradores.add(col);
             }
@@ -142,12 +141,12 @@ public class ColaboradorDao extends ConnectionFactory {
         return colaboradores;
     }
 
-    public Colaborador getColaborador(int codcli) throws SQLException {
-        String sql = "select * from cliente where codcol = ?";
+    public Colaborador getColaborador(int codCol) throws SQLException {
+        String sql = "select * from colaborador where codCol = ?";
         Colaborador colaborador = null;
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setInt(1, codcli);
+            st.setInt(1, codCol);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     colaborador = new Colaborador();
@@ -158,7 +157,7 @@ public class ColaboradorDao extends ConnectionFactory {
                     colaborador.setNumCol(rs.getString("numCol"));
                     colaborador.setCepCol(rs.getLong("cepCol"));
                     colaborador.setCidCol(rs.getString("cidCol"));
-                    colaborador.setCelCol(rs.getLong("celcli"));
+                    colaborador.setCelCol(rs.getLong("celCol"));
                     colaborador.setDddCol(rs.getInt("dddCol"));
                     colaborador.setTipCol(rs.getInt("tipCol"));
                     colaborador.setUsuCol(rs.getString("usuCol"));
@@ -166,7 +165,7 @@ public class ColaboradorDao extends ConnectionFactory {
                     colaborador.setEmaCol(rs.getString("emaCol"));
                     colaborador.setUtiCol(rs.getString("utiCol"));
                     colaborador.setDatCol(rs.getString("datCol"));
-                     colaborador.setEstCol(rs.getInt("estCol"));
+                    colaborador.setEstCol(rs.getInt("estCol"));
                      
                 }
             }
