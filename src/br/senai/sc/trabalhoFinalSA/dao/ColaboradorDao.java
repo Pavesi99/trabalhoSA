@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ColaboradorDao extends ConnectionFactory {
     
@@ -52,7 +54,24 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
 
-   
+   public boolean checar(String usuario,String senha)throws SQLException {
+         String sql = "select * from colaborador where usuCol = ? and senCol = ?;";
+        List<br.senai.sc.trabalhoFinalSA.modelo.Colaborador> colaboradores = null;
+
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+        st.setString(1, usuario);
+        st.setString(2, senha);
+            
+         
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Erro na autenticação do Usuario e Senha");
+          
+            return false;
+        }
+        
+           return true;
+   }
+    
     public void eliminar(int estCol) throws SQLException {
 
         String sql = "update colaborador set estCol = 0";
@@ -117,7 +136,7 @@ public class ColaboradorDao extends ConnectionFactory {
                 col.setRuaCol(rs.getString("ruaCol"));
                 col.setBaiCol(rs.getString("baiCol"));
                 col.setNumCol(rs.getString("numCol"));
-                //Esta FINALIZADO ??
+       
                  col.setCepCol(rs.getLong("cepCol"));
                     col.setCidCol(rs.getString("cidCol"));
                     col.setCelCol(rs.getLong("celcli"));
@@ -142,12 +161,12 @@ public class ColaboradorDao extends ConnectionFactory {
         return colaboradores;
     }
 
-    public Colaborador getColaborador(int codcli) throws SQLException {
+    public Colaborador getColaborador(int codCol) throws SQLException {
         String sql = "select * from cliente where codcol = ?";
         Colaborador colaborador = null;
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setInt(1, codcli);
+            st.setInt(1, codCol);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     colaborador = new Colaborador();
