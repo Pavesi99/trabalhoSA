@@ -4,6 +4,7 @@ package br.senai.sc.trabalhoFinalSA.modelo;
 public class Colaborador {
     
     private int codCol;
+    private String nomCol;
     private String ruaCol;
     private String baiCol;
     private String numCol;
@@ -19,6 +20,16 @@ public class Colaborador {
     private String datCol;
     private int estCol;
 
+    public String getNomCol() {
+        return nomCol;
+    }
+
+    public void setNomCol(String nomCol) {
+        this.nomCol = nomCol;
+    }
+
+    
+    
     public int getCodCol() {
         return codCol;
     }
