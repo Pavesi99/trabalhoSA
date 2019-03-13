@@ -1,0 +1,1 @@
+SELECT * FROM trabalho_final.colaborador;
