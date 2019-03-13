@@ -36,32 +36,6 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         
     }
 
-      private void popularTabela ()  {
-        ColaboradorDao col = new ColaboradorDao ();
-        List<Colaborador> listaColaborador;
-        try {
-            listaColaborador = col.listarColaboradores();
-            
-        DefaultTableModel model = (DefaultTableModel) TblListagemColaborador.getModel();
-        List<Object> lista = new ArrayList<Object> ();
-        
-        for(int i =0 ; i < listaColaborador.size(); i++) {
-             Colaborador c = listaColaborador.get(i);
-             lista.add(new Object[]{c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
-    }
-        
-        for(int idx = 0; idx < lista.size(); idx++) {
-            model.addRow((Object []) lista.get(idx));
-        }
-        
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Obter os Colaboradores do Banco de Dados!");
-            Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-      
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,7 +107,27 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
-        this.popularTabela();
+        ColaboradorDao col = new ColaboradorDao ();
+        List<Colaborador> listaColaborador;
+        try {
+            listaColaborador = col.listarColaboradores();
+            
+        DefaultTableModel model = (DefaultTableModel) TblListagemColaborador.getModel();
+        List<Object> lista = new ArrayList<Object> ();
+        
+        for(int i =0 ; i < listaColaborador.size(); i++) {
+             Colaborador c = listaColaborador.get(i);
+             lista.add(new Object[]{c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
+    }
+        
+        for(int idx = 0; idx < lista.size(); idx++) {
+            model.addRow((Object []) lista.get(idx));
+        }
+        
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Obter os Colaboradores do Banco de Dados!");
+            Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_painelListagemComponentShown
 
 

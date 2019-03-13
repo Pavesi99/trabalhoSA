@@ -2,6 +2,7 @@ package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
+import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
     /**
      * Creates new form PainelCadastroColaborador
      */
+    
     public PainelCadastroColaborador() {
         initComponents();
     }
