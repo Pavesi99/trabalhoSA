@@ -20,7 +20,14 @@ import javax.swing.JOptionPane;
  */
 public class PainelCadastroColaborador extends javax.swing.JPanel {
 
+
     private CardLayout cl;
+
+
+    /**
+     * Creates new form PainelCadastroColaborador
+     */
+    
 
     public PainelCadastroColaborador() {
         initComponents();

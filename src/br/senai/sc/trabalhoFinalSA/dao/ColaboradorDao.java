@@ -77,10 +77,10 @@ public class ColaboradorDao extends ConnectionFactory {
     
     public void eliminar(int estCol) throws SQLException {
 
-        String sql = "update colaborador set estCol = 0";
+        String sql = "update colaborador set estCol = 2";
 //estatus = 0 significa que o colaborador esta inativel
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setInt(1, estCol);
+            st.setInt(2, estCol);
             st.execute();
             st.close();
         }

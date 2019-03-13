@@ -5,6 +5,17 @@
  */
 package br.senai.sc.trabalhoFinalSA.views;
 
+import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
+import java.awt.CardLayout;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Rosaldo Junior
@@ -14,8 +25,14 @@ public class ExcluirColaborador extends javax.swing.JPanel {
     /**
      * Creates new form ExcluirColaborador
      */
+    private int estCol;
+    private CardLayout cl;
     public ExcluirColaborador() {
         initComponents();
+        
+        this.cl  = (CardLayout) this.getLayout();
+       
+        
     }
 
     /**
@@ -30,6 +47,8 @@ public class ExcluirColaborador extends javax.swing.JPanel {
         painelListagem = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblListagemColaborador = new javax.swing.JTable();
+
+        setLayout(new java.awt.CardLayout());
 
         painelListagem.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -60,56 +79,75 @@ public class ExcluirColaborador extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        TblListagemColaborador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblListagemColaboradorMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TblListagemColaborador);
 
         javax.swing.GroupLayout painelListagemLayout = new javax.swing.GroupLayout(painelListagem);
         painelListagem.setLayout(painelListagemLayout);
         painelListagemLayout.setHorizontalGroup(
             painelListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
-            .addGroup(painelListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(painelListagemLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
         );
         painelListagemLayout.setVerticalGroup(
             painelListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
-            .addGroup(painelListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(painelListagemLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 608, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(painelListagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 433, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(painelListagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        add(painelListagem, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
-        //this.popularTabela();
+
+        ColaboradorDao col = new ColaboradorDao ();
+        List<Colaborador> listaColaborador;
+        try {
+            listaColaborador = col.listarColaboradores();
+
+            DefaultTableModel model = (DefaultTableModel) TblListagemColaborador.getModel();
+            List<Object> lista = new ArrayList<Object> ();
+
+            for(int i =0 ; i < listaColaborador.size(); i++) {
+                Colaborador c = listaColaborador.get(i);
+                lista.add(new Object[]{c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
+            }
+
+            for(int idx = 0; idx < lista.size(); idx++) {
+                model.addRow((Object []) lista.get(idx));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao Obter os Colaboradores do Banco de Dados!");
+            Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_painelListagemComponentShown
 
+    private void TblListagemColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblListagemColaboradorMouseClicked
+  
+        Object[] options = {"Sim", "Não"};
+        int opcaoSelecionada = JOptionPane.showOptionDialog(null, "Deseja Realmente Eliminar Este Colaborador ?", "Atenção!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+        
+        if (opcaoSelecionada ==0){
+            ColaboradorDao colDao = new ColaboradorDao();
+             try {
+                 colDao.eliminar(this.estCol);
+                 this.limparTabela(); 
+                 this.cl.show(this,"painelListagem");
+             } catch (SQLException ex) {
+                 Logger.getLogger(ExcluirColaborador.class.getName()).log(Level.SEVERE, null, ex);
+             }
+        }
+    }//GEN-LAST:event_TblListagemColaboradorMouseClicked
+   private void limparTabela() {
 
+        ((DefaultTableModel) TblListagemColaborador.getModel()).setNumRows(0);
+
+        TblListagemColaborador.updateUI();
+   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable TblListagemColaborador;
     private javax.swing.JScrollPane jScrollPane1;
