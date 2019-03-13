@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class ColaboradorDao extends ConnectionFactory {
@@ -61,15 +60,19 @@ public class ColaboradorDao extends ConnectionFactory {
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
         st.setString(1, usuario);
         st.setString(2, senha);
-            
+        st.execute();
+        st.close();
          
         }catch(SQLException ex){
             JOptionPane.showMessageDialog(null, "Erro na autenticação do Usuario e Senha");
           
             return false;
         }
-        
+         
+        this.con.close();
            return true;
+           
+        
    }
     
     public void eliminar(int estCol) throws SQLException {

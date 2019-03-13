@@ -6,6 +6,7 @@
 package br.senai.sc.trabalhoFinalSA;
 
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
+import br.senai.sc.trabalhoFinalSA.views.ListagemDeColaborador;
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,7 +24,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     public trabalhoFinalFrame() {
         initComponents();
         
+        ListagemDeColaborador lt = new ListagemDeColaborador ();
+        
         painelPrincipal.add(painelLogin, "telaPadrao");
+        painelPrincipal.add(lt , "painelListagem");
+       
         
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "telaPadrao");
@@ -159,6 +164,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         menuManterColaborador.add(menuEliminarColaborador);
 
         menuListarColaborador.setText("Listar ");
+        menuListarColaborador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuListarColaboradorMouseClicked(evt);
+            }
+        });
         menuListarColaborador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuListarColaboradorActionPerformed(evt);
@@ -251,12 +261,12 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void menuEditarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarColaboradorActionPerformed
 
-
         
     }//GEN-LAST:event_menuEditarColaboradorActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
-        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "painelListagem");
     }//GEN-LAST:event_menuListarColaboradorActionPerformed
 
     private void menuEditarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarEquipeActionPerformed
@@ -277,6 +287,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void menuListarColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListarColaboradorMouseClicked
+       
+    }//GEN-LAST:event_menuListarColaboradorMouseClicked
 
     /**
      * @param args the command line arguments

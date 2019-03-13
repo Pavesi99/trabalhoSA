@@ -5,63 +5,19 @@
  */
 package br.senai.sc.trabalhoFinalSA.views;
 
-import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
-import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
-import java.awt.CardLayout;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
- * @author Aluno
+ * @author Rosaldo Junior
  */
-public class ListagemDeColaborador extends javax.swing.JPanel {
+public class ExcluirColaborador extends javax.swing.JPanel {
 
     /**
-     * Creates new form ListagemDeColaborador
+     * Creates new form ExcluirColaborador
      */
-    private CardLayout cl;
-    public ListagemDeColaborador() {
+    public ExcluirColaborador() {
         initComponents();
-        
-        this.add(painelListagem, "painelListagem");
-        
-        this.cl  = (CardLayout) this.getLayout();
-        cl.show(this, "painelListagem");
-        
     }
 
-      private void popularTabela ()  {
-        ColaboradorDao col = new ColaboradorDao ();
-        List<Colaborador> listaColaborador;
-        try {
-            listaColaborador = col.listarColaboradores();
-            
-        DefaultTableModel model = (DefaultTableModel) TblListagemColaborador.getModel();
-        List<Object> lista = new ArrayList<Object> ();
-        
-        for(int i =0 ; i < listaColaborador.size(); i++) {
-             Colaborador c = listaColaborador.get(i);
-             lista.add(new Object[]{c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
-    }
-        
-        for(int idx = 0; idx < lista.size(); idx++) {
-            model.addRow((Object []) lista.get(idx));
-        }
-        
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao Obter os Colaboradores do Banco de Dados!");
-            Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-      
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,8 +30,6 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         painelListagem = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TblListagemColaborador = new javax.swing.JTable();
-
-        setLayout(new java.awt.CardLayout());
 
         painelListagem.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -129,7 +83,26 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        add(painelListagem, "card3");
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 608, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(painelListagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 433, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(painelListagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
