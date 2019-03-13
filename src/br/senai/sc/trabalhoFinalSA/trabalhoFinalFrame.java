@@ -7,6 +7,8 @@ package br.senai.sc.trabalhoFinalSA;
 
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.views.ListagemDeColaborador;
+import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
+
 import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -24,12 +26,13 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     public trabalhoFinalFrame() {
         initComponents();
         
+               
         ListagemDeColaborador lt = new ListagemDeColaborador ();
+        PainelCadastroColaborador cadastro= new PainelCadastroColaborador();
         
-        painelPrincipal.add(painelLogin, "telaPadrao");
+      painelPrincipal.add(painelLogin, "telaPadrao");
         painelPrincipal.add(lt , "painelListagem");
-       
-        
+       painelPrincipal.add(cadastro,"painelCadastro");
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "telaPadrao");
     }
@@ -252,7 +255,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuCadastrarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarColaboradorActionPerformed
-        // TODO add your handling code here:
+       CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "painelCadastro");
     }//GEN-LAST:event_menuCadastrarColaboradorActionPerformed
 
     private void menuAgendaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaEquipeActionPerformed
@@ -260,7 +264,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuEditarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEditarColaboradorActionPerformed
-
+CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "painelEdicao");
         
     }//GEN-LAST:event_menuEditarColaboradorActionPerformed
 

@@ -106,7 +106,7 @@ public class ExcluirColaborador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
-        this.popularTabela();
+        //this.popularTabela();
     }//GEN-LAST:event_painelListagemComponentShown
 
 
