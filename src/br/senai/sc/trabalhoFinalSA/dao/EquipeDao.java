@@ -33,8 +33,8 @@ public class EquipeDao extends ConnectionFactory {
                 + "values (?, ?);";
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setString(2, equ.getNomEqu());
-            st.setString(3, equ.getDesEqu());
+            st.setString(1, equ.getNomEqu());
+            st.setString(2, equ.getDesEqu());
             
             st.execute();
             st.close();
@@ -46,10 +46,11 @@ public class EquipeDao extends ConnectionFactory {
     
     public void eliminar(int codEqu) throws SQLException {
         
-        String sql = "delete from Equipe where codcli = ?";
+        String sql = "delete from equipe where codEqu = ?";
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setInt(1, codEqu);
+            
             st.execute();
             st.close();
         }
@@ -60,7 +61,7 @@ public class EquipeDao extends ConnectionFactory {
     
     public void alterar(Equipe equi) throws SQLException {
         
-        String sql = "update Equipe set nomEqu = ?, desEqu = ?";
+        String sql = "update equipe set nomEqu = ?, desEqu = ?";
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, equi.getNomEqu());
@@ -75,7 +76,7 @@ public class EquipeDao extends ConnectionFactory {
     }
     
     public List<Equipe> listarEquipes() throws SQLException {
-        String sql = "select * from Equipe";
+        String sql = "select * from equipe";
         List<Equipe> equipes = null;
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -103,7 +104,7 @@ public class EquipeDao extends ConnectionFactory {
     }
     
     public Equipe getEquipe(int codcli) throws SQLException {
-        String sql = "select * from Equipe where codcli = ?";
+        String sql = "select * from equipe where codEqu = ?";
      Equipe equi = null;
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {

@@ -23,7 +23,7 @@ public class ColaboradorDao extends ConnectionFactory {
         String sql = "insert into colaborador "
                 + "(nomCol,ruaCol, baiCol, "
                 + "numCol, cepCol, cidCol, celCol, dddCol,"
-                + "tipCol, usuCol, senCol, emaCol, ultCol, datCol, estCol) "
+                + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol) "
                 + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -142,7 +142,7 @@ public class ColaboradorDao extends ConnectionFactory {
        
                  col.setCepCol(rs.getLong("cepCol"));
                     col.setCidCol(rs.getString("cidCol"));
-                    col.setCelCol(rs.getLong("celcli"));
+                    col.setCelCol(rs.getLong("celCol"));
                     col.setDddCol(rs.getInt("dddCol"));
                     col.setTipCol(rs.getInt("tipCol"));
                     col.setUsuCol(rs.getString("usuCol"));
