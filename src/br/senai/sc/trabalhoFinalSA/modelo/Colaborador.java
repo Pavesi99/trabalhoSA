@@ -1,16 +1,15 @@
-
 package br.senai.sc.trabalhoFinalSA.modelo;
 
 public class Colaborador {
-    
+
     private int codCol;
     private String nomCol;
     private String ruaCol;
     private String baiCol;
-    private String numCol;
-    private long cepCol;
+    private int numCol;
+    private int cepCol;
     private String cidCol;
-    private long celCol;
+    private int celCol;
     private int dddCol;
     private int tipCol; //colaborador  tipo ="1" Gestor,  otros colaboradores tipo ="2"
     private String usuCol;
@@ -19,6 +18,15 @@ public class Colaborador {
     private String utiCol;
     private String datCol;
     private int estCol;   //Etatos ="1"  colaborador ativo, Inativo Etatos ="2"
+    private int equCol;
+
+    public int getEquCol() {
+        return equCol;
+    }
+
+    public void setEquCol(int equCol) {
+        this.equCol = equCol;
+    }
 
     public String getNomCol() {
         return nomCol;
@@ -28,8 +36,6 @@ public class Colaborador {
         this.nomCol = nomCol;
     }
 
-    
-    
     public int getCodCol() {
         return codCol;
     }
@@ -37,8 +43,6 @@ public class Colaborador {
     public void setCodCol(int codCol) {
         this.codCol = codCol;
     }
-
-   
 
     public String getRuaCol() {
         return ruaCol;
@@ -56,11 +60,11 @@ public class Colaborador {
         this.baiCol = baiCol;
     }
 
-    public String getNumCol() {
+    public int getNumCol() {
         return numCol;
     }
 
-    public void setNumCol(String numCol) {
+    public void setNumCol(int numCol) {
         this.numCol = numCol;
     }
 
@@ -68,7 +72,7 @@ public class Colaborador {
         return cepCol;
     }
 
-    public void setCepCol(long cepCol) {
+    public void setCepCol(int cepCol) {
         this.cepCol = cepCol;
     }
 
@@ -84,7 +88,7 @@ public class Colaborador {
         return celCol;
     }
 
-    public void setCelCol(long celCol) {
+    public void setCelCol(int celCol) {
         this.celCol = celCol;
     }
 
@@ -152,7 +156,4 @@ public class Colaborador {
         this.estCol = estCol;
     }
 
-
-    
-    
 }

@@ -23,17 +23,17 @@ public class ColaboradorDao extends ConnectionFactory {
         String sql = "insert into colaborador "
                 + "(nomCol,ruaCol, baiCol, "
                 + "numCol, cepCol, cidCol, celCol, dddCol,"
-                + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol) "
-                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol, equCol.) "
+                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, col.getNomCol());
             st.setString(2, col.getRuaCol());
             st.setString(3, col.getBaiCol());
-            st.setString(4, col.getNumCol());
-            st.setLong(5, col.getCepCol());
+            st.setInt(4, col.getNumCol());
+            st.setInt(5, (int) col.getCepCol());
             st.setString(6, col.getCidCol());
-            st.setLong(7, col.getCelCol());
+            st.setInt(7, (int) col.getCelCol());
             st.setInt(8, col.getDddCol());
             st.setInt(9, col.getTipCol());
             st.setString(10, col.getUsuCol());
@@ -42,7 +42,8 @@ public class ColaboradorDao extends ConnectionFactory {
             st.setString(13, col.getUtiCol());
             st.setString(14, col.getDatCol());
             //verificar se vai comecar como 1 o estCol
-            st.setInt(15, 1);
+            st.setInt(15, col.getEstCol());
+            st.setInt(16, col.getEquCol());
             
 
             st.execute();
@@ -101,7 +102,7 @@ public class ColaboradorDao extends ConnectionFactory {
             st.setString(1, col.getNomCol());
            st.setString(2, col.getRuaCol());
             st.setString(3, col.getBaiCol());
-            st.setString(4, col.getNumCol());
+            st.setInt(4, col.getNumCol());
             st.setLong(5, col.getCepCol());
             st.setString(6, col.getCidCol());
             st.setLong(7, col.getCelCol());
@@ -138,11 +139,11 @@ public class ColaboradorDao extends ConnectionFactory {
                 col.setNomCol(rs.getString("nomCol"));
                 col.setRuaCol(rs.getString("ruaCol"));
                 col.setBaiCol(rs.getString("baiCol"));
-                col.setNumCol(rs.getString("numCol"));
+                col.setNumCol(rs.getInt("numCol"));
        
-                 col.setCepCol(rs.getLong("cepCol"));
+                 col.setCepCol(rs.getInt("cepCol"));
                     col.setCidCol(rs.getString("cidCol"));
-                    col.setCelCol(rs.getLong("celCol"));
+                    col.setCelCol(rs.getInt("celCol"));
                     col.setDddCol(rs.getInt("dddCol"));
                     col.setTipCol(rs.getInt("tipCol"));
                     col.setUsuCol(rs.getString("usuCol"));
@@ -181,10 +182,10 @@ public class ColaboradorDao extends ConnectionFactory {
                     colaborador.setNomCol(rs.getString("nomCol"));
                     colaborador.setRuaCol(rs.getString("ruaCol"));
                     colaborador.setBaiCol(rs.getString("baiCol"));
-                    colaborador.setNumCol(rs.getString("numCol"));
-                    colaborador.setCepCol(rs.getLong("cepCol"));
+                    colaborador.setNumCol(rs.getInt("numCol"));
+                    colaborador.setCepCol(rs.getInt("cepCol"));
                     colaborador.setCidCol(rs.getString("cidCol"));
-                    colaborador.setCelCol(rs.getLong("celCol"));
+                    colaborador.setCelCol(rs.getInt("celCol"));
                     colaborador.setDddCol(rs.getInt("dddCol"));
                     colaborador.setTipCol(rs.getInt("tipCol"));
                     colaborador.setUsuCol(rs.getString("usuCol"));

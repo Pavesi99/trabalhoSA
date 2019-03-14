@@ -93,14 +93,14 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nome", "Rua", "Bairro", "Número", "CEP", "Cidade", "Celular", "DDD", "Tipo", "E-mail"
+                "cod", "Nome", "Rua", "Bairro", "Número", "CEP", "Cidade", "Celular", "DDD", "Tipo", "E-mail"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Long.class, java.lang.String.class, java.lang.Long.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, false, false, false, false
+                true, true, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -117,6 +117,9 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(TblListagemColaborador);
+        if (TblListagemColaborador.getColumnModel().getColumnCount() > 0) {
+            TblListagemColaborador.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout painelListagemLayout = new javax.swing.GroupLayout(painelListagem);
         painelListagem.setLayout(painelListagemLayout);
@@ -374,7 +377,7 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         
         for(int i =0 ; i < listaColaborador.size(); i++) {
              Colaborador c = listaColaborador.get(i);
-             lista.add(new Object[]{c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
+             lista.add(new Object[]{c.getCodCol(),c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
     }
         
         for(int idx = 0; idx < lista.size(); idx++) {
@@ -396,15 +399,16 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         Colaborador col = new Colaborador();
 
         col.setNomCol(campoNome.getText());
-        String data=campoFormatadoNascimento.getText();
-        String[]date=data.split("/");
-        data= date[2]+"-"+date[1]+"-"+date[0];
+        String data = campoFormatadoNascimento.getText();
+        System.out.println(data);
+        String[] date = data.split("/");
+        data = date[2]+"-" + date[1]+"-"+ date[0];
         col.setDatCol(data);
-
-        String tipo= campoSelecaoTipoColaborador.getSelectedItem().toString();
-        if(tipo=="Gestor"){
+System.out.println(data);
+        String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
+        if (tipo == "Gestor") {
             col.setTipCol(1);
-        }else{
+        } else {
             col.setTipCol(2);
         }
 
@@ -415,26 +419,31 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
 
         String cep = campoFormatadoCep.getText();
         cep = cep.replaceAll("[^0-9]", "");
+
         col.setCepCol(Integer.parseInt(cep));
-        col.setNumCol(campoEnderecoNumero.getText());
+        String num = "" + campoEnderecoNumero.getText();
+        num = num.replaceAll("[^0-9]", "");
+        col.setNumCol(Integer.parseInt(num));
+        
 
         String ddd = campoFormatadoDD.getText();
         ddd = ddd.replaceAll("[^0-9]", "");
+
         col.setDddCol(Integer.parseInt(ddd));
-
         String celular = campoFormatadoTelefone.getText();
-        col.setCelCol(Long.parseLong(celular));
-        col.setEmaCol(campoEmail.getText());
-        col.setEstCol(1);
+        celular = celular.replaceAll("[^0-9]", "");
+        System.out.println(celular);
 
-        ColaboradorDao coDao= new ColaboradorDao();
+        col.setCelCol(Integer.parseInt(celular));
+        col.setEmaCol(campoEmail.getText());
+       col.setEstCol(1);
+        col.setEquCol(1);
+        ColaboradorDao coDao = new ColaboradorDao();
+
         try {
             coDao.inserir(col);
-        } catch (SQLException ex) {
-            Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
-        campoBairro.setText(null);
+             JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
+           campoBairro.setText(null);
         campoCidade.setText(null);
         campoEmail.setText(null);
         campoEnderecoNumero.setText(null);
@@ -443,6 +452,12 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         campoFormatadoTelefone.setText(null);
         campoNome.setText(null);
         campoRua.setText(null);
+        } catch (SQLException ex) {
+            Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(null, "Falha");
+        }
+       
+     
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void campoFormatadoCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoFormatadoCepActionPerformed
@@ -459,12 +474,38 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         if (linha != -1) {
             String codigo = TblListagemColaborador.getValueAt(linha, 0).toString();
             int codigoCliente = Integer.parseInt(codigo);
+            try {
+                this.SetClienteTabelaEdicao(codigoCliente);
+            } catch (SQLException ex) {
+                Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             this.add(painelEdicao, "painelEdicao");
             this.cl.show(this, "painelEdicao");
         }
-
     }//GEN-LAST:event_TblListagemColaboradorMouseClicked
 
+        private void SetClienteTabelaEdicao(int codigo) throws SQLException{
+            ColaboradorDao colab=new ColaboradorDao();
+            Colaborador col=colab.getColaborador(codigo);
+            String cod=""+codigo;
+            LabelCodigo.setText(cod);
+            campoBairro.setText(col.getBaiCol());
+            campoCidade.setText(col.getCidCol());
+            campoEmail.setText(col.getEmaCol());
+            
+            String num=""+col.getNumCol();
+            campoEnderecoNumero.setText(num);
+            String cep=""+col.getCepCol();
+            campoFormatadoCep.setText(cep);
+            String ddd=""+col.getDddCol();
+            campoFormatadoDD.setText(ddd);
+            campoFormatadoNascimento.setText(col.getDatCol());
+           String telefone=""+col.getCelCol();
+            campoFormatadoTelefone.setText(telefone);
+            campoNome.setText(col.getNomCol());
+            campoRua.setText(col.getRuaCol());
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCodigo;
