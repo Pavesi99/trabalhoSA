@@ -142,7 +142,7 @@ public class ColaboradorDao extends ConnectionFactory {
        
                  col.setCepCol(rs.getLong("cepCol"));
                     col.setCidCol(rs.getString("cidCol"));
-                    col.setCelCol(rs.getLong("celcli"));
+                    col.setCelCol(rs.getLong("celCol"));
                     col.setDddCol(rs.getInt("dddCol"));
                     col.setTipCol(rs.getInt("tipCol"));
                     col.setUsuCol(rs.getString("usuCol"));
