@@ -68,7 +68,7 @@ public class Colaborador {
         this.numCol = numCol;
     }
 
-    public long getCepCol() {
+    public int getCepCol() {
         return cepCol;
     }
 
@@ -84,7 +84,7 @@ public class Colaborador {
         this.cidCol = cidCol;
     }
 
-    public long getCelCol() {
+    public int getCelCol() {
         return celCol;
     }
 

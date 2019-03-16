@@ -61,11 +61,12 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         labelNomeUsuario = new javax.swing.JLabel();
         campoUsuario = new javax.swing.JTextField();
         labelSenha = new javax.swing.JLabel();
-        campoSenha = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         labelRua = new javax.swing.JLabel();
         campoRua = new javax.swing.JTextField();
+        labelSenhaPadrao = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         labellNome.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labellNome.setText("Nome");
@@ -153,7 +154,7 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         labelNomeUsuario.setText("Nome de usuario");
 
         labelSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        labelSenha.setText("Senha");
+        labelSenha.setText("Senha padrao:");
 
         btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSalvar.setText("Salvar");
@@ -166,6 +167,17 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         labelRua.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelRua.setText("Rua");
 
+        labelSenhaPadrao.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        labelSenhaPadrao.setText("abc123.");
+
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -173,13 +185,11 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
             .addComponent(separador1)
             .addComponent(separador2)
             .addComponent(labelContatos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labelTitolo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnSalvar))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -205,7 +215,7 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
                                                 .addComponent(campoFormatadoCep, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(campoRua, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                                .addComponent(campoRua, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(labelNumeroEndereco)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -231,18 +241,22 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
                                         .addGap(42, 42, 42)
                                         .addComponent(labelEmail)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(labelNomeUsuario)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(33, 33, 33)
-                                        .addComponent(labelSenha)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(11, 11, 11)))))
+                                        .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(11, 11, 11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labelNomeUsuario)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(33, 33, 33)
+                                .addComponent(labelSenha)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(labelSenhaPadrao)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnCancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalvar)))
                 .addContainerGap())
-            .addComponent(labelTitolo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -289,14 +303,16 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
                     .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNomeUsuario)
                     .addComponent(campoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelSenha)
-                    .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnSalvar))
+                    .addComponent(labelSenhaPadrao))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSalvar)
+                    .addComponent(btnCancelar)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -319,9 +335,9 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         String data = campoFormatadoNascimento.getText();
         System.out.println(data);
         String[] date = data.split("/");
-        data = date[2]+"-" + date[1]+"-"+ date[0];
+        data = date[2] + "-" + date[1] + "-" + date[0];
         col.setDatCol(data);
-System.out.println(data);
+        System.out.println(data);
         String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
         if (tipo == "Gestor") {
             col.setTipCol(1);
@@ -341,7 +357,6 @@ System.out.println(data);
         String num = "" + campoEnderecoNumero.getText();
         num = num.replaceAll("[^0-9]", "");
         col.setNumCol(Integer.parseInt(num));
-        
 
         String ddd = campoFormatadoDD.getText();
         ddd = ddd.replaceAll("[^0-9]", "");
@@ -354,7 +369,7 @@ System.out.println(data);
         col.setCelCol(Integer.parseInt(celular));
         col.setEmaCol(campoEmail.getText());
         col.setUsuCol(campoUsuario.getText());
-        col.setSenCol(campoSenha.getText());
+        col.setSenCol(labelSenhaPadrao.getText());
         col.setEstCol(1);
         col.setEquCol(1);
         ColaboradorDao coDao = new ColaboradorDao();
@@ -363,25 +378,32 @@ System.out.println(data);
             System.out.println("Passando akiikk");
             coDao.inserir(col);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
-            
+            limparCampos();
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha ao salvar cliente");
             Logger.getLogger(PainelCadastroColaborador.class.getName()).log(Level.SEVERE, null, ex);
         }
-campoBairro.setText(null);
-            campoCidade.setText(null);
-            campoEmail.setText(null);
-            campoEnderecoNumero.setText(null);
-            campoFormatadoCep.setText(null);
-            campoFormatadoNascimento.setText(null);
-            campoFormatadoTelefone.setText(null);
-            campoNome.setText(null);
-            campoRua.setText(null);
-            campoSenha.setText(null);
-            campoUsuario.setText(null);
+
     }//GEN-LAST:event_btnSalvarActionPerformed
-   
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+      limparCampos();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+    private void limparCampos() {
+        campoBairro.setText(null);
+        campoCidade.setText(null);
+        campoEmail.setText(null);
+        campoEnderecoNumero.setText(null);
+        campoFormatadoCep.setText(null);
+        campoFormatadoNascimento.setText(null);
+        campoFormatadoTelefone.setText(null);
+        campoNome.setText(null);
+        campoRua.setText(null);
+        campoUsuario.setText(null);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField campoBairro;
     private javax.swing.JTextField campoCidade;
@@ -394,7 +416,6 @@ campoBairro.setText(null);
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoRua;
     private javax.swing.JComboBox<String> campoSelecaoTipoColaborador;
-    private javax.swing.JTextField campoSenha;
     private javax.swing.JTextField campoUsuario;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labelBairro;
@@ -409,6 +430,7 @@ campoBairro.setText(null);
     private javax.swing.JLabel labelNumeroEndereco;
     private javax.swing.JLabel labelRua;
     private javax.swing.JLabel labelSenha;
+    private javax.swing.JLabel labelSenhaPadrao;
     private javax.swing.JLabel labelTelefone;
     private javax.swing.JLabel labelTitolo;
     private javax.swing.JLabel labellNome;

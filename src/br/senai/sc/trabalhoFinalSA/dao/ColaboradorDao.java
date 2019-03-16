@@ -103,9 +103,9 @@ public class ColaboradorDao extends ConnectionFactory {
            st.setString(2, col.getRuaCol());
             st.setString(3, col.getBaiCol());
             st.setInt(4, col.getNumCol());
-            st.setLong(5, col.getCepCol());
+            st.setInt(5, col.getCepCol());
             st.setString(6, col.getCidCol());
-            st.setLong(7, col.getCelCol());
+            st.setInt(7, col.getCelCol());
             st.setInt(8, col.getDddCol());
             st.setInt(9, col.getTipCol());
             st.setString(10, col.getUsuCol());
