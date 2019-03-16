@@ -65,7 +65,7 @@ public class ColaboradorDao extends ConnectionFactory {
         st.close();
          
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Erro na autenticação do Usuario e Senha");
+            JOptionPane.showMessageDialog(null, "Usuario ou Senha incoretos");
           
             return false;
         }

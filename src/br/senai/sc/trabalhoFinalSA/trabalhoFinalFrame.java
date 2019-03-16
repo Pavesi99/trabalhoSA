@@ -13,6 +13,7 @@ import br.senai.sc.trabalhoFinalSA.views.ListagemDeColaborador;
 import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
 
 import br.senai.sc.trabalhoFinalSA.views.ListagemEquipe;
+import br.senai.sc.trabalhoFinalSA.views.PainelAlterarSenha;
 
 import java.awt.CardLayout;
 import java.sql.SQLException;
@@ -33,7 +34,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
           
         ListagemDeColaborador lt = new ListagemDeColaborador ();
         PainelCadastroColaborador cadastro= new PainelCadastroColaborador();
-
+        PainelAlterarSenha altSenha= new PainelAlterarSenha();
         ExcluirColaborador ec = new ExcluirColaborador();
         ListagemEquipe le = new ListagemEquipe();
         CadastroEquipe ce = new CadastroEquipe();
@@ -46,7 +47,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         painelPrincipal.add(ec , "painelExcluir");
         painelPrincipal.add(le, "painelListagemEquipe");
         painelPrincipal.add(ce, "painelCadastroEquipe");
-      
+      painelPrincipal.add(altSenha,"alterarSenha");
         
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "telaPadrao");
@@ -84,6 +85,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         menuVerAgenda = new javax.swing.JMenu();
         menuAgendaColaborador = new javax.swing.JMenuItem();
         menuAgendaEquipe = new javax.swing.JMenuItem();
+        manuSenha = new javax.swing.JMenu();
+        menuAlterSenha = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,6 +236,18 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
         BarraMenu.add(menuConsultarAgenda);
 
+        manuSenha.setText("Senha");
+
+        menuAlterSenha.setText("Alterar senha");
+        menuAlterSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAlterSenhaActionPerformed(evt);
+            }
+        });
+        manuSenha.add(menuAlterSenha);
+
+        BarraMenu.add(manuSenha);
+
         setJMenuBar(BarraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -296,6 +311,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         cl.show(painelPrincipal, "painelCadastroEquipe");
     }//GEN-LAST:event_menuCadastrarEquipeActionPerformed
 
+    private void menuAlterSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlterSenhaActionPerformed
+         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "alterarSenha");
+    }//GEN-LAST:event_menuAlterSenhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,9 +360,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JTextField cpSenha;
     private javax.swing.JTextField cpUsuario;
+    private javax.swing.JMenu manuSenha;
     private javax.swing.JMenuItem menuAdicionarTarefa;
     private javax.swing.JMenuItem menuAgendaColaborador;
     private javax.swing.JMenuItem menuAgendaEquipe;
+    private javax.swing.JMenuItem menuAlterSenha;
     private javax.swing.JMenuItem menuCadastrarColaborador;
     private javax.swing.JMenuItem menuCadastrarEquipe;
     private javax.swing.JMenu menuConsultarAgenda;
