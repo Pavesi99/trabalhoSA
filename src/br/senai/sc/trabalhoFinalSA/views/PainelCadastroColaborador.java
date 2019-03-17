@@ -1,5 +1,6 @@
 package br.senai.sc.trabalhoFinalSA.views;
 
+import br.sc.senai.Utilidades.EmailWrapper;
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import java.awt.CardLayout;
@@ -234,8 +235,8 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
                                         .addComponent(campoFormatadoNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(labelTelefone)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(campoFormatadoDD, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(campoFormatadoDD, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(campoFormatadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(42, 42, 42)
@@ -309,7 +310,7 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
                     .addComponent(campoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labelSenha)
                     .addComponent(labelSenhaPadrao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar)))
@@ -329,15 +330,17 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
     }//GEN-LAST:event_campoSelecaoTipoColaboradorActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+  
+        if(validarCampos()){
+        
+        
         Colaborador col = new Colaborador();
 
         col.setNomCol(campoNome.getText());
         String data = campoFormatadoNascimento.getText();
-        System.out.println(data);
         String[] date = data.split("/");
         data = date[2] + "-" + date[1] + "-" + date[0];
         col.setDatCol(data);
-        System.out.println(data);
         String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
         if (tipo == "Gestor") {
             col.setTipCol(1);
@@ -364,8 +367,7 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         col.setDddCol(Integer.parseInt(ddd));
         String celular = campoFormatadoTelefone.getText();
         celular = celular.replaceAll("[^0-9]", "");
-        System.out.println(celular);
-
+       
         col.setCelCol(Integer.parseInt(celular));
         col.setEmaCol(campoEmail.getText());
         col.setUsuCol(campoUsuario.getText());
@@ -374,21 +376,63 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         col.setEquCol(1);
         ColaboradorDao coDao = new ColaboradorDao();
 
+            EmailWrapper confirmar = new EmailWrapper();
+            String mensagem = "Confirme seus dados:" + "\nNome: " + campoNome.getText() + "\tData de nascimento: " + data
+                    + "\nFuncao: " + campoSelecaoTipoColaborador.getToolTipText() + "\nCidade: " + campoCidade.getText()
+                    + "\tCep: " + campoFormatadoCep.getText() + "\nBairro: " + campoBairro.getText() + "\tRua: " + campoRua.getText()
+                    + "\tNumero: " + campoEnderecoNumero.getText() + "\nTelefone: (" + campoFormatadoDD.getText() + ") " + campoFormatadoTelefone
+                    + "\tEmail: " + campoEmail.getText() + "\nUsuario: " + campoUsuario.getText() + "\tSenha: " + labelSenhaPadrao.getText()
+                    + "\nCasso os dados nao estejam coreto entre em contato para autualizar\n\n\nAttgestores";
+            String remetente = "Remetente@remetente";
+            String asunto = "Confirmacao e cadastro";
+            String destinatario = campoEmail.getText();
+            
         try {
-            System.out.println("Passando akiikk");
             coDao.inserir(col);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
+confirmar.enviar(remetente, destinatario, asunto, mensagem);
+            
             limparCampos();
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Falha ao salvar cliente");
             Logger.getLogger(PainelCadastroColaborador.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private boolean validarCampos() {
+       
+        String nome=campoNome.getText();
+            if(nome.trim().equals("")){
+              JOptionPane.showMessageDialog(null,"Informe o nome"); 
+              return false;
+            }
+            String nascimento=campoFormatadoNascimento.getText();
+           
+            if (nascimento.trim().equals("")){
+                campoFormatadoNascimento.setText("00/00/0000");
+               
+               return false;
+            }
+            String email=campoEmail.getText();
+            if(email.trim()==""){
+                 JOptionPane.showMessageDialog(null,"Informe o Email");
+                  return false;
+            }
+            String usuario=campoUsuario.getText();
+            if(usuario.trim()==""){
+                 JOptionPane.showMessageDialog(null,"Informe o nome de usuario"); 
+                  return false;
+            }
+                
+        
+        
+        return true;
+        
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-      limparCampos();
+        limparCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
     private void limparCampos() {
         campoBairro.setText(null);
@@ -401,6 +445,7 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
         campoNome.setText(null);
         campoRua.setText(null);
         campoUsuario.setText(null);
+        campoFormatadoDD.setText(null);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;

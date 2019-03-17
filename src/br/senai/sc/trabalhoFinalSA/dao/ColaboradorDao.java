@@ -1,4 +1,3 @@
-
 package br.senai.sc.trabalhoFinalSA.dao;
 
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
@@ -11,7 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ColaboradorDao extends ConnectionFactory {
-    
+
     private Connection con;
 
     public ColaboradorDao() {
@@ -23,7 +22,7 @@ public class ColaboradorDao extends ConnectionFactory {
         String sql = "insert into colaborador "
                 + "(nomCol,ruaCol, baiCol, "
                 + "numCol, cepCol, cidCol, celCol, dddCol,"
-                + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol, equCol.) "
+                + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol, equCol) "
                 + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -44,7 +43,6 @@ public class ColaboradorDao extends ConnectionFactory {
             //verificar se vai comecar como 1 o estCol
             st.setInt(15, col.getEstCol());
             st.setInt(16, col.getEquCol());
-            
 
             st.execute();
             st.close();
@@ -54,28 +52,27 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
 
-   public boolean checar(String usuario,String senha)throws SQLException {
-         String sql = "select * from colaborador where usuCol = ? and senCol = ?;";
+    public boolean checar(String usuario, String senha) throws SQLException {
+        String sql = "select * from colaborador where usuCol = ? and senCol = ?;";
         List<br.senai.sc.trabalhoFinalSA.modelo.Colaborador> colaboradores = null;
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-        st.setString(1, usuario);
-        st.setString(2, senha);
-        st.execute();
-        st.close();
-         
-        }catch(SQLException ex){
+            st.setString(1, usuario);
+            st.setString(2, senha);
+            st.execute();
+            st.close();
+
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Usuario ou Senha incoretos");
-          
+
             return false;
         }
-         
+
         this.con.close();
-           return true;
-           
-        
-   }
-    
+        return true;
+
+    }
+
     public void eliminar(int estCol) throws SQLException {
 
         String sql = "update colaborador set estCol = 2";
@@ -90,7 +87,6 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
 
-
     public void alterar(Colaborador col) throws SQLException {
 
         String sql = "update colaborador set nomCol = ?, ruaCol = ?, baiCol = ?, "
@@ -100,7 +96,7 @@ public class ColaboradorDao extends ConnectionFactory {
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, col.getNomCol());
-           st.setString(2, col.getRuaCol());
+            st.setString(2, col.getRuaCol());
             st.setString(3, col.getBaiCol());
             st.setInt(4, col.getNumCol());
             st.setInt(5, col.getCepCol());
@@ -125,7 +121,7 @@ public class ColaboradorDao extends ConnectionFactory {
     }
 
     public List<Colaborador> listarColaboradores() throws SQLException {
-        String sql = "select * from colaborador";
+        String sql = "select * from colaborador where estCol=1";
         List<Colaborador> colaboradores = null;
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -140,19 +136,19 @@ public class ColaboradorDao extends ConnectionFactory {
                 col.setRuaCol(rs.getString("ruaCol"));
                 col.setBaiCol(rs.getString("baiCol"));
                 col.setNumCol(rs.getInt("numCol"));
-       
-                 col.setCepCol(rs.getInt("cepCol"));
-                    col.setCidCol(rs.getString("cidCol"));
-                    col.setCelCol(rs.getInt("celCol"));
-                    col.setDddCol(rs.getInt("dddCol"));
-                    col.setTipCol(rs.getInt("tipCol"));
-                    col.setUsuCol(rs.getString("usuCol"));
-                    col.setSenCol(rs.getString("senCol"));
-                    col.setEmaCol(rs.getString("emaCol"));
-                    col.setUtiCol(rs.getString("utiCol"));
-                    col.setDatCol(rs.getString("datCol"));
-                     col.setEstCol(rs.getInt("estCol"));
-                
+
+                col.setCepCol(rs.getInt("cepCol"));
+                col.setCidCol(rs.getString("cidCol"));
+                col.setCelCol(rs.getInt("celCol"));
+                col.setDddCol(rs.getInt("dddCol"));
+                col.setTipCol(rs.getInt("tipCol"));
+                col.setUsuCol(rs.getString("usuCol"));
+                col.setSenCol(rs.getString("senCol"));
+                col.setEmaCol(rs.getString("emaCol"));
+                col.setUtiCol(rs.getString("utiCol"));
+                col.setDatCol(rs.getString("datCol"));
+                col.setEstCol(rs.getInt("estCol"));
+
                 colaboradores.add(col);
             }
 
@@ -168,8 +164,6 @@ public class ColaboradorDao extends ConnectionFactory {
     public Colaborador getColaborador(int codCol) throws SQLException {
 
         String sql = "select * from colaborador where codCol = ?";
-
-        
 
         Colaborador colaborador = null;
 
@@ -194,7 +188,7 @@ public class ColaboradorDao extends ConnectionFactory {
                     colaborador.setUtiCol(rs.getString("utiCol"));
                     colaborador.setDatCol(rs.getString("datCol"));
                     colaborador.setEstCol(rs.getInt("estCol"));
-                     
+
                 }
             }
             st.close();
@@ -203,6 +197,18 @@ public class ColaboradorDao extends ConnectionFactory {
         this.con.close();
         return colaborador;
     }
+    
+ public void alterarSenha(Colaborador col) throws SQLException {
 
+        String sql = "update colaborador set senCol = ? where codCol = ?";
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+           st.setString(1, col.getNomCol());
+            st.setString(2, col.getRuaCol());
+            st.execute();
+            st.close();
+        }
+
+        this.con.close();
+
+    }
 }
-

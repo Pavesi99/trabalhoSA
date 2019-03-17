@@ -144,13 +144,14 @@ public class PainelAlterarSenha extends javax.swing.JPanel {
     }//GEN-LAST:event_campoConfirmaNovaSenhaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        System.out.println("afbadgdfgdsg");
-        System.out.println(campoSenha.getText()+"\n"+campoConfirmaNovaSenha.getText());
-       
-       ColaboradorDao cl = new ColaboradorDao();
+              ColaboradorDao cl = new ColaboradorDao();
         
         try {
             cl.checar(campoUsuario.getText(),campoSenha.getText());
+            boolean senha= false;
+            if(campoNovaSenha.getText() == null ? campoConfirmaNovaSenha.getText() == null : campoNovaSenha.getText().equals(campoConfirmaNovaSenha.getText())){
+                senha= true;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
