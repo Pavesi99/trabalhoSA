@@ -25,6 +25,16 @@ public class ObterData {
         String dataTxt = formatador.format(data);
 
         return dataTxt;
+        
+   
+  
+}
+     
+       public void inserirData(){
+        
+        
+            
+        }
     
-}
-}
+        }
+

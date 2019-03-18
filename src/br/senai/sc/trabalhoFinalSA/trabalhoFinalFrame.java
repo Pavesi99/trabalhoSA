@@ -6,6 +6,7 @@
 package br.senai.sc.trabalhoFinalSA;
 
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.views.CadastroEquipe;
 import br.senai.sc.trabalhoFinalSA.views.ExcluirColaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemDeColaborador;
@@ -19,6 +20,7 @@ import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -287,13 +289,23 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cpUsuarioActionPerformed
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        ColaboradorDao cl = new ColaboradorDao();
+    ColaboradorDao col = new ColaboradorDao();
 
         try {
-            cl.checar(cpUsuario.getText(),cpSenha.getText());
+            Colaborador c = col.checar(cpUsuario.getText(), cpSenha.getText());
+
+            if (c == null) {
+                JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
+            } else {
+                this.codigoColaborador = c;
+           
+                JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
+            }
+
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 

@@ -19,18 +19,20 @@ public class AgendaDao extends ConnectionFactory {
         this.con = this.getConnection();
     }
 
-    public void inserir(Agenda age, Colaborador col, Equipe equ) throws SQLException {
+    public void inserir(Agenda age, int col) throws SQLException {
 
         String sql = "insert into agenda "
-                + "(criAge, comAge, titAge, desAge) "
-                + "values (?, ?, ?, ?);";
+                + "(criAge, comAge, titAge, desAge,codCol,equCol) "
+                + "values (?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, age.getCriAge());
             st.setString(2, age.getComAge());
             st.setString(3, age.getTitAge());
             st.setString(4, age.getDesAge());
-           
+            st.setInt(5,col);
+            st.setInt(6, 1);
+            
             st.execute();
             st.close();
         }
