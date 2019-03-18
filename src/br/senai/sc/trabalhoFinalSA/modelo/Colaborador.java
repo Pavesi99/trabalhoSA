@@ -17,7 +17,7 @@ public class Colaborador {
     private String emaCol;
     private String utiCol;
     private String datCol;
-    private int estCol;   //Etatos ="1"  colaborador ativo, Inativo Etatos ="2"
+    private int estCol;   //istatos ="1"  colaborador ativo, Inativo istatos ="2"
     private int equCol;
 
     public int getEquCol() {
