@@ -52,24 +52,46 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
 
-    public boolean checar(String usuario, String senha) throws SQLException {
+    public Colaborador checar(String usuario, String senha) throws SQLException {
         String sql = "select * from colaborador where usuCol = ? and senCol = ?;";
         List<br.senai.sc.trabalhoFinalSA.modelo.Colaborador> colaboradores = null;
-
+        Colaborador colaborador = null;
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, usuario);
             st.setString(2, senha);
-            st.execute();
+            
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+                    colaborador = new Colaborador();
+                    colaborador.setCodCol(rs.getInt("codCol"));
+                    colaborador.setNomCol(rs.getString("nomCol"));
+                    colaborador.setRuaCol(rs.getString("ruaCol"));
+                    colaborador.setBaiCol(rs.getString("baiCol"));
+                    colaborador.setNumCol(rs.getInt("numCol"));
+                    colaborador.setCepCol(rs.getInt("cepCol"));
+                    colaborador.setCidCol(rs.getString("cidCol"));
+                    colaborador.setCelCol(rs.getInt("celCol"));
+                    colaborador.setDddCol(rs.getInt("dddCol"));
+                    colaborador.setTipCol(rs.getInt("tipCol"));
+                    colaborador.setUsuCol(rs.getString("usuCol"));
+                    colaborador.setSenCol(rs.getString("senCol"));
+                    colaborador.setEmaCol(rs.getString("emaCol"));
+                    colaborador.setUtiCol(rs.getString("utiCol"));
+                    colaborador.setDatCol(rs.getString("datCol"));
+                    colaborador.setEstCol(rs.getInt("estCol"));
+
+                }
+            }
+            
             st.close();
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Usuario ou Senha incoretos");
 
-            return false;
+            return null;
         }
 
         this.con.close();
-        return true;
+        return colaborador;
 
     }
 

@@ -16,12 +16,12 @@ import javax.swing.JOptionPane;
  *
  * @author Aluno
  */
-public class PainelCadastrarTarefaColaborador extends javax.swing.JPanel {
+public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
     /**
      * Creates new form PainelCadastrarTarefa
      */
-    public PainelCadastrarTarefaColaborador() {
+    public PainelCadastrarTarefa() {
         initComponents();
     }
 
@@ -34,6 +34,20 @@ public class PainelCadastrarTarefaColaborador extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        LabelTituloCadastroDeTarefa1 = new javax.swing.JLabel();
+        LabelDataDeCriacao1 = new javax.swing.JLabel();
+        LabelDataDeFinalizacao1 = new javax.swing.JLabel();
+        cpDataCriacao1 = new javax.swing.JFormattedTextField();
+        cpDataFinalizacao1 = new javax.swing.JFormattedTextField();
+        LabelTituloTarefa1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        cpDescricaoTarefa1 = new javax.swing.JTextArea();
+        cpTituloTarefa1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnSalvar1 = new javax.swing.JButton();
         LabelTituloCadastroDeTarefa = new javax.swing.JLabel();
         LabelDataDeCriacao = new javax.swing.JLabel();
         LabelDataDeFinalizacao = new javax.swing.JLabel();
@@ -48,9 +62,119 @@ public class PainelCadastrarTarefaColaborador extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         btnSalvar = new javax.swing.JButton();
 
+        LabelTituloCadastroDeTarefa1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        LabelTituloCadastroDeTarefa1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelTituloCadastroDeTarefa1.setText("Cadastro de Tarefa da Equipe");
+
+        LabelDataDeCriacao1.setText("Data de Início:");
+
+        LabelDataDeFinalizacao1.setText("Data de Entrega:");
+
+        try {
+            cpDataCriacao1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            cpDataFinalizacao1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("       ##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        LabelTituloTarefa1.setText("Título:");
+
+        jLabel5.setText("Descrição:");
+
+        cpDescricaoTarefa1.setColumns(20);
+        cpDescricaoTarefa1.setRows(5);
+        jScrollPane2.setViewportView(cpDescricaoTarefa1);
+
+        jLabel6.setText("(Max:50");
+
+        jLabel7.setText("caracteres)");
+
+        btnSalvar1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalvar1.setText("Salvar");
+        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelTituloCadastroDeTarefa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LabelDataDeCriacao1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpDataCriacao1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(LabelDataDeFinalizacao1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpDataFinalizacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(LabelTituloTarefa1)
+                        .addGap(18, 18, 18)
+                        .addComponent(cpTituloTarefa1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addGap(9, 9, 9))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jScrollPane2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSalvar1)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(LabelTituloCadastroDeTarefa1)
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelDataDeCriacao1)
+                    .addComponent(cpDataCriacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelDataDeFinalizacao1)
+                    .addComponent(cpDataFinalizacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelTituloTarefa1)
+                    .addComponent(cpTituloTarefa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel7))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalvar1)
+                .addContainerGap())
+        );
+
         LabelTituloCadastroDeTarefa.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         LabelTituloCadastroDeTarefa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelTituloCadastroDeTarefa.setText("Cadastro de Tarefa");
+        LabelTituloCadastroDeTarefa.setText("Cadastro de Tarefa do Colaborador");
 
         LabelDataDeCriacao.setText("Data de Início:");
 
@@ -192,20 +316,55 @@ public class PainelCadastrarTarefaColaborador extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
+    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
+        Agenda age = new Agenda();
+
+        age.setCriAge(cpTituloTarefa.getText());
+        age.setDesAge(cpDescricaoTarefa.getText());
+        String data = cpDataCriacao.getText();
+        String[] date = data.split("/");
+        data = date[2] + "-" + date[1] + "-" + date[0];
+        age.setCriAge(data);
+
+        String data2 = cpDataFinalizacao.getText();
+        String[] date2 = data2.split("/");
+        data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
+        age.setComAge(data2);
+
+        AgendaDao ageDao = new AgendaDao();
+
+        ageDao.inserir(age, col);
+        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+    }//GEN-LAST:event_btnSalvar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelDataDeCriacao;
+    private javax.swing.JLabel LabelDataDeCriacao1;
     private javax.swing.JLabel LabelDataDeFinalizacao;
+    private javax.swing.JLabel LabelDataDeFinalizacao1;
     private javax.swing.JLabel LabelTituloCadastroDeTarefa;
+    private javax.swing.JLabel LabelTituloCadastroDeTarefa1;
     private javax.swing.JLabel LabelTituloTarefa;
+    private javax.swing.JLabel LabelTituloTarefa1;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JButton btnSalvar1;
     private javax.swing.JFormattedTextField cpDataCriacao;
+    private javax.swing.JFormattedTextField cpDataCriacao1;
     private javax.swing.JFormattedTextField cpDataFinalizacao;
+    private javax.swing.JFormattedTextField cpDataFinalizacao1;
     private javax.swing.JTextArea cpDescricaoTarefa;
+    private javax.swing.JTextArea cpDescricaoTarefa1;
     private javax.swing.JTextField cpTituloTarefa;
+    private javax.swing.JTextField cpTituloTarefa1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

@@ -7,6 +7,7 @@ package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.dao.AgendaDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Agenda;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ListagemAgendaEquipe
-     */
-    public ListagemAgendaEquipe() {
+  private Colaborador colaborador;
+    public ListagemAgendaEquipe(Colaborador colaborador) {
         initComponents();
+        this.colaborador = colaborador;
     }
 
     /**

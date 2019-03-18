@@ -56,24 +56,22 @@
             <Property name="text" type="java.lang.String" value="Consultar Ag&#xea;nda"/>
           </Properties>
           <SubComponents>
-            <Menu class="javax.swing.JMenu" name="menuManterAgenda">
+            <Menu class="javax.swing.JMenu" name="menuTarefas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Manter Tarefas"/>
+                <Property name="text" type="java.lang.String" value="Tarefas"/>
               </Properties>
               <SubComponents>
-                <MenuItem class="javax.swing.JMenuItem" name="menuAdicionarTarefa">
+                <MenuItem class="javax.swing.JMenuItem" name="menuAdicionarTarefaEquipe">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Adicionar Tarefa"/>
+                    <Property name="text" type="java.lang.String" value="Adicionar Tarefa a Equipe"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAdicionarTarefaEquipeActionPerformed"/>
+                  </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="menuEliminarTarefa">
+                <MenuItem class="javax.swing.JMenuItem" name="menuAdicionarTarefaColaborador">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Eliminar Tarefa"/>
-                  </Properties>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="menuEditarTarefa">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Editar Tarefa"/>
+                    <Property name="text" type="java.lang.String" value="Adicionar Tarefa ao Colaborador"/>
                   </Properties>
                 </MenuItem>
               </SubComponents>
@@ -87,6 +85,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Agenda do Colaborador"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuAgendaColaboradorActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="menuAgendaEquipe">
                   <Properties>

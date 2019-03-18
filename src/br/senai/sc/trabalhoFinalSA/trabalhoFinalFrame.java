@@ -28,9 +28,7 @@ import javax.swing.JOptionPane;
  */
 public class trabalhoFinalFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form trabalhoFinal
-     */
+    private Colaborador colaborador;
     public trabalhoFinalFrame() {
         initComponents();
           
@@ -80,10 +78,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         menuCadastrarEquipe = new javax.swing.JMenuItem();
         menuListarEquipe = new javax.swing.JMenuItem();
         menuConsultarAgenda = new javax.swing.JMenu();
-        menuManterAgenda = new javax.swing.JMenu();
-        menuAdicionarTarefa = new javax.swing.JMenuItem();
-        menuEliminarTarefa = new javax.swing.JMenuItem();
-        menuEditarTarefa = new javax.swing.JMenuItem();
+        menuTarefas = new javax.swing.JMenu();
+        menuAdicionarTarefaEquipe = new javax.swing.JMenuItem();
+        menuAdicionarTarefaColaborador = new javax.swing.JMenuItem();
         menuVerAgenda = new javax.swing.JMenu();
         menuAgendaColaborador = new javax.swing.JMenuItem();
         menuAgendaEquipe = new javax.swing.JMenuItem();
@@ -208,22 +205,29 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
         menuConsultarAgenda.setText("Consultar Agênda");
 
-        menuManterAgenda.setText("Manter Tarefas");
+        menuTarefas.setText("Tarefas");
 
-        menuAdicionarTarefa.setText("Adicionar Tarefa");
-        menuManterAgenda.add(menuAdicionarTarefa);
+        menuAdicionarTarefaEquipe.setText("Adicionar Tarefa a Equipe");
+        menuAdicionarTarefaEquipe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAdicionarTarefaEquipeActionPerformed(evt);
+            }
+        });
+        menuTarefas.add(menuAdicionarTarefaEquipe);
 
-        menuEliminarTarefa.setText("Eliminar Tarefa");
-        menuManterAgenda.add(menuEliminarTarefa);
+        menuAdicionarTarefaColaborador.setText("Adicionar Tarefa ao Colaborador");
+        menuTarefas.add(menuAdicionarTarefaColaborador);
 
-        menuEditarTarefa.setText("Editar Tarefa");
-        menuManterAgenda.add(menuEditarTarefa);
-
-        menuConsultarAgenda.add(menuManterAgenda);
+        menuConsultarAgenda.add(menuTarefas);
 
         menuVerAgenda.setText("Ver Agênda");
 
         menuAgendaColaborador.setText("Agenda do Colaborador");
+        menuAgendaColaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAgendaColaboradorActionPerformed(evt);
+            }
+        });
         menuVerAgenda.add(menuAgendaColaborador);
 
         menuAgendaEquipe.setText("Agenda da Equipe");
@@ -297,7 +301,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             if (c == null) {
                 JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
             } else {
-                this.codigoColaborador = c;
+                this.colaborador = c;
            
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
             }
@@ -327,6 +331,16 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
          CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "alterarSenha");
     }//GEN-LAST:event_menuAlterSenhaActionPerformed
+
+    private void menuAgendaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaColaboradorActionPerformed
+
+
+
+    }//GEN-LAST:event_menuAgendaColaboradorActionPerformed
+
+    private void menuAdicionarTarefaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaEquipeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuAdicionarTarefaEquipeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,20 +387,19 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private javax.swing.JTextField cpSenha;
     private javax.swing.JTextField cpUsuario;
     private javax.swing.JMenu manuSenha;
-    private javax.swing.JMenuItem menuAdicionarTarefa;
+    private javax.swing.JMenuItem menuAdicionarTarefaColaborador;
+    private javax.swing.JMenuItem menuAdicionarTarefaEquipe;
     private javax.swing.JMenuItem menuAgendaColaborador;
     private javax.swing.JMenuItem menuAgendaEquipe;
     private javax.swing.JMenuItem menuAlterSenha;
     private javax.swing.JMenuItem menuCadastrarColaborador;
     private javax.swing.JMenuItem menuCadastrarEquipe;
     private javax.swing.JMenu menuConsultarAgenda;
-    private javax.swing.JMenuItem menuEditarTarefa;
-    private javax.swing.JMenuItem menuEliminarTarefa;
     private javax.swing.JMenuItem menuListarColaborador;
     private javax.swing.JMenuItem menuListarEquipe;
-    private javax.swing.JMenu menuManterAgenda;
     private javax.swing.JMenu menuManterColaborador;
     private javax.swing.JMenu menuManterEquipe;
+    private javax.swing.JMenu menuTarefas;
     private javax.swing.JMenu menuVerAgenda;
     private javax.swing.JPanel painelLogin;
     private javax.swing.JPanel painelPrincipal;
