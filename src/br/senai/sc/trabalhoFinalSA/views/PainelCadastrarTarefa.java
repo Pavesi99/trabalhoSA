@@ -304,7 +304,7 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
         AgendaDao ageDao = new AgendaDao();
         
-        ageDao.inserir(age, col);
+       // ageDao.inserir(age, col);
         JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
             
            
@@ -333,7 +333,7 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
         AgendaDao ageDao = new AgendaDao();
 
-        ageDao.inserir(age, col);
+       // ageDao.inserir(age, col);
         JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
     }//GEN-LAST:event_btnSalvar1ActionPerformed
 

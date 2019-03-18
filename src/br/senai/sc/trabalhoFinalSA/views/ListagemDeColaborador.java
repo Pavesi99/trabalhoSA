@@ -21,19 +21,18 @@ import javax.swing.table.DefaultTableModel;
  * @author Aluno
  */
 public class ListagemDeColaborador extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ListagemDeColaborador
-     */
+private int listar;
+   
     private CardLayout cl;
-    public ListagemDeColaborador() {
+    public ListagemDeColaborador(int a) {
         initComponents();
+        this.listar=a;
         
         this.add(painelListagem, "painelListagem");
         
         this.cl  = (CardLayout) this.getLayout();
         cl.show(this, "painelListagem");
-        
+       
     }
 
     /**
@@ -233,7 +232,7 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         LabelCodigo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabelCodigo.setText("Codigo");
 
-        labelCodigoDoCliente.setText("CodigoDoCliente");
+        labelCodigoDoCliente.setText("Codigo Do Cliente");
 
         javax.swing.GroupLayout painelEdicaoLayout = new javax.swing.GroupLayout(painelEdicao);
         painelEdicao.setLayout(painelEdicaoLayout);
@@ -281,8 +280,8 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
                                                 .addComponent(campoEnderecoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                     .addGroup(painelEdicaoLayout.createSequentialGroup()
                                         .addComponent(labelTelefone)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(campoFormatadoDD, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(campoFormatadoDD, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(campoFormatadoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(42, 42, 42)
@@ -300,9 +299,10 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
                                         .addComponent(campoSelecaoTipoColaborador, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(35, 35, 35))
                                     .addGroup(painelEdicaoLayout.createSequentialGroup()
-                                        .addComponent(LabelCodigo)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGap(17, 17, 17)
                                         .addComponent(labelCodigoDoCliente)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(LabelCodigo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(labellNome)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -359,8 +359,9 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
                     .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar))
+                .addGap(15, 15, 15)
+                .addComponent(btnSalvar)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         add(painelEdicao, "card3");
@@ -452,6 +453,7 @@ System.out.println(data);
         campoFormatadoTelefone.setText(null);
         campoNome.setText(null);
         campoRua.setText(null);
+        LabelCodigo.setText(null);
         } catch (SQLException ex) {
             Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
          JOptionPane.showMessageDialog(null, "Falha");
@@ -469,6 +471,7 @@ System.out.println(data);
     }//GEN-LAST:event_campoSelecaoTipoColaboradorActionPerformed
 
     private void TblListagemColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblListagemColaboradorMouseClicked
+       if(this.listar==1){
         int linha = TblListagemColaborador.getSelectedRow();
 
         if (linha != -1) {
@@ -484,7 +487,7 @@ System.out.println(data);
             this.cl.show(this, "painelEdicao");
         }
     }//GEN-LAST:event_TblListagemColaboradorMouseClicked
-
+    }
         private void SetClienteTabelaEdicao(int codigo) throws SQLException{
             ColaboradorDao colab=new ColaboradorDao();
             Colaborador col=colab.getColaborador(codigo);
@@ -500,7 +503,12 @@ System.out.println(data);
             campoFormatadoCep.setText(cep);
             String ddd=""+col.getDddCol();
             campoFormatadoDD.setText(ddd);
-            campoFormatadoNascimento.setText(col.getDatCol());
+            
+            String nascimento=col.getDatCol();
+            String[]data=nascimento.split("-");
+            nascimento=data[2]+data[1]+data[0];
+            System.out.println(nascimento);
+            campoFormatadoNascimento.setText(nascimento);
            String telefone=""+col.getCelCol();
             campoFormatadoTelefone.setText(telefone);
             campoNome.setText(col.getNomCol());

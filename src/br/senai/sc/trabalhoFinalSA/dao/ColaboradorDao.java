@@ -220,12 +220,12 @@ public class ColaboradorDao extends ConnectionFactory {
         return colaborador;
     }
     
- public void alterarSenha(Colaborador col) throws SQLException {
-
+ public void alterarSenha(int cod,String senha) throws SQLException {
+     System.out.println(cod+"  "+senha);
         String sql = "update colaborador set senCol = ? where codCol = ?";
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-           st.setString(1, col.getNomCol());
-            st.setString(2, col.getRuaCol());
+           st.setString(1, senha);
+            st.setInt(2, cod);
             st.execute();
             st.close();
         }

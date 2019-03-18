@@ -6,20 +6,20 @@
 package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.trabalhoFinalFrame;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
-/**
- *
- * @author ivan rezini
- */
 public class PainelAlterarSenha extends javax.swing.JPanel {
 
-    
+    private Colaborador colaborador;
+
     public PainelAlterarSenha() {
         initComponents();
+
     }
 
     /**
@@ -144,17 +144,53 @@ public class PainelAlterarSenha extends javax.swing.JPanel {
     }//GEN-LAST:event_campoConfirmaNovaSenhaActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-              ColaboradorDao cl = new ColaboradorDao();
+        ColaboradorDao cl = new ColaboradorDao();
+        ColaboradorDao cl2 = new ColaboradorDao();
+        char[] senha = campoNovaSenha.getPassword();
+        char[] cosenha = campoConfirmaNovaSenha.getPassword();
+        char[] senhaAt=campoSenha.getPassword();
+        String novaSenha = "";
+        String coNovaSenha = "";
+        String senhaAtual="";
         
+        for (int i = 0; i < senhaAt.length; i++) {
+            senhaAtual+=senhaAt[i];
+        }
+        
+        Colaborador c = null;
         try {
-            cl.checar(campoUsuario.getText(),campoSenha.getText());
-            boolean senha= false;
-            if(campoNovaSenha.getText() == null ? campoConfirmaNovaSenha.getText() == null : campoNovaSenha.getText().equals(campoConfirmaNovaSenha.getText())){
-                senha= true;
+            c = cl.checar(campoUsuario.getText(), senhaAtual);
+            this.colaborador = c;
+            if (c == null) {
+                JOptionPane.showMessageDialog(null, "Usuario ou senha incorretos");
+                campoUsuario.setText(null);
+                campoSenha.setText(null);
+                campoConfirmaNovaSenha.setText(null);
+                campoNovaSenha.setText(null);
+            } else {
+                for (int i = 0; i < senha.length; i++) {
+                    coNovaSenha += cosenha[i];
+                    novaSenha += senha[i];
+                }
+
+                if (novaSenha.equals(coNovaSenha)) {
+                    cl2.alterarSenha(c.getCodCol(), novaSenha);
+                    JOptionPane.showMessageDialog(null, "nova senha salva");
+                    campoUsuario.setText(null);
+                    campoSenha.setText(null);
+                    campoConfirmaNovaSenha.setText(null);
+                    campoNovaSenha.setText(null);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Confirmacao de nova senha incoreta");
+                    campoConfirmaNovaSenha.setText(null);
+                    campoNovaSenha.setText(null);
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
 
