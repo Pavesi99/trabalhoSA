@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `trabalho_final` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `trabalho_final`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: trabalho_final
@@ -109,10 +111,6 @@ LOCK TABLES `equipe` WRITE;
 INSERT INTO `equipe` VALUES (1,'Vendas','Vendedores'),(2,'Confecção','Equipe destinada a produção em massa dos produtos'),(3,'Confecção','Equipe destinada a produção em massa dos produtos');
 /*!40000 ALTER TABLE `equipe` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping routines for database 'trabalho_final'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -123,4 +121,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-13 20:45:46
+-- Dump completed on 2019-03-19 16:52:35
