@@ -1,4 +1,3 @@
-
 package br.senai.sc.trabalhoFinalSA.dao;
 
 import br.senai.sc.trabalhoFinalSA.modelo.Agenda;
@@ -11,18 +10,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AgendaDao extends ConnectionFactory {
+public class AgendaEquipeDao extends ConnectionFactory {
     
     private Connection con;
 
-    public AgendaDao() {
+    public AgendaEquipeDao() {
         this.con = this.getConnection();
     }
 
-    public void inserir(Agenda age, int col,int equ) throws SQLException {
+    public void inserir(Agenda age) throws SQLException {
 
         String sql = "insert into agenda "
-                + "(criAge, comAge, titAge, desAge) "
+                + "(criAge, comAge, titAge, desAge"
                 + "values (?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -30,7 +29,7 @@ public class AgendaDao extends ConnectionFactory {
             st.setString(2, age.getComAge());
             st.setString(3, age.getTitAge());
             st.setString(4, age.getDesAge());
-            
+               
             st.execute();
             st.close();
         }
@@ -39,20 +38,20 @@ public class AgendaDao extends ConnectionFactory {
 
     }
 
-     public void eliminar(String comAge, String criAge, String desAge, String titAge, int codCol) throws SQLException {
+     public void eliminar(String comAge, String criAge, String desAge, String titAge, int codEqu) throws SQLException {
 
-         Colaborador col = new Colaborador();
-         codCol = col.getCodCol();
+         Equipe equ = new Equipe();
+         codEqu = equ.getCodEqu();
          
-        String sql = "delete from agenda where criAge = ? and comAge = ? and titAge = ? and desAge = ?"
-                + " and codCol = ? ";
+        String sql = "delete from agenda where criAge = ?, comAge = ?, titAge = ?, desAge = ?"
+                + ", codEqu = ? ";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, criAge);
             st.setString(2, comAge);
             st.setString(3, titAge);
             st.setString(4, desAge);
-            st.setInt(5, codCol);
+            st.setInt(5, codEqu);
             st.execute();
             st.close();
         }
@@ -62,10 +61,10 @@ public class AgendaDao extends ConnectionFactory {
     }
 
 
-    public void alterar(Agenda age, Colaborador col) throws SQLException {
+    public void alterar(Agenda age, Equipe equ) throws SQLException {
 
         String sql = "update agenda set criAge = ?, comAge = ?, titAge = ?, desAge = ? where criAge = ? and"
-                + "comAge = ? and titAge = ? and desAge = ? and codCol = ? ";
+                + "comAge = ? and titAge = ? and desAge = ? and codEqu = ? ";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, age.getCriAge());
@@ -76,7 +75,7 @@ public class AgendaDao extends ConnectionFactory {
            st.setString(6, age.getTitAge());
            st.setString(7, age.getDesAge());
            st.setString(8, age.getComAge());
-           st.setInt(9, col.getCodCol());
+           st.setInt(9, equ.getCodEqu());
 
             st.execute();
             st.close();
@@ -117,21 +116,17 @@ public class AgendaDao extends ConnectionFactory {
         return agendas;
     }
 
-    public Agenda getAgenda(String comAge, String criAge, String desAge, String titAge, int codCol) throws SQLException {
-        
-        Colaborador col = new Colaborador();
-        codCol = col.getCodCol();
-        
-        String sql = "select * from agenda where criAge = ? and comAge = ? and titAge = ? and desAge = ? and codCol = ?";
+  
+     public Agenda getAgendaEquipe(int codEqu) throws SQLException {
+         
+         Equipe equ = new Equipe();
+         codEqu = equ.getCodEqu();
+        String sql = "select * from agenda where codEqu = ?";
         Agenda agenda = null;
  
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setString(1, criAge);
-            st.setString(2, comAge);
-            st.setString(3, titAge);
-            st.setString(4, desAge);
-            st.setInt(5, codCol);
+            st.setInt(5, codEqu);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                 agenda = new Agenda ();
@@ -150,6 +145,9 @@ public class AgendaDao extends ConnectionFactory {
         this.con.close();
         return agenda;
     }
+    
+    
+    
 
 }
 
