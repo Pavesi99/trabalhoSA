@@ -53,7 +53,7 @@ public class ColaboradorDao extends ConnectionFactory {
     }
 
     public Colaborador checar(String usuario, String senha) throws SQLException {
-        String sql = "select * from colaborador where usuCol = ? and senCol = ?;";
+        String sql = "select * from colaborador where usuCol = ? and senCol = md5(?);";
         List<br.senai.sc.trabalhoFinalSA.modelo.Colaborador> colaboradores = null;
         Colaborador colaborador = null;
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -113,7 +113,7 @@ public class ColaboradorDao extends ConnectionFactory {
 
         String sql = "update colaborador set nomCol = ?, ruaCol = ?, baiCol = ?, "
                 + "numCol = ?, cepCol = ?, cidCol = ?, celCol = ?, dddCol = ?,"
-                + "tipCol = ?, usuCol = ?, senCol = ?, emaCol = ?, utiCol = ?,"
+                + "tipCol = ?, emaCol = ?, utiCol = ?,"
                 + " datCol = ?, estCol = ?, where codCol = ?";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -126,13 +126,11 @@ public class ColaboradorDao extends ConnectionFactory {
             st.setInt(7, col.getCelCol());
             st.setInt(8, col.getDddCol());
             st.setInt(9, col.getTipCol());
-            st.setString(10, col.getUsuCol());
-            st.setString(11, col.getSenCol());
-            st.setString(12, col.getEmaCol());
-            st.setString(13, col.getUtiCol());
-            st.setString(14, col.getDatCol());
-            st.setInt(15, col.getEstCol());
-            st.setInt(16, col.getCodCol());
+            st.setString(10, col.getEmaCol());
+            st.setString(11, col.getUtiCol());
+            st.setString(12, col.getDatCol());
+            st.setInt(13, col.getEstCol());
+            st.setInt(14, col.getCodCol());
 
             st.execute();
             st.close();
@@ -222,7 +220,7 @@ public class ColaboradorDao extends ConnectionFactory {
     
  public void alterarSenha(int cod,String senha) throws SQLException {
      System.out.println(cod+"  "+senha);
-        String sql = "update colaborador set senCol = ? where codCol = ?";
+        String sql = "update colaborador set senCol = md5(?) where codCol = ?";
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, senha);
             st.setInt(2, cod);

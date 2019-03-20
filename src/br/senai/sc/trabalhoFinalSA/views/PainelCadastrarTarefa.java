@@ -7,6 +7,8 @@ package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.dao.AgendaDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Agenda;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
+import java.awt.CardLayout;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,11 +20,31 @@ import javax.swing.JOptionPane;
  */
 public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PainelCadastrarTarefa
-     */
-    public PainelCadastrarTarefa() {
+    private CardLayout cl;
+    private Colaborador colaborador;
+
+    public PainelCadastrarTarefa(Colaborador colaborador, String painel) {
         initComponents();
+        this.cl = (CardLayout) this.getLayout();
+         this.add(CadastroTarefaColaborador, "painelCadastroTarefaColaborador");
+         this.add(CadastroTarefaEquipe, "painelCadastroTarefaEquipe");
+       if (painel.equals("equipe")) {
+            
+            this.cl.show(this, "painelCadastroTarefaEquipe");
+       } else {
+           
+            this.cl.show(this, "painelCadastroTarefaColaborador");
+       }
+
+        this.colaborador = colaborador;
+
+        /* int codCol = this.colaborador.getTipCol();
+          if(codCol == 2){
+              this.cpCodEqu.setVisible(false);
+              this.labelCodigoEquipe.setVisible(false);
+              this.cpCodCol.setVisible(false);
+              this.labelCodigoColaborador.setVisible(false);
+          }*/
     }
 
     /**
@@ -34,33 +56,46 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        CadastroTarefaEquipe = new javax.swing.JPanel();
         LabelTituloCadastroDeTarefa1 = new javax.swing.JLabel();
         LabelDataDeCriacao1 = new javax.swing.JLabel();
         LabelDataDeFinalizacao1 = new javax.swing.JLabel();
-        cpDataCriacao1 = new javax.swing.JFormattedTextField();
-        cpDataFinalizacao1 = new javax.swing.JFormattedTextField();
-        LabelTituloTarefa1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        cpDescricaoTarefa1 = new javax.swing.JTextArea();
-        cpTituloTarefa1 = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        btnSalvar1 = new javax.swing.JButton();
-        LabelTituloCadastroDeTarefa = new javax.swing.JLabel();
-        LabelDataDeCriacao = new javax.swing.JLabel();
-        LabelDataDeFinalizacao = new javax.swing.JLabel();
         cpDataCriacao = new javax.swing.JFormattedTextField();
         cpDataFinalizacao = new javax.swing.JFormattedTextField();
         LabelTituloTarefa = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
         cpDescricaoTarefa = new javax.swing.JTextArea();
         cpTituloTarefa = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        btnSalvar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnSalvarEquipe = new javax.swing.JButton();
+        cpCodEqu = new javax.swing.JTextField();
+        labelCodigoEquipe = new javax.swing.JLabel();
+        CadastroTarefaColaborador = new javax.swing.JPanel();
+        LabelTituloCadastroDeTarefa2 = new javax.swing.JLabel();
+        LabelDataDeCriacao2 = new javax.swing.JLabel();
+        LabelDataDeFinalizacao2 = new javax.swing.JLabel();
+        cpDataCriacao2 = new javax.swing.JFormattedTextField();
+        cpDataFinalizacao2 = new javax.swing.JFormattedTextField();
+        LabelTituloTarefa2 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        cpDescricaoTarefa2 = new javax.swing.JTextArea();
+        cpTituloTarefa2 = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        btnSalvarColaborador = new javax.swing.JButton();
+        labelCodigoColaborador = new javax.swing.JLabel();
+        cpCodCol = new javax.swing.JTextField();
+
+        setLayout(new java.awt.CardLayout());
+
+        CadastroTarefaEquipe.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                CadastroTarefaEquipeComponentShown(evt);
+            }
+        });
 
         LabelTituloCadastroDeTarefa1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         LabelTituloCadastroDeTarefa1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -69,116 +104,6 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         LabelDataDeCriacao1.setText("Data de Início:");
 
         LabelDataDeFinalizacao1.setText("Data de Entrega:");
-
-        try {
-            cpDataCriacao1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        try {
-            cpDataFinalizacao1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("       ##/##/####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-
-        LabelTituloTarefa1.setText("Título:");
-
-        jLabel5.setText("Descrição:");
-
-        cpDescricaoTarefa1.setColumns(20);
-        cpDescricaoTarefa1.setRows(5);
-        jScrollPane2.setViewportView(cpDescricaoTarefa1);
-
-        jLabel6.setText("(Max:50");
-
-        jLabel7.setText("caracteres)");
-
-        btnSalvar1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar1.setText("Salvar");
-        btnSalvar1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvar1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelTituloCadastroDeTarefa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LabelDataDeCriacao1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataCriacao1, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(LabelDataDeFinalizacao1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataFinalizacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(LabelTituloTarefa1)
-                        .addGap(18, 18, 18)
-                        .addComponent(cpTituloTarefa1)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel6))
-                                .addGap(9, 9, 9))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jScrollPane2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar1)))
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(LabelTituloCadastroDeTarefa1)
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelDataDeCriacao1)
-                    .addComponent(cpDataCriacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelDataDeFinalizacao1)
-                    .addComponent(cpDataFinalizacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelTituloTarefa1)
-                    .addComponent(cpTituloTarefa1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSalvar1)
-                .addContainerGap())
-        );
-
-        LabelTituloCadastroDeTarefa.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        LabelTituloCadastroDeTarefa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelTituloCadastroDeTarefa.setText("Cadastro de Tarefa do Colaborador");
-
-        LabelDataDeCriacao.setText("Data de Início:");
-
-        LabelDataDeFinalizacao.setText("Data de Entrega:");
 
         try {
             cpDataCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
@@ -194,94 +119,233 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
         LabelTituloTarefa.setText("Título:");
 
-        jLabel2.setText("Descrição:");
+        jLabel5.setText("Descrição:");
 
         cpDescricaoTarefa.setColumns(20);
         cpDescricaoTarefa.setRows(5);
-        jScrollPane1.setViewportView(cpDescricaoTarefa);
+        jScrollPane2.setViewportView(cpDescricaoTarefa);
 
-        jLabel3.setText("(Max:50");
+        jLabel6.setText("(Max:50");
 
-        jLabel4.setText("caracteres)");
+        jLabel7.setText("caracteres)");
 
-        btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        btnSalvar.setText("Salvar");
-        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarEquipe.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalvarEquipe.setText("Salvar");
+        btnSalvarEquipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalvarActionPerformed(evt);
+                btnSalvarEquipeActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelTituloCadastroDeTarefa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LabelDataDeCriacao)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataCriacao, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(LabelDataDeFinalizacao)
+        labelCodigoEquipe.setText("Codigo da Equipe:");
+
+        javax.swing.GroupLayout CadastroTarefaEquipeLayout = new javax.swing.GroupLayout(CadastroTarefaEquipe);
+        CadastroTarefaEquipe.setLayout(CadastroTarefaEquipeLayout);
+        CadastroTarefaEquipeLayout.setHorizontalGroup(
+            CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelTituloCadastroDeTarefa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(LabelDataDeFinalizacao1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cpDataFinalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addGap(373, 373, 373)
+                        .addComponent(btnSalvarEquipe))
+                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5)))
+                            .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel7)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2))
+                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LabelDataDeCriacao1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(LabelTituloTarefa)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cpTituloTarefa)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(9, 9, 9))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addComponent(jScrollPane1))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar)))
                 .addContainerGap())
+            .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(labelCodigoEquipe)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(cpCodEqu, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(LabelTituloCadastroDeTarefa)
+        CadastroTarefaEquipeLayout.setVerticalGroup(
+            CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                .addComponent(LabelTituloCadastroDeTarefa1)
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelDataDeCriacao)
+                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelDataDeCriacao1)
                     .addComponent(cpDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelDataDeFinalizacao)
+                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelDataDeFinalizacao1)
                     .addComponent(cpDataFinalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cpCodEqu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelCodigoEquipe))
+                .addGap(12, 12, 12)
+                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabelTituloTarefa)
                     .addComponent(cpTituloTarefa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
+                        .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(btnSalvar)
+                        .addComponent(jLabel7))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(btnSalvarEquipe)
                 .addContainerGap())
         );
+
+        add(CadastroTarefaEquipe, "card4");
+
+        LabelTituloCadastroDeTarefa2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        LabelTituloCadastroDeTarefa2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabelTituloCadastroDeTarefa2.setText("Cadastro de Tarefa do Colaborador");
+
+        LabelDataDeCriacao2.setText("Data de Início:");
+
+        LabelDataDeFinalizacao2.setText("Data de Entrega:");
+
+        try {
+            cpDataCriacao2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            cpDataFinalizacao2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("       ##/##/####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        LabelTituloTarefa2.setText("Título:");
+
+        jLabel8.setText("Descrição:");
+
+        cpDescricaoTarefa2.setColumns(20);
+        cpDescricaoTarefa2.setRows(5);
+        jScrollPane3.setViewportView(cpDescricaoTarefa2);
+
+        jLabel9.setText("(Max:50");
+
+        jLabel10.setText("caracteres)");
+
+        btnSalvarColaborador.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnSalvarColaborador.setText("Salvar");
+        btnSalvarColaborador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarColaboradorActionPerformed(evt);
+            }
+        });
+
+        labelCodigoColaborador.setText("Codigo do Colaborador:");
+
+        javax.swing.GroupLayout CadastroTarefaColaboradorLayout = new javax.swing.GroupLayout(CadastroTarefaColaborador);
+        CadastroTarefaColaborador.setLayout(CadastroTarefaColaboradorLayout);
+        CadastroTarefaColaboradorLayout.setHorizontalGroup(
+            CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LabelTituloCadastroDeTarefa2, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                        .addComponent(LabelDataDeCriacao2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpDataCriacao2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
+                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(LabelDataDeFinalizacao2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cpDataFinalizacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                        .addComponent(LabelTituloTarefa2)
+                        .addGap(18, 18, 18)
+                        .addComponent(cpTituloTarefa2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroTarefaColaboradorLayout.createSequentialGroup()
+                        .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(jLabel9))
+                                .addGap(9, 9, 9))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroTarefaColaboradorLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addComponent(jScrollPane3))
+                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroTarefaColaboradorLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnSalvarColaborador))
+                            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                                .addComponent(labelCodigoColaborador)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cpCodCol, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))))
+                .addContainerGap())
+        );
+        CadastroTarefaColaboradorLayout.setVerticalGroup(
+            CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                .addComponent(LabelTituloCadastroDeTarefa2)
+                .addGap(24, 24, 24)
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelDataDeCriacao2)
+                    .addComponent(cpDataCriacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelDataDeFinalizacao2)
+                    .addComponent(cpDataFinalizacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelCodigoColaborador)
+                    .addComponent(cpCodCol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabelTituloTarefa2)
+                    .addComponent(cpTituloTarefa2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel10))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(btnSalvarColaborador)
+                .addContainerGap())
+        );
+
+        add(CadastroTarefaColaborador, "card5");
     }// </editor-fold>//GEN-END:initComponents
+
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
  Agenda age = new Agenda();
@@ -316,9 +380,15 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvar1ActionPerformed
-        Agenda age = new Agenda();
+    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    
+    }
+    private void btnSalvarEquipeActionPerformed(java.awt.event.ActionEvent evt) {                                                
 
+        Agenda age = new Agenda();
+        int col = 1;
+        int equ = 0;
+        String aux;
         age.setCriAge(cpTituloTarefa.getText());
         age.setDesAge(cpDescricaoTarefa.getText());
         String data = cpDataCriacao.getText();
@@ -331,40 +401,73 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
         age.setComAge(data2);
 
+        aux = cpCodEqu.getText();
+        if (aux == null) {
+            equ = this.colaborador.getCodCol();
+        } else {
+            equ = Integer.parseInt(aux);
+        }
+
         AgendaDao ageDao = new AgendaDao();
+
 
        // ageDao.inserir(age, col);
         JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
-    }//GEN-LAST:event_btnSalvar1ActionPerformed
+                                              
+
+        try {
+            ageDao.inserir(age, col, equ);
+            JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+        } catch (SQLException ex) {
+            Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar tarefa");
+        }
+
+    }                                               
+
+    private void btnSalvarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarColaboradorActionPerformed
+
+
+    }//GEN-LAST:event_btnSalvarColaboradorActionPerformed
+
+    private void CadastroTarefaEquipeComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CadastroTarefaEquipeComponentShown
+
+    }//GEN-LAST:event_CadastroTarefaEquipeComponentShown
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LabelDataDeCriacao;
+    private javax.swing.JPanel CadastroTarefaColaborador;
+    private javax.swing.JPanel CadastroTarefaEquipe;
     private javax.swing.JLabel LabelDataDeCriacao1;
-    private javax.swing.JLabel LabelDataDeFinalizacao;
+    private javax.swing.JLabel LabelDataDeCriacao2;
     private javax.swing.JLabel LabelDataDeFinalizacao1;
-    private javax.swing.JLabel LabelTituloCadastroDeTarefa;
+    private javax.swing.JLabel LabelDataDeFinalizacao2;
     private javax.swing.JLabel LabelTituloCadastroDeTarefa1;
+    private javax.swing.JLabel LabelTituloCadastroDeTarefa2;
     private javax.swing.JLabel LabelTituloTarefa;
-    private javax.swing.JLabel LabelTituloTarefa1;
-    private javax.swing.JButton btnSalvar;
-    private javax.swing.JButton btnSalvar1;
+    private javax.swing.JLabel LabelTituloTarefa2;
+    private javax.swing.JButton btnSalvarColaborador;
+    private javax.swing.JButton btnSalvarEquipe;
+    private javax.swing.JTextField cpCodCol;
+    private javax.swing.JTextField cpCodEqu;
     private javax.swing.JFormattedTextField cpDataCriacao;
-    private javax.swing.JFormattedTextField cpDataCriacao1;
+    private javax.swing.JFormattedTextField cpDataCriacao2;
     private javax.swing.JFormattedTextField cpDataFinalizacao;
-    private javax.swing.JFormattedTextField cpDataFinalizacao1;
+    private javax.swing.JFormattedTextField cpDataFinalizacao2;
     private javax.swing.JTextArea cpDescricaoTarefa;
-    private javax.swing.JTextArea cpDescricaoTarefa1;
+    private javax.swing.JTextArea cpDescricaoTarefa2;
     private javax.swing.JTextField cpTituloTarefa;
-    private javax.swing.JTextField cpTituloTarefa1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField cpTituloTarefa2;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel labelCodigoColaborador;
+    private javax.swing.JLabel labelCodigoEquipe;
     // End of variables declaration//GEN-END:variables
 }
