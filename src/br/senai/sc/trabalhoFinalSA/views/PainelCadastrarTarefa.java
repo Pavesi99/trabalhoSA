@@ -5,7 +5,7 @@
  */
 package br.senai.sc.trabalhoFinalSA.views;
 
-import br.senai.sc.trabalhoFinalSA.dao.AgendaDao;
+import br.senai.sc.trabalhoFinalSA.dao.AgendaColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Agenda;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import java.awt.CardLayout;
@@ -354,6 +354,34 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
+ Agenda age = new Agenda();
+
+        age.setCriAge(cpTituloTarefa.getText());
+        age.setDesAge(cpDescricaoTarefa.getText());
+        String data = cpDataCriacao.getText();
+        String[] date = data.split("/");
+        data = date[2] + "-" + date[1] + "-" + date[0];
+        age.setCriAge(data);
+        
+        
+        String data2 = cpDataFinalizacao.getText();
+        String[] date2 = data2.split("/");
+        data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
+        age.setComAge(data2);
+       
+
+        
+
+        AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
+        
+       // ageDao.inserir(age, col);
+        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+            
+           
+          
+        
+           
+
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
@@ -385,7 +413,14 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             equ = Integer.parseInt(aux);
         }
 
-        AgendaDao ageDao = new AgendaDao();
+
+        AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
+
+
+       // ageDao.inserir(age, col);
+        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+                                              
+
 
         try {
             ageDao.inserir(age, col, equ);
@@ -422,7 +457,7 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             col = Integer.parseInt(aux);
         }
 
-        AgendaDao ageDao = new AgendaDao();
+        AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
         System.out.println("chegou aqui");
         try {
             ageDao.inserir(age, col, equ);

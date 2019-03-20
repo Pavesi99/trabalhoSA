@@ -21,18 +21,16 @@ import javax.swing.table.DefaultTableModel;
  * @author Aluno
  */
 public class ListagemDeColaborador extends javax.swing.JPanel {
-private int listar;
-   
+
+    private int listar;
+
     private CardLayout cl;
+
     public ListagemDeColaborador(int a) {
         initComponents();
-        this.listar=a;
-        
-        this.add(painelListagem, "painelListagem");
-        
-        this.cl  = (CardLayout) this.getLayout();
-        cl.show(this, "painelListagem");
-       
+        this.listar = a;
+        this.popularTabela();
+
     }
 
     /**
@@ -124,7 +122,7 @@ private int listar;
         painelListagem.setLayout(painelListagemLayout);
         painelListagemLayout.setHorizontalGroup(
             painelListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
         );
         painelListagemLayout.setVerticalGroup(
             painelListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,23 +366,27 @@ private int listar;
     }// </editor-fold>//GEN-END:initComponents
 
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
-        ColaboradorDao col = new ColaboradorDao ();
+    }
+    private void popularTabela(){
+        System.out.println("pasouaki");
+        ColaboradorDao col = new ColaboradorDao();
         List<Colaborador> listaColaborador;
         try {
             listaColaborador = col.listarColaboradores();
-            
-        DefaultTableModel model = (DefaultTableModel) TblListagemColaborador.getModel();
-        List<Object> lista = new ArrayList<Object> ();
-        
-        for(int i =0 ; i < listaColaborador.size(); i++) {
-             Colaborador c = listaColaborador.get(i);
-             lista.add(new Object[]{c.getCodCol(),c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
-    }
-        
-        for(int idx = 0; idx < lista.size(); idx++) {
-            model.addRow((Object []) lista.get(idx));
-        }
-        
+
+            DefaultTableModel model = (DefaultTableModel) TblListagemColaborador.getModel();
+            List<Object> lista = new ArrayList<Object>();
+
+            for (int i = 0; i < listaColaborador.size(); i++) {
+                Colaborador c = listaColaborador.get(i);
+                lista.add(new Object[]{c.getCodCol(), c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
+                System.out.println(c.getCodCol());
+            }
+
+            for (int idx = 0; idx < lista.size(); idx++) {
+                model.addRow((Object[]) lista.get(idx));
+            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Obter os Colaboradores do Banco de Dados!");
             Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
@@ -402,7 +404,7 @@ private int listar;
         col.setNomCol(campoNome.getText());
         String data = campoFormatadoNascimento.getText();;
         String[] date = data.split("/");
-        data = date[2]+"-" + date[1]+"-"+ date[0];
+        data = date[2] + "-" + date[1] + "-" + date[0];
         col.setDatCol(data);
 
         String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
@@ -424,7 +426,6 @@ private int listar;
         String num = "" + campoEnderecoNumero.getText();
         num = num.replaceAll("[^0-9]", "");
         col.setNumCol(Integer.parseInt(num));
-        
 
         String ddd = campoFormatadoDD.getText();
         ddd = ddd.replaceAll("[^0-9]", "");
@@ -435,29 +436,29 @@ private int listar;
 
         col.setCelCol(Integer.parseInt(celular));
         col.setEmaCol(campoEmail.getText());
-       col.setEstCol(1);
+        col.setEstCol(1);
         col.setEquCol(1);
         ColaboradorDao coDao = new ColaboradorDao();
 
         try {
             coDao.inserir(col);
-             JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
-           campoBairro.setText(null);
-        campoCidade.setText(null);
-        campoEmail.setText(null);
-        campoEnderecoNumero.setText(null);
-        campoFormatadoCep.setText(null);
-        campoFormatadoNascimento.setText(null);
-        campoFormatadoTelefone.setText(null);
-        campoNome.setText(null);
-        campoRua.setText(null);
-        LabelCodigo.setText(null);
+            JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
+            campoBairro.setText(null);
+            campoCidade.setText(null);
+            campoEmail.setText(null);
+            campoEnderecoNumero.setText(null);
+            campoFormatadoCep.setText(null);
+            campoFormatadoNascimento.setText(null);
+            campoFormatadoTelefone.setText(null);
+            campoNome.setText(null);
+            campoRua.setText(null);
+            LabelCodigo.setText(null);
         } catch (SQLException ex) {
             Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
-         JOptionPane.showMessageDialog(null, "Falha");
+            JOptionPane.showMessageDialog(null, "Falha");
         }
-       
-     
+
+
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void campoFormatadoCepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoFormatadoCepActionPerformed
@@ -469,49 +470,50 @@ private int listar;
     }//GEN-LAST:event_campoSelecaoTipoColaboradorActionPerformed
 
     private void TblListagemColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblListagemColaboradorMouseClicked
-       if(this.listar==1){
-        int linha = TblListagemColaborador.getSelectedRow();
+        if (this.listar == 1) {
+            int linha = TblListagemColaborador.getSelectedRow();
 
-        if (linha != -1) {
-            String codigo = TblListagemColaborador.getValueAt(linha, 0).toString();
-            int codigoCliente = Integer.parseInt(codigo);
-            try {
-                this.SetClienteTabelaEdicao(codigoCliente);
-            } catch (SQLException ex) {
-                Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
+            if (linha != -1) {
+                String codigo = TblListagemColaborador.getValueAt(linha, 0).toString();
+                int codigoCliente = Integer.parseInt(codigo);
+                try {
+                    this.SetClienteTabelaEdicao(codigoCliente);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                this.add(painelEdicao, "painelEdicao");
+                this.cl.show(this, "painelEdicao");
             }
-            
-            this.add(painelEdicao, "painelEdicao");
-            this.cl.show(this, "painelEdicao");
-        }
     }//GEN-LAST:event_TblListagemColaboradorMouseClicked
     }
-        private void SetClienteTabelaEdicao(int codigo) throws SQLException{
-            ColaboradorDao colab=new ColaboradorDao();
-            Colaborador col=colab.getColaborador(codigo);
-            String cod=""+codigo;
-            LabelCodigo.setText(cod);
-            campoBairro.setText(col.getBaiCol());
-            campoCidade.setText(col.getCidCol());
-            campoEmail.setText(col.getEmaCol());
-            
-            String num=""+col.getNumCol();
-            campoEnderecoNumero.setText(num);
-            String cep=""+col.getCepCol();
-            campoFormatadoCep.setText(cep);
-            String ddd=""+col.getDddCol();
-            campoFormatadoDD.setText(ddd);
-            
-            String nascimento=col.getDatCol();
-            String[]data=nascimento.split("-");
-            nascimento=data[2]+data[1]+data[0];
-            System.out.println(nascimento);
-            campoFormatadoNascimento.setText(nascimento);
-           String telefone=""+col.getCelCol();
-            campoFormatadoTelefone.setText(telefone);
-            campoNome.setText(col.getNomCol());
-            campoRua.setText(col.getRuaCol());
-        }
+
+    private void SetClienteTabelaEdicao(int codigo) throws SQLException {
+        ColaboradorDao colab = new ColaboradorDao();
+        Colaborador col = colab.getColaborador(codigo);
+        String cod = "" + codigo;
+        LabelCodigo.setText(cod);
+        campoBairro.setText(col.getBaiCol());
+        campoCidade.setText(col.getCidCol());
+        campoEmail.setText(col.getEmaCol());
+
+        String num = "" + col.getNumCol();
+        campoEnderecoNumero.setText(num);
+        String cep = "" + col.getCepCol();
+        campoFormatadoCep.setText(cep);
+        String ddd = "" + col.getDddCol();
+        campoFormatadoDD.setText(ddd);
+
+        String nascimento = col.getDatCol();
+        String[] data = nascimento.split("-");
+        nascimento = data[2] + data[1] + data[0];
+        System.out.println(nascimento);
+        campoFormatadoNascimento.setText(nascimento);
+        String telefone = "" + col.getCelCol();
+        campoFormatadoTelefone.setText(telefone);
+        campoNome.setText(col.getNomCol());
+        campoRua.setText(col.getRuaCol());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabelCodigo;
