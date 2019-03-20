@@ -5,7 +5,7 @@
  */
 package br.senai.sc.trabalhoFinalSA.views;
 
-import br.senai.sc.trabalhoFinalSA.dao.AgendaDao;
+import br.senai.sc.trabalhoFinalSA.dao.AgendaColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Agenda;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import java.awt.CardLayout;
@@ -366,7 +366,7 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
         
 
-        AgendaDao ageDao = new AgendaDao();
+        AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
         
        // ageDao.inserir(age, col);
         JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
@@ -408,7 +408,7 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             equ = Integer.parseInt(aux);
         }
 
-        AgendaDao ageDao = new AgendaDao();
+        AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
 
 
        // ageDao.inserir(age, col);

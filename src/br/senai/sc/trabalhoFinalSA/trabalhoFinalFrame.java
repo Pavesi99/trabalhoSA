@@ -9,6 +9,8 @@ import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.views.CadastroEquipe;
 import br.senai.sc.trabalhoFinalSA.views.ExcluirColaborador;
+import br.senai.sc.trabalhoFinalSA.views.ListagemAgendaColaborador;
+import br.senai.sc.trabalhoFinalSA.views.ListagemAgendaEquipe;
 import br.senai.sc.trabalhoFinalSA.views.ListagemDeColaborador;
 
 import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
@@ -277,7 +279,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCadastrarColaboradorActionPerformed
 
     private void menuAgendaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaEquipeActionPerformed
-        // TODO add your handling code here:
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "painelListagemAgendaEquipe");
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
@@ -298,14 +301,26 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         ExcluirColaborador ec = new ExcluirColaborador();
         ListagemEquipe le = new ListagemEquipe();
         CadastroEquipe ce = new CadastroEquipe();
-        
 
+        ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);
+
+        ListagemAgendaEquipe lae = new ListagemAgendaEquipe();
+
+        painelPrincipal.add(painelLogin, "telaPadrao");
+        painelPrincipal.add(listar, "painelListagem");
+        painelPrincipal.add(listarEAlterar, "painelListagemAlt");
+        painelPrincipal.add(cadastro, "painelCadastro");
+        painelPrincipal.add(lae, "painelListagemAgendaEquipe");
+        painelPrincipal.add(ec, "painelExcluir");
+
+        painelPrincipal.add(agenCol, "painelagendaCol");
         painelPrincipal.add(painelLogin, "telaPadrao");
         painelPrincipal.add(listar, "painelListagem");
         painelPrincipal.add(listarEAlterar, "painelListagemAlt");
         painelPrincipal.add(cadastro, "painelCadastro");
 
         painelPrincipal.add(ec, "painelExcluir");
+
         painelPrincipal.add(le, "painelListagemEquipe");
         painelPrincipal.add(ce, "painelCadastroEquipe");
         painelPrincipal.add(altSenha, "alterarSenha");
@@ -357,12 +372,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAlterSenhaActionPerformed
 
     private void menuAgendaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaColaboradorActionPerformed
-        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(colaborador, "colaborador");
-        this.add(ct, "painelCadastrarTarefaColaborador");
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
-
-        cl.show(painelPrincipal, "painelCadastrarTarefaColaborador");
-
+         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "painelagendaCol");
 
     }//GEN-LAST:event_menuAgendaColaboradorActionPerformed
 
