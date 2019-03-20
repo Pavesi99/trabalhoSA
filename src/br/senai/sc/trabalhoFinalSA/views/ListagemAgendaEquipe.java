@@ -22,10 +22,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
-  private Colaborador colaborador;
-    public ListagemAgendaEquipe(Colaborador colaborador) {
+
+    public ListagemAgendaEquipe() {
         initComponents();
-        this.colaborador = colaborador;
+      
     }
 
     /**
