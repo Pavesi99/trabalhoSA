@@ -233,7 +233,7 @@ public class ColaboradorDao extends ConnectionFactory {
     }
   public void SetarUltimoAcesso(int codCliente,String data) throws SQLException {
 
-        String sql = "update colaborador set utiCol = ? where = codCol ?";
+        String sql = "update colaborador set utiCol = ? where codCol = ?";
 //estatus = 0 significa que o colaborador esta inativel
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, data);

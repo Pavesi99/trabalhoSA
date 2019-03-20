@@ -298,6 +298,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         ExcluirColaborador ec = new ExcluirColaborador();
         ListagemEquipe le = new ListagemEquipe();
         CadastroEquipe ce = new CadastroEquipe();
+        
 
         painelPrincipal.add(painelLogin, "telaPadrao");
         painelPrincipal.add(listar, "painelListagem");

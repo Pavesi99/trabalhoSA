@@ -85,14 +85,13 @@ public class AgendaDao extends ConnectionFactory {
 
     }
 
-    public List<Agenda> listarAgenda() throws SQLException {
-        String sql = "select * from agenda";
+    public List<Agenda> listarAgendaColaborador(int cod) throws SQLException {
+        String sql = "select * from agenda Where codCol= ?";
         List<Agenda> agendas = null;
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
+             st.setInt(1,cod);
             ResultSet rs = st.executeQuery();
-
-            agendas = new ArrayList<Agenda>();
 
             while (rs.next()) {
                 Agenda age = new Agenda();

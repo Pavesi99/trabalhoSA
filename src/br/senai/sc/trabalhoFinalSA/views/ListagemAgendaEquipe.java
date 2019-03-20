@@ -83,7 +83,7 @@ private void popularTabela () {
         List<Agenda> listaAgenda;
         try {
             listaAgenda= age.listarAgenda();
-            
+         
         DefaultTableModel model = (DefaultTableModel) tblListagemAgenda.getModel();
         List<Object> lista = new ArrayList<Object> ();
         

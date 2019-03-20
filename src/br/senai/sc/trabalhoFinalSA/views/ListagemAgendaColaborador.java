@@ -7,6 +7,7 @@ package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.dao.AgendaDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Agenda;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemEquipe;
 import java.awt.CardLayout;
 import java.sql.SQLException;
@@ -22,13 +23,13 @@ import javax.swing.table.DefaultTableModel;
  * @author Aluno
  */
 public class ListagemAgendaColaborador extends javax.swing.JPanel {
-
+private Colaborador c;
   private CardLayout cl;
-    public ListagemAgendaColaborador() {
+    public ListagemAgendaColaborador(Colaborador colaborador) {
+        this.c=colaborador;
+                
         initComponents();
-        initComponents();
-        
-        this.add(ListagemAgenda, "painelListagemAgenda");
+     this.add(ListagemAgenda, "painelListagemAgenda");
         
         this.cl  = (CardLayout) this.getLayout();
         cl.show(this, "painelListagemAgenda");
@@ -89,7 +90,7 @@ private void popularTabela () {
         AgendaDao age = new AgendaDao ();
         List<Agenda> listaAgenda;
         try {
-            listaAgenda= age.listarAgenda();
+            listaAgenda= age.listarAgendaColaborador(this.c.getCodCol());
             
         DefaultTableModel model = (DefaultTableModel) tblListagemAgenda.getModel();
         List<Object> lista = new ArrayList<Object> ();
