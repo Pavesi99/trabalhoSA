@@ -168,9 +168,11 @@ public class PainelAlterarSenha extends javax.swing.JPanel {
                 campoConfirmaNovaSenha.setText(null);
                 campoNovaSenha.setText(null);
             } else {
-                for (int i = 0; i < senha.length; i++) {
-                    coNovaSenha += cosenha[i];
-                    novaSenha += senha[i];
+                for (int i = 0; i < cosenha.length; i++) {
+                    coNovaSenha += cosenha[i];    
+                }
+                for (int i2 = 0; i2 < senha.length; i2++) {
+                    novaSenha += senha[i2];
                 }
 
                 if (novaSenha.equals(coNovaSenha)) {

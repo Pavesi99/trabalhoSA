@@ -33,7 +33,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         initComponents();
           
         ListagemDeColaborador listar = new ListagemDeColaborador (0);
-       ListagemDeColaborador listarEAlterar = new ListagemDeColaborador (0);
+       ListagemDeColaborador listarEAlterar = new ListagemDeColaborador (1);
         PainelCadastroColaborador cadastro= new PainelCadastroColaborador();
         PainelAlterarSenha altSenha= new PainelAlterarSenha();
         ExcluirColaborador ec = new ExcluirColaborador();
@@ -75,7 +75,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         menuManterColaborador = new javax.swing.JMenu();
         menuCadastrarColaborador = new javax.swing.JMenuItem();
         menuListarColaborador = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        manuAlterarCadastro = new javax.swing.JMenuItem();
         menuManterEquipe = new javax.swing.JMenu();
         menuCadastrarEquipe = new javax.swing.JMenuItem();
         menuListarEquipe = new javax.swing.JMenuItem();
@@ -183,13 +183,13 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         });
         menuManterColaborador.add(menuListarColaborador);
 
-        jMenuItem2.setText("jMenuItem2");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        manuAlterarCadastro.setText("Editar cadastro");
+        manuAlterarCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                manuAlterarCadastroActionPerformed(evt);
             }
         });
-        menuManterColaborador.add(jMenuItem2);
+        menuManterColaborador.add(manuAlterarCadastro);
 
         BarraMenu.add(menuManterColaborador);
 
@@ -352,10 +352,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_menuAdicionarTarefaEquipeActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagemAlt");
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_manuAlterarCadastroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -401,7 +401,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnEntrar;
     private javax.swing.JTextField cpSenha;
     private javax.swing.JTextField cpUsuario;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem manuAlterarCadastro;
     private javax.swing.JMenu manuSenha;
     private javax.swing.JMenuItem menuAdicionarTarefaColaborador;
     private javax.swing.JMenuItem menuAdicionarTarefaEquipe;
