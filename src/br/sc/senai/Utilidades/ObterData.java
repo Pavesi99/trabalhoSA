@@ -19,7 +19,7 @@ public class ObterData {
 
         Date data = new Date();
         if (mascara == null) {
-            mascara = "dd/MM/yyyy HH:mm:ss";
+            mascara = "yyyy-MM-dd";
         }
         SimpleDateFormat formatador = new SimpleDateFormat(mascara);
         String dataTxt = formatador.format(data);

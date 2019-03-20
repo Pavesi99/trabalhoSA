@@ -5,6 +5,7 @@
  */
 package br.senai.sc.trabalhoFinalSA;
 
+import br.sc.senai.Utilidades.ObterData;
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.views.CadastroEquipe;
@@ -33,9 +34,6 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     public trabalhoFinalFrame() {
         initComponents();
-
-          
-       
 
     }
 
@@ -294,24 +292,24 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void autenticarPaineis() {
 
-        ListagemDeColaborador listar = new ListagemDeColaborador (0);
-       ListagemDeColaborador listarEAlterar = new ListagemDeColaborador (1);
-        PainelCadastroColaborador cadastro= new PainelCadastroColaborador();
-        PainelAlterarSenha altSenha= new PainelAlterarSenha();
+        ListagemDeColaborador listar = new ListagemDeColaborador(0);
+        ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);
+        PainelCadastroColaborador cadastro = new PainelCadastroColaborador();
+        PainelAlterarSenha altSenha = new PainelAlterarSenha();
         ExcluirColaborador ec = new ExcluirColaborador();
         ListagemEquipe le = new ListagemEquipe();
         CadastroEquipe ce = new CadastroEquipe();
 
-      painelPrincipal.add(painelLogin, "telaPadrao");
-        painelPrincipal.add(listar , "painelListagem");
- painelPrincipal.add(listarEAlterar , "painelListagemAlt");
-       painelPrincipal.add(cadastro,"painelCadastro");
+        painelPrincipal.add(painelLogin, "telaPadrao");
+        painelPrincipal.add(listar, "painelListagem");
+        painelPrincipal.add(listarEAlterar, "painelListagemAlt");
+        painelPrincipal.add(cadastro, "painelCadastro");
 
-        painelPrincipal.add(ec , "painelExcluir");
+        painelPrincipal.add(ec, "painelExcluir");
         painelPrincipal.add(le, "painelListagemEquipe");
         painelPrincipal.add(ce, "painelCadastroEquipe");
-      painelPrincipal.add(altSenha,"alterarSenha");
-        
+        painelPrincipal.add(altSenha, "alterarSenha");
+
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "telaPadrao");
     }
@@ -319,6 +317,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         ColaboradorDao col = new ColaboradorDao();
+        ObterData od = new ObterData();
 
         try {
             Colaborador c = col.checar(cpUsuario.getText(), cpSenha.getText());
@@ -326,7 +325,12 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             if (c == null) {
                 JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
             } else {
+               
                 this.colaborador = c;
+                String data = null; 
+                od.obterData(data);
+                col.SetarUltimoAcesso(this.colaborador.getCodCol(),data);
+               
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
                 this.autenticarPaineis();
@@ -388,7 +392,6 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_menuAdicionarTarefaColaboradorActionPerformed
-
 
     /**
      * @param args the command line arguments

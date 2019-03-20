@@ -348,31 +348,43 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
- Agenda age = new Agenda();
-
+  Agenda age = new Agenda();
+        int col = 0;
+        int equ = 1;
+        String aux;
         age.setCriAge(cpTituloTarefa.getText());
         age.setDesAge(cpDescricaoTarefa.getText());
         String data = cpDataCriacao.getText();
         String[] date = data.split("/");
         data = date[2] + "-" + date[1] + "-" + date[0];
         age.setCriAge(data);
-        
-        
+
         String data2 = cpDataFinalizacao.getText();
         String[] date2 = data2.split("/");
         data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
         age.setComAge(data2);
-       
 
-        
+        aux = cpCodCol.getText();
+        if (aux == null) {
+            equ = this.colaborador.getCodCol();
+        } else {
+            equ = Integer.parseInt(aux);
+        }
 
         AgendaDao ageDao = new AgendaDao();
-        
-       // ageDao.inserir(age, col);
-        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
-            
-           
-          
+
+
+       
+    
+                                              
+
+        try {
+            ageDao.inserir(age, col, equ);
+            JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+        } catch (SQLException ex) {
+            Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar tarefa");
+        }
         
            
  
@@ -384,6 +396,10 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
     
     }
     private void btnSalvarEquipeActionPerformed(java.awt.event.ActionEvent evt) {                                                
+
+    }                                               
+
+    private void btnSalvarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarColaboradorActionPerformed
 
         Agenda age = new Agenda();
         int col = 1;
@@ -411,8 +427,8 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         AgendaDao ageDao = new AgendaDao();
 
 
-       // ageDao.inserir(age, col);
-        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+       
+    
                                               
 
         try {
@@ -422,10 +438,6 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao salvar tarefa");
         }
-
-    }                                               
-
-    private void btnSalvarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarColaboradorActionPerformed
 
 
     }//GEN-LAST:event_btnSalvarColaboradorActionPerformed
