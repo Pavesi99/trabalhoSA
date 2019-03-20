@@ -400,12 +400,11 @@ private int listar;
         Colaborador col = new Colaborador();
 
         col.setNomCol(campoNome.getText());
-        String data = campoFormatadoNascimento.getText();
-        System.out.println(data);
+        String data = campoFormatadoNascimento.getText();;
         String[] date = data.split("/");
         data = date[2]+"-" + date[1]+"-"+ date[0];
         col.setDatCol(data);
-System.out.println(data);
+
         String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
         if (tipo == "Gestor") {
             col.setTipCol(1);
@@ -433,7 +432,6 @@ System.out.println(data);
         col.setDddCol(Integer.parseInt(ddd));
         String celular = campoFormatadoTelefone.getText();
         celular = celular.replaceAll("[^0-9]", "");
-        System.out.println(celular);
 
         col.setCelCol(Integer.parseInt(celular));
         col.setEmaCol(campoEmail.getText());
