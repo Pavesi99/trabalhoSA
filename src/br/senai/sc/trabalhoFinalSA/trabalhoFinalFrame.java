@@ -329,8 +329,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 this.colaborador = c;
                 String data = null; 
                 od.obterData(data);
-                col.SetarUltimoAcesso(this.colaborador.getCodCol(),data);
-               
+            
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
                 this.autenticarPaineis();
