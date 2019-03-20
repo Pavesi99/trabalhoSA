@@ -389,8 +389,8 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
             
         try {
             coDao.inserir(col);
+            confirmar.enviar(remetente, destinatario, asunto, mensagem);
             JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
-confirmar.enviar(remetente, destinatario, asunto, mensagem);
             
             limparCampos();
         } catch (SQLException ex) {
