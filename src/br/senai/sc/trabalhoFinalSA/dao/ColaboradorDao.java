@@ -231,13 +231,13 @@ public class ColaboradorDao extends ConnectionFactory {
         this.con.close();
 
     }
-  public void SetarUltimoAcesso(int codCliente,String data) throws SQLException {
+  public void SetarUltimoAcesso(int codCliente) throws SQLException {
 
-        String sql = "update colaborador set utiCol = ? where = codCol ?";
-//estatus = 0 significa que o colaborador esta inativel
+        String sql = "update colaborador set utiCol = CURDATE() where  codCol =?";
+
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setString(1, data);
-            st.setInt(2,codCliente);
+           
+            st.setInt(1,codCliente);
             st.execute();
             st.close();
         }

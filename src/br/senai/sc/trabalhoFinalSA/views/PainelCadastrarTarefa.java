@@ -23,28 +23,33 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
     private CardLayout cl;
     private Colaborador colaborador;
 
-    public PainelCadastrarTarefa(Colaborador colaborador, String painel) {
+    public PainelCadastrarTarefa(Colaborador colaborador,String painel) {
         initComponents();
-        this.cl = (CardLayout) this.getLayout();
-         this.add(CadastroTarefaColaborador, "painelCadastroTarefaColaborador");
-         this.add(CadastroTarefaEquipe, "painelCadastroTarefaEquipe");
-       if (painel.equals("equipe")) {
-            
-            this.cl.show(this, "painelCadastroTarefaEquipe");
-       } else {
-           
-            this.cl.show(this, "painelCadastroTarefaColaborador");
-       }
 
+        
+
+        this.cl = (CardLayout) this.getLayout();
+        this.add(CadastroTarefaColaborador, "painelCadastroTarefaColaborador");
+        this.add(CadastroTarefaEquipe, "painelCadastroTarefaEquipe");
+
+        this.cl.show(this, "painelCadastroTarefaEquipe");
+
+        if (painel.equals("equipe")) {
+
+            this.cl.show(this, "painelCadastroTarefaEquipe");
+        } else {
+
+            this.cl.show(this, "painelCadastroTarefaColaborador");
+        }
         this.colaborador = colaborador;
 
-        /* int codCol = this.colaborador.getTipCol();
-          if(codCol == 2){
-              this.cpCodEqu.setVisible(false);
-              this.labelCodigoEquipe.setVisible(false);
-              this.cpCodCol.setVisible(false);
-              this.labelCodigoColaborador.setVisible(false);
-          }*/
+        int codCol = this.colaborador.getTipCol();
+        if (codCol == 2) {
+            this.cpCodEqu.setVisible(false);
+            this.labelCodigoEquipe.setVisible(false);
+            this.cpCodCol.setVisible(false);
+            this.labelCodigoColaborador.setVisible(false);
+        }
     }
 
     /**
@@ -348,7 +353,16 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-  Agenda age = new Agenda();
+
+
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {
+
+    }
+
+    private void btnSalvarEquipeActionPerformed(java.awt.event.ActionEvent evt) {
+        Agenda age = new Agenda();
         int col = 0;
         int equ = 1;
         String aux;
@@ -366,17 +380,12 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
         aux = cpCodCol.getText();
         if (aux == null) {
-            equ = this.colaborador.getCodCol();
+            equ = this.colaborador.getEquCol();
         } else {
             equ = Integer.parseInt(aux);
         }
 
         AgendaDao ageDao = new AgendaDao();
-
-
-       
-    
-                                              
 
         try {
             ageDao.inserir(age, col, equ);
@@ -385,25 +394,14 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao salvar tarefa");
         }
-        
-           
- 
 
-
-    }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {                                           
-    
     }
-    private void btnSalvarEquipeActionPerformed(java.awt.event.ActionEvent evt) {                                                
-
-    }                                               
 
     private void btnSalvarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarColaboradorActionPerformed
 
         Agenda age = new Agenda();
-        int col = 1;
-        int equ = 0;
+        int col = 0;
+        int equ = 1;
         String aux;
         age.setCriAge(cpTituloTarefa.getText());
         age.setDesAge(cpDescricaoTarefa.getText());
@@ -416,21 +414,16 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         String[] date2 = data2.split("/");
         data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
         age.setComAge(data2);
-
+        System.out.println("Passou aqui");
         aux = cpCodEqu.getText();
         if (aux == null) {
-            equ = this.colaborador.getCodCol();
+            col = this.colaborador.getCodCol();
         } else {
-            equ = Integer.parseInt(aux);
+            col = Integer.parseInt(aux);
         }
 
         AgendaDao ageDao = new AgendaDao();
-
-
-       
-    
-                                              
-
+        System.out.println("chegou aqui");
         try {
             ageDao.inserir(age, col, equ);
             JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
@@ -445,7 +438,6 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
     private void CadastroTarefaEquipeComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_CadastroTarefaEquipeComponentShown
 
     }//GEN-LAST:event_CadastroTarefaEquipeComponentShown
-
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

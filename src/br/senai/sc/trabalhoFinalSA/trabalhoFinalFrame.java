@@ -31,10 +31,11 @@ import javax.swing.JOptionPane;
 public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private Colaborador colaborador;
-
+    private CardLayout cl;
+    
     public trabalhoFinalFrame() {
         initComponents();
-
+        this.cl = (CardLayout) painelPrincipal.getLayout();
     }
 
     /**
@@ -310,8 +311,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         painelPrincipal.add(ce, "painelCadastroEquipe");
         painelPrincipal.add(altSenha, "alterarSenha");
 
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
-        cl.show(painelPrincipal, "telaPadrao");
+        
+        this.cl.show(painelPrincipal, "telaPadrao");
     }
 
 
@@ -325,11 +326,13 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             if (c == null) {
                 JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
             } else {
-               
+
                 this.colaborador = c;
-                String data = null; 
-                od.obterData(data);
-            
+
+                int codigo = this.colaborador.getCodCol();
+                ColaboradorDao colaborador = new ColaboradorDao();
+                System.out.println(codigo);
+                colaborador.SetarUltimoAcesso(codigo);
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
                 this.autenticarPaineis();
@@ -347,8 +350,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuListarColaboradorMouseClicked
 
     private void menuListarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarEquipeActionPerformed
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
-        cl.show(painelPrincipal, "painelListagemEquipe");
+ 
+        this.cl.show(painelPrincipal, "painelListagemEquipe");
     }//GEN-LAST:event_menuListarEquipeActionPerformed
 
     private void menuCadastrarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarEquipeActionPerformed
@@ -362,22 +365,18 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAlterSenhaActionPerformed
 
     private void menuAgendaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaColaboradorActionPerformed
-        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(colaborador, "colaborador");
-        this.add(ct, "painelCadastrarTarefaColaborador");
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
-
-        cl.show(painelPrincipal, "painelCadastrarTarefaColaborador");
-
-
+      
+        
     }//GEN-LAST:event_menuAgendaColaboradorActionPerformed
 
     private void menuAdicionarTarefaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaEquipeActionPerformed
-        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(colaborador, "equipe");
-        this.add(ct, "painelCadastrarTarefa");
+        String painel = "equipe";
+        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador,painel);
+
+        painelPrincipal.add(ct, "painelCadastrarTarefa");
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
 
         cl.show(painelPrincipal, "painelCadastrarTarefa");
-
 
     }//GEN-LAST:event_menuAdicionarTarefaEquipeActionPerformed
 
@@ -388,8 +387,13 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_manuAlterarCadastroActionPerformed
 
     private void menuAdicionarTarefaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaColaboradorActionPerformed
+        String painel = "colaborador";
+        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador,painel);
 
+        painelPrincipal.add(ct, "painelCadastrarTarefa");
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
 
+        cl.show(painelPrincipal, "painelCadastrarTarefa");
     }//GEN-LAST:event_menuAdicionarTarefaColaboradorActionPerformed
 
     /**
