@@ -41,10 +41,11 @@ public class AgendaEquipeDao extends ConnectionFactory {
      public void eliminar(String comAge, String criAge, String desAge, String titAge, int codEqu) throws SQLException {
 
          Equipe equ = new Equipe();
-         codEqu = equ.getCodEqu();
+         Colaborador col = new Colaborador();
+         codEqu = col.getEquCol();
          
-        String sql = "delete from agenda where criAge = ?, comAge = ?, titAge = ?, desAge = ?"
-                + ", codEqu = ? ";
+        String sql = "delete from agenda where criAge = ? and comAge = ? and titAge = ? and desAge = ?"
+                + " and codEqu = ? ";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, criAge);
@@ -61,7 +62,7 @@ public class AgendaEquipeDao extends ConnectionFactory {
     }
 
 
-    public void alterar(Agenda age, Equipe equ) throws SQLException {
+    public void alterar(Agenda age, Colaborador equCol) throws SQLException {
 
         String sql = "update agenda set criAge = ?, comAge = ?, titAge = ?, desAge = ? where criAge = ? and"
                 + "comAge = ? and titAge = ? and desAge = ? and codEqu = ? ";
@@ -75,7 +76,7 @@ public class AgendaEquipeDao extends ConnectionFactory {
            st.setString(6, age.getTitAge());
            st.setString(7, age.getDesAge());
            st.setString(8, age.getComAge());
-           st.setInt(9, equ.getCodEqu());
+           st.setInt(9, equCol.getEquCol());
 
             st.execute();
             st.close();
@@ -119,14 +120,14 @@ public class AgendaEquipeDao extends ConnectionFactory {
   
      public Agenda getAgendaEquipe(int codEqu) throws SQLException {
          
-         Equipe equ = new Equipe();
-         codEqu = equ.getCodEqu();
+         Colaborador col = new Colaborador();
+         codEqu = col.getEquCol();
         String sql = "select * from agenda where codEqu = ?";
         Agenda agenda = null;
  
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setInt(5, codEqu);
+            st.setInt(1, codEqu);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                 agenda = new Agenda ();

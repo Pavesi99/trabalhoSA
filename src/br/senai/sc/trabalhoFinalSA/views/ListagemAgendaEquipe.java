@@ -71,17 +71,30 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
         setLayout(new java.awt.CardLayout());
 
+        painelListagemAgenda.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                painelListagemAgendaComponentShown(evt);
+            }
+        });
+
         tblListagemAgenda.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Data de Criação", "Data de Entrega", "Título", "Descrição"
+                "codigo", "Data de Criação", "Data de Entrega", "Título", "Descrição"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -252,16 +265,15 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblListagemAgendaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tblListagemAgendaComponentShown
-        this.popularTabela();
+       
     }//GEN-LAST:event_tblListagemAgendaComponentShown
 
-        private void preencherFormulario(int codEqu){
+        private void preencherFormulario(int codEquCol){
         AgendaEquipeDao ageE = new AgendaEquipeDao();
-        Equipe equ = new Equipe();
-        codEqu = equ.getCodEqu();
+      
         
         try {
-            Agenda agenda = ageE.getAgendaEquipe(codEqu);
+            Agenda agenda = ageE.getAgendaEquipe(codEquCol);
             cpDataCriacao.setText(agenda.getCriAge());
             cpDataFinalizacao.setText(agenda.getComAge());
             cpTituloTarefa.setText(agenda.getTitAge());
@@ -273,7 +285,7 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
             Logger.getLogger(ListagemAgendaEquipe.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        this.codAgeEqu = codEqu;
+        this.codAgeEqu = codEquCol;
     }
     
     
@@ -281,20 +293,20 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         Agenda age = new Agenda();
-        Equipe equ = new Equipe();
+        Colaborador col = new Colaborador();
         age.setCriAge(cpDataCriacao.getText());
         age.setComAge(cpDataFinalizacao.getText());
         age.setTitAge(cpTituloTarefa.getText());
         age.setDesAge(cpDescricaoTarefa.getText());
-        equ.setCodEqu(this.codAgeEqu);
+        col.setEquCol(this.codAgeEqu);
 
         AgendaEquipeDao ageEDao = new AgendaEquipeDao();
         try {
-            ageEDao.alterar(age, equ);
+            ageEDao.alterar(age, col);
             JOptionPane.showMessageDialog(null,"Tarefa da Equipe Atualizada com Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Falha ao Atualizar a Tarefa da Equipe");
-            Logger.getLogger(ListagemAgendaEquipe.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE,
                 null, ex);
 
         }
@@ -307,8 +319,8 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         
         if (linha!= -1) {
             String codigo = tblListagemAgenda.getValueAt(linha, 0).toString();
-            int codigoCliente = Integer.parseInt(codigo);
-            this.preencherFormulario(codigoCliente);
+            int codigoAgenda = Integer.parseInt(codigo);
+            this.preencherFormulario(codigoAgenda);
             this.limparTabela();
             this.cl.show(this,"painelEdicao" );
         }
@@ -318,7 +330,7 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
            this.cl  = (CardLayout) this.getLayout();
-           cl.show(this, "painelListagem");
+           cl.show(this, "painelListagemAgenda");
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
@@ -336,7 +348,12 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
              }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void painelListagemAgendaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemAgendaComponentShown
+         this.popularTabela();
+    }//GEN-LAST:event_painelListagemAgendaComponentShown
 private void popularTabela () {
+        Colaborador col = new Colaborador();
         AgendaEquipeDao ageE = new AgendaEquipeDao ();
         List<Agenda> listaAgenda;
         try {
@@ -357,7 +374,7 @@ private void popularTabela () {
         
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Obter as Tarefas do Banco de Dados!");
-            Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ListagemAgendaEquipe.class.getName()).log(Level.SEVERE, null, ex);
         }
            
     }
