@@ -19,6 +19,7 @@ import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemEquipe;
 import br.senai.sc.trabalhoFinalSA.views.PainelAlterarSenha;
 import br.senai.sc.trabalhoFinalSA.views.PainelCadastrarTarefa;
+import br.senai.sc.trabalhoFinalSA.views.TelaPadrao;
 
 import java.awt.CardLayout;
 import java.sql.SQLException;
@@ -34,7 +35,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private Colaborador colaborador;
     private CardLayout cl;
-    
+
     public trabalhoFinalFrame() {
         initComponents();
         this.cl = (CardLayout) painelPrincipal.getLayout();
@@ -58,6 +59,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         cpSenha = new javax.swing.JTextField();
         btnEntrar = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
+        menuInicio = new javax.swing.JMenu();
         menuManterColaborador = new javax.swing.JMenu();
         menuCadastrarColaborador = new javax.swing.JMenuItem();
         menuListarColaborador = new javax.swing.JMenuItem();
@@ -141,10 +143,18 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                     .addComponent(cpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(btnEntrar)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(223, Short.MAX_VALUE))
         );
 
         painelPrincipal.add(painelLogin, "card2");
+
+        menuInicio.setText("Inicio");
+        menuInicio.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuInicioMouseClicked(evt);
+            }
+        });
+        BarraMenu.add(menuInicio);
 
         menuManterColaborador.setText("Colaborador");
 
@@ -286,7 +296,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+ListagemDeColaborador listar = new ListagemDeColaborador(0);
+ painelPrincipal.add(listar, "painelListagem");
+        this.cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagem");
     }//GEN-LAST:event_menuListarColaboradorActionPerformed
 
@@ -296,40 +308,30 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void autenticarPaineis() {
 
-        ListagemDeColaborador listar = new ListagemDeColaborador(0);
-        ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);
         PainelCadastroColaborador cadastro = new PainelCadastroColaborador();
         PainelAlterarSenha altSenha = new PainelAlterarSenha();
         ExcluirColaborador ec = new ExcluirColaborador();
         ListagemEquipe le = new ListagemEquipe();
         CadastroEquipe ce = new CadastroEquipe();
-
+        TelaPadrao padrao = new TelaPadrao();
         ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);
         
 
         ListagemAgendaEquipe lae = new ListagemAgendaEquipe(this.colaborador);
 
-        painelPrincipal.add(painelLogin, "telaPadrao");
-        painelPrincipal.add(listar, "painelListagem");
-        painelPrincipal.add(listarEAlterar, "painelListagemAlt");
+        painelPrincipal.add(padrao, "telaPadrao");
+        painelPrincipal.add(painelLogin, "telaLogin");
+       
+       
         painelPrincipal.add(cadastro, "painelCadastro");
         painelPrincipal.add(lae, "painelListagemAgendaEquipe");
         painelPrincipal.add(ec, "painelExcluir");
-
         painelPrincipal.add(agenCol, "painelagendaCol");
-        painelPrincipal.add(painelLogin, "telaPadrao");
-        painelPrincipal.add(listar, "painelListagem");
-        painelPrincipal.add(listarEAlterar, "painelListagemAlt");
-        painelPrincipal.add(cadastro, "painelCadastro");
-
-        painelPrincipal.add(ec, "painelExcluir");
-
         painelPrincipal.add(le, "painelListagemEquipe");
         painelPrincipal.add(ce, "painelCadastroEquipe");
         painelPrincipal.add(altSenha, "alterarSenha");
 
-        
-        this.cl.show(painelPrincipal, "telaPadrao");
+        this.cl.show(painelPrincipal, "telaLogin");
     }
 
 
@@ -348,17 +350,20 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
                 int codigo = this.colaborador.getCodCol();
                 ColaboradorDao colaborador = new ColaboradorDao();
-                System.out.println(codigo);
+
                 colaborador.SetarUltimoAcesso(codigo);
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
+                cpSenha.setText(null);
+                cpUsuario.setText(null);
                 this.autenticarPaineis();
             }
 
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "telaPadrao");
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
@@ -367,7 +372,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuListarColaboradorMouseClicked
 
     private void menuListarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarEquipeActionPerformed
- 
+
         this.cl.show(painelPrincipal, "painelListagemEquipe");
     }//GEN-LAST:event_menuListarEquipeActionPerformed
 
@@ -383,7 +388,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void menuAgendaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaColaboradorActionPerformed
 
-         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelagendaCol");
 
 
@@ -391,7 +396,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void menuAdicionarTarefaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaEquipeActionPerformed
         String painel = "equipe";
-        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador,painel);
+        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador, painel);
 
         painelPrincipal.add(ct, "painelCadastrarTarefa");
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
@@ -402,19 +407,29 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
 
     private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+
+ 
+        
+        ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);
+      painelPrincipal.add(listarEAlterar, "painelListagemAlt");
+        this.cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagemAlt");
     }//GEN-LAST:event_manuAlterarCadastroActionPerformed
 
     private void menuAdicionarTarefaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaColaboradorActionPerformed
         String painel = "colaborador";
-        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador,painel);
+        PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador, painel);
 
         painelPrincipal.add(ct, "painelCadastrarTarefa");
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();
 
         cl.show(painelPrincipal, "painelCadastrarTarefa");
     }//GEN-LAST:event_menuAdicionarTarefaColaboradorActionPerformed
+
+    private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
+        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+        cl.show(painelPrincipal, "telaPadrao");
+    }//GEN-LAST:event_menuInicioMouseClicked
 
     /**
      * @param args the command line arguments
@@ -470,6 +485,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCadastrarColaborador;
     private javax.swing.JMenuItem menuCadastrarEquipe;
     private javax.swing.JMenu menuConsultarAgenda;
+    private javax.swing.JMenu menuInicio;
     private javax.swing.JMenuItem menuListarColaborador;
     private javax.swing.JMenuItem menuListarEquipe;
     private javax.swing.JMenu menuManterColaborador;

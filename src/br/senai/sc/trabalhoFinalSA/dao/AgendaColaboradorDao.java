@@ -91,7 +91,7 @@ public class AgendaColaboradorDao extends ConnectionFactory {
         List<Agenda> agendas = new ArrayList<Agenda>();
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-             st.setInt(1, 2);
+             st.setInt(1, cod);
             ResultSet rs = st.executeQuery();
 
             while (rs.next()) {

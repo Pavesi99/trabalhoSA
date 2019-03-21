@@ -23,7 +23,7 @@ public class ColaboradorDao extends ConnectionFactory {
                 + "(nomCol,ruaCol, baiCol, "
                 + "numCol, cepCol, cidCol, celCol, dddCol,"
                 + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol, equCol) "
-                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, md5(?), ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, col.getNomCol());
@@ -111,12 +111,12 @@ public class ColaboradorDao extends ConnectionFactory {
     }
 
     public void alterar(Colaborador col) throws SQLException {
-
+        System.out.println("aaaa"+col.getCodCol());
         String sql = "update colaborador set nomCol = ?, ruaCol = ?, baiCol = ?, "
                 + "numCol = ?, cepCol = ?, cidCol = ?, celCol = ?, dddCol = ?,"
                 + "tipCol = ?, emaCol = ?, utiCol = ?,"
-                + " datCol = ?, estCol = ?, where codCol = ?";
-
+                + " datCol = ?, estCol = ? where codCol = ?";
+        System.out.println("get"+col.getCodCol());
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, col.getNomCol());
             st.setString(2, col.getRuaCol());
@@ -220,7 +220,6 @@ public class ColaboradorDao extends ConnectionFactory {
     }
     
  public void alterarSenha(int cod,String senha) throws SQLException {
-     System.out.println(cod+"  "+senha);
         String sql = "update colaborador set senCol = md5(?) where codCol = ?";
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, senha);

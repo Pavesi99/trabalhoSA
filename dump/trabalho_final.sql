@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `trabalho_final` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `trabalho_final` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `trabalho_final`;
 -- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
 --
@@ -83,7 +83,7 @@ CREATE TABLE `colaborador` (
 
 LOCK TABLES `colaborador` WRITE;
 /*!40000 ALTER TABLE `colaborador` DISABLE KEYS */;
-INSERT INTO `colaborador` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(2,'Vilmar Pavesi Junior','Arnoldo Ristow','Zantão',593,88357200,'Brusque',999117121,47,1,'vilmar','123','vilmarjunior@gmail.voce',NULL,'0000-00-00',1,1),(3,'Ana','Arnoldo Cedrinho','Cedrinho',593,88357200,'Brusque',2147483647,47,2,'colaborador','123','vilmarjunior@gmail.voce',NULL,'0000-00-00',1,1),(4,'Gestor Teste','Arnoldo Ristow','Zantão',593,88357200,'Brusque',999117121,47,1,'gestor','123','vTeste@gmail.voce',NULL,'2000-10-00',1,2),(5,'Joao o INATIVO','Arnoldo Ristow','Centro',593,88357200,'Brusque',999117121,47,2,'inativo','123','vilmarjunior@gmail.voce',NULL,'0000-00-00',2,1);
+INSERT INTO `colaborador` VALUES (1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0),(2,'Vilmar Pavesi Junior','Arnoldo Ristow','Zantão',593,88357200,'Brusque',999117121,47,1,'vilmar','202cb962ac59075b964b07152d234b70','vilmarjunior@gmail.voce',NULL,'0000-00-00',1,1),(3,'Ana','Arnoldo Cedrinho','Cedrinho',593,88357200,'Brusque',2147483647,47,2,'colaborador','202cb962ac59075b964b07152d234b70','vilmarjunior@gmail.voce',NULL,'0000-00-00',1,1),(4,'Gestor Teste','Arnoldo Ristow','Zantão',593,88357200,'Brusque',999117121,47,1,'gestor','202cb962ac59075b964b07152d234b70','vTeste@gmail.voce',NULL,'2000-10-00',1,2),(5,'Joao o INATIVO','Arnoldo Ristow','Centro',593,88357200,'Brusque',999117121,47,2,'inativo','202cb962ac59075b964b07152d234b70','vilmarjunior@gmail.voce',NULL,'0000-00-00',2,1);
 /*!40000 ALTER TABLE `colaborador` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,4 +121,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-19 16:52:35
+-- Dump completed on 2019-03-21 16:52:47
