@@ -296,7 +296,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
-        CardLayout cl = (CardLayout) painelPrincipal.getLayout();
+ListagemDeColaborador listar = new ListagemDeColaborador(0);
+ painelPrincipal.add(listar, "painelListagem");
+        this.cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagem");
     }//GEN-LAST:event_menuListarColaboradorActionPerformed
 
@@ -306,8 +308,6 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void autenticarPaineis() {
 
-        ListagemDeColaborador listar = new ListagemDeColaborador(0);
-        ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);
         PainelCadastroColaborador cadastro = new PainelCadastroColaborador();
         PainelAlterarSenha altSenha = new PainelAlterarSenha();
         ExcluirColaborador ec = new ExcluirColaborador();
@@ -320,12 +320,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
         painelPrincipal.add(padrao, "telaPadrao");
         painelPrincipal.add(painelLogin, "telaLogin");
-        painelPrincipal.add(listar, "painelListagem");
-        painelPrincipal.add(listarEAlterar, "painelListagemAlt");
+       
+       
         painelPrincipal.add(cadastro, "painelCadastro");
         painelPrincipal.add(lae, "painelListagemAgendaEquipe");
         painelPrincipal.add(ec, "painelExcluir");
-
         painelPrincipal.add(agenCol, "painelagendaCol");
         painelPrincipal.add(le, "painelListagemEquipe");
         painelPrincipal.add(ce, "painelCadastroEquipe");
@@ -354,6 +353,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 colaborador.SetarUltimoAcesso(codigo);
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
+                cpSenha.setText(null);
+                cpUsuario.setText(null);
                 this.autenticarPaineis();
             }
 
@@ -406,8 +407,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
 
+ 
+        
         ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);
-     
+      painelPrincipal.add(listarEAlterar, "painelListagemAlt");
         this.cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagemAlt");
     }//GEN-LAST:event_manuAlterarCadastroActionPerformed
