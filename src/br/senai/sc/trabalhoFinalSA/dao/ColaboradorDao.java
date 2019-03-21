@@ -23,7 +23,7 @@ public class ColaboradorDao extends ConnectionFactory {
                 + "(nomCol,ruaCol, baiCol, "
                 + "numCol, cepCol, cidCol, celCol, dddCol,"
                 + "tipCol, usuCol, senCol, emaCol, utiCol, datCol, estCol, equCol) "
-                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, md5(?), ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, col.getNomCol());
@@ -219,7 +219,6 @@ public class ColaboradorDao extends ConnectionFactory {
     }
     
  public void alterarSenha(int cod,String senha) throws SQLException {
-     System.out.println(cod+"  "+senha);
         String sql = "update colaborador set senCol = md5(?) where codCol = ?";
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, senha);

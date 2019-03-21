@@ -28,28 +28,36 @@ public class TelaPadrao extends javax.swing.JPanel {
     private void initComponents() {
 
         labeTitulo = new javax.swing.JLabel();
+        labelVercao = new javax.swing.JLabel();
 
         labeTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         labeTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labeTitulo.setText("Trabalho Final");
+
+        labelVercao.setText("1.0.0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(labeTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labelVercao))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addComponent(labeTitulo)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
+                .addComponent(labelVercao))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel labeTitulo;
+    private javax.swing.JLabel labelVercao;
     // End of variables declaration//GEN-END:variables
 }

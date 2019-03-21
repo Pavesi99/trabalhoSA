@@ -367,8 +367,9 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
 
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
     }
-    private void popularTabela(){
-        System.out.println("pasouaki");
+
+    private void popularTabela() {
+
         ColaboradorDao col = new ColaboradorDao();
         List<Colaborador> listaColaborador;
         try {
@@ -380,7 +381,7 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
             for (int i = 0; i < listaColaborador.size(); i++) {
                 Colaborador c = listaColaborador.get(i);
                 lista.add(new Object[]{c.getCodCol(), c.getNomCol(), c.getRuaCol(), c.getBaiCol(), c.getNumCol(), c.getCepCol(), c.getCidCol(), c.getCelCol(), c.getDddCol(), c.getTipCol(), c.getEmaCol()});
-                System.out.println(c.getCodCol());
+
             }
 
             for (int idx = 0; idx < lista.size(); idx++) {
@@ -470,9 +471,9 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
     }//GEN-LAST:event_campoSelecaoTipoColaboradorActionPerformed
 
     private void TblListagemColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblListagemColaboradorMouseClicked
-        if (this.listar == 1) {
+     if (this.listar == 1) {
             int linha = TblListagemColaborador.getSelectedRow();
-
+         
             if (linha != -1) {
                 String codigo = TblListagemColaborador.getValueAt(linha, 0).toString();
                 int codigoCliente = Integer.parseInt(codigo);
@@ -482,14 +483,18 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
                     Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
-                this.add(painelEdicao, "painelEdicao");
+                this.add(this, "painelEdicao");
                 this.cl.show(this, "painelEdicao");
             }
     }//GEN-LAST:event_TblListagemColaboradorMouseClicked
     }
 
     private void SetClienteTabelaEdicao(int codigo) throws SQLException {
+        System.out.println("set");
+     
         ColaboradorDao colab = new ColaboradorDao();
+        
+
         Colaborador col = colab.getColaborador(codigo);
         String cod = "" + codigo;
         LabelCodigo.setText(cod);
@@ -507,12 +512,14 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         String nascimento = col.getDatCol();
         String[] data = nascimento.split("-");
         nascimento = data[2] + data[1] + data[0];
-        System.out.println(nascimento);
+
         campoFormatadoNascimento.setText(nascimento);
         String telefone = "" + col.getCelCol();
         campoFormatadoTelefone.setText(telefone);
         campoNome.setText(col.getNomCol());
         campoRua.setText(col.getRuaCol());
+
+        System.out.println("fimmm");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

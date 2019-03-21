@@ -93,9 +93,8 @@ public class ListagemAgendaColaborador extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tblListagemAgendaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tblListagemAgendaComponentShown
-        System.out.println("ghsdhsdhdsdhdshgds");
-        this.popularTabela();
-        System.out.println("ghsdhsdhdsdhdshgds");
+     this.popularTabela();
+    
     }//GEN-LAST:event_tblListagemAgendaComponentShown
 
     private void ListagemAgendaComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_ListagemAgendaComponentShown
@@ -104,22 +103,22 @@ public class ListagemAgendaColaborador extends javax.swing.JPanel {
     private void popularTabela() {
         AgendaColaboradorDao age = new AgendaColaboradorDao();
         List<Agenda> listaAgenda;
-        System.out.println("pasou aki");
+     
         try {
             listaAgenda = age.listarAgendaColaborador(this.c.getCodCol());
-            System.out.println("pasou aki tambem");
+      
             DefaultTableModel model = (DefaultTableModel) tblListagemAgenda.getModel();
             List<Object> lista = new ArrayList<Object>();
 
             for (int i = 0; i < listaAgenda.size(); i++) {
-                System.out.println("asgagdf");
+            
                 Agenda a = listaAgenda.get(i);
                 lista.add(new Object[]{a.getCriAge(), a.getComAge(),
                     a.getTitAge(), a.getDesAge()});
             }
 
             for (int idx = 0; idx < lista.size(); idx++) {
-                System.out.println("asga444444444444df");
+             
                 model.addRow((Object[]) lista.get(idx));
             }
 
