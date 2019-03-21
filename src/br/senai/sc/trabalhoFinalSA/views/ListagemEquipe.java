@@ -27,7 +27,7 @@ public class ListagemEquipe extends javax.swing.JPanel {
      */
     private CardLayout cl;
     private int codEqu;
-    private int linha;
+
     public ListagemEquipe() {
         initComponents();
         
@@ -75,14 +75,14 @@ public class ListagemEquipe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Nome", "Descrição"
+                "Código da Equipe", "Nome", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -104,6 +104,9 @@ public class ListagemEquipe extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(tblListagemEquipe);
+        if (tblListagemEquipe.getColumnModel().getColumnCount() > 0) {
+            tblListagemEquipe.getColumnModel().getColumn(0).setHeaderValue("Código da Equipe");
+        }
 
         javax.swing.GroupLayout painelListagemEquipeLayout = new javax.swing.GroupLayout(painelListagemEquipe);
         painelListagemEquipe.setLayout(painelListagemEquipeLayout);
@@ -213,6 +216,7 @@ public class ListagemEquipe extends javax.swing.JPanel {
         add(painelEdicao, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
+   
     private void popularTabela () {
          EquipeDao eq = new EquipeDao ();
         List<Equipe> listaEquipe;
@@ -224,7 +228,7 @@ public class ListagemEquipe extends javax.swing.JPanel {
         
         for(int i =0 ; i < listaEquipe.size(); i++) {
              Equipe c = listaEquipe.get(i);
-             lista.add(new Object[]{c.getNomEqu(), c.getDesEqu()});
+             lista.add(new Object[]{c.getCodEqu(), c.getNomEqu(), c.getDesEqu()});
     }
         
         for(int idx = 0; idx < lista.size(); idx++) {
@@ -238,14 +242,11 @@ public class ListagemEquipe extends javax.swing.JPanel {
            
     }
     
-    private void painelListagemEquipeComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemEquipeComponentShown
-      this.popularTabela();                               
-    }//GEN-LAST:event_painelListagemEquipeComponentShown
-
     private void cpNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpNomeActionPerformed
 
+     
      private void preencherFormulario(int codigoEquipe){
         EquipeDao equ = new EquipeDao();
         
@@ -253,6 +254,7 @@ public class ListagemEquipe extends javax.swing.JPanel {
             Equipe equipe = equ.getEquipe(codigoEquipe);
             cpNome.setText(equipe.getNomEqu());
             cpDescricao.setText(equipe.getDesEqu());
+         
            
            
         } catch (SQLException ex) {
@@ -262,11 +264,13 @@ public class ListagemEquipe extends javax.swing.JPanel {
         this.codEqu = codigoEquipe;
     }
     
+    
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
  
         Equipe equ = new Equipe();
         equ.setNomEqu(cpNome.getText());
         equ.setDesEqu(cpDescricao.getText());
+        equ.setCodEqu(this.codEqu);
   
 
         EquipeDao equDao = new EquipeDao();
@@ -280,22 +284,8 @@ public class ListagemEquipe extends javax.swing.JPanel {
 
         }
         this.cl  = (CardLayout) this.getLayout();
-        cl.show(this, "painelListagem");
+        cl.show(this, "painelListagemEquipe");
     }//GEN-LAST:event_btnEditarActionPerformed
-
-    private void tblListagemEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemEquipeMouseClicked
-         JOptionPane.showMessageDialog(null, "Você escolheu eliminar o item "+this.linha);
-        int linha = tblListagemEquipe.getSelectedRow();
-        
-        if (linha!= -1) {
-            String codigo = tblListagemEquipe.getValueAt(linha, 0).toString();
-            int codigoEquipe = Integer.parseInt(codigo);
-            this.preencherFormulario(codigoEquipe);
-            this.limparTabela();
-            this.cl.show(this,"painelEdicao" );
-        }
-      
-    }//GEN-LAST:event_tblListagemEquipeMouseClicked
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
          this.cl  = (CardLayout) this.getLayout();
@@ -303,7 +293,7 @@ public class ListagemEquipe extends javax.swing.JPanel {
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-         JOptionPane.showMessageDialog(null, "Você escolheu eliminar o item "+this.linha);
+      
         Object[] options = {"Sim", "Não"};
         int opcaoSelecionada = JOptionPane.showOptionDialog(null, "Deseja realmente eliminar esta equipe ?", "Atenção!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
         
@@ -312,6 +302,7 @@ public class ListagemEquipe extends javax.swing.JPanel {
              try {
                  equDao.eliminar(this.codEqu);
                  this.limparTabela(); 
+                 this.cl  = (CardLayout) this.getLayout();
                  this.cl.show(this,"painelListagemEquipe");
              } catch (SQLException ex) {
                  Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
@@ -319,9 +310,28 @@ public class ListagemEquipe extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
+    private void painelListagemEquipeComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemEquipeComponentShown
+        this.popularTabela();
+    }//GEN-LAST:event_painelListagemEquipeComponentShown
+
     private void tblListagemEquipeComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_tblListagemEquipeComponentShown
         // TODO add your handling code here:
     }//GEN-LAST:event_tblListagemEquipeComponentShown
+
+    private void tblListagemEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemEquipeMouseClicked
+         
+        int linha = tblListagemEquipe.getSelectedRow();
+        
+        if (linha!= -1) {
+            String codigo = tblListagemEquipe.getValueAt(linha, 0).toString();
+            int codigoEquipe = Integer.parseInt(codigo);
+            this.preencherFormulario(codigoEquipe);
+            this.limparTabela();
+            this.cl  = (CardLayout) this.getLayout();
+            this.cl.show(this,"painelEdicao" );
+        }
+      
+    }//GEN-LAST:event_tblListagemEquipeMouseClicked
 
     private void limparTabela() {
 

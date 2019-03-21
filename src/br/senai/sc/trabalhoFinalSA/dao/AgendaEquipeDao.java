@@ -13,6 +13,7 @@ import java.util.List;
 public class AgendaEquipeDao extends ConnectionFactory {
     
     private Connection con;
+    private Colaborador colaborador;
 
     public AgendaEquipeDao() {
         this.con = this.getConnection();
@@ -86,11 +87,13 @@ public class AgendaEquipeDao extends ConnectionFactory {
 
     }
 
-    public List<Agenda> listarAgenda() throws SQLException {
-        String sql = "select * from agenda";
-        List<Agenda> agendas = null;
-
+    public List<Agenda> listarAgenda(int equCol) throws SQLException {
+        String sql = "select * from agenda where codEqu = ?";
+        List<Agenda> agendas = new ArrayList<Agenda>();
+   
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
+            st.setInt(1, equCol);
+         
             ResultSet rs = st.executeQuery();
 
             agendas = new ArrayList<Agenda>();

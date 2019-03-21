@@ -79,6 +79,7 @@ public class ColaboradorDao extends ConnectionFactory {
                     colaborador.setUtiCol(rs.getString("utiCol"));
                     colaborador.setDatCol(rs.getString("datCol"));
                     colaborador.setEstCol(rs.getInt("estCol"));
+                    colaborador.setEquCol(rs.getInt("equCol"));
 
                 }
             }

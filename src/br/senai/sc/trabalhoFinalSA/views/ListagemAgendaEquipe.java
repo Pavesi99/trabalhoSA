@@ -30,10 +30,11 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
  private CardLayout cl;
  private int codAgeEqu;
  private String criAge, comAge, titAge, desAge;
+ private Colaborador colaborador;
     
-    public ListagemAgendaEquipe() {
+    public ListagemAgendaEquipe(Colaborador colaborador) {
         initComponents();
-       
+       this.colaborador = colaborador;
         this.add(painelListagemAgenda, "painelListagemAgenda");
         this.add(painelEdicao, "painelEdicao");
         
@@ -84,11 +85,11 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "codigo", "Data de Criação", "Data de Entrega", "Título", "Descrição"
+                "Código da Tarefa", "Data de Criação", "Data de Entrega", "Título", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -272,12 +273,23 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
         private void preencherFormulario(int codEquCol){
         AgendaEquipeDao ageE = new AgendaEquipeDao();
-      
-        
+        Agenda age = new Agenda();
+    
         try {
+        String data = cpDataCriacao.getText();
+       data = data.replace( "-" , "");
+       data = data.replace( "/" , "");
+        age.setCriAge(data);
+        
+        String data2 = cpDataFinalizacao.getText();
+       data2 = data2.replace( "-" , "");
+       data2 = data2.replace( "/" , "");
+        age.setCriAge(data2);
+        
+        
             Agenda agenda = ageE.getAgendaEquipe(codEquCol);
-            cpDataCriacao.setText(agenda.getCriAge());
-            cpDataFinalizacao.setText(agenda.getComAge());
+            cpDataCriacao.setText(data);
+            cpDataFinalizacao.setText(data2);
             cpTituloTarefa.setText(agenda.getTitAge());
             cpDescricaoTarefa.setText(agenda.getDesAge());
          
@@ -295,16 +307,16 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
         Agenda age = new Agenda();
-        Colaborador col = new Colaborador();
+        
         age.setCriAge(cpDataCriacao.getText());
         age.setComAge(cpDataFinalizacao.getText());
         age.setTitAge(cpTituloTarefa.getText());
         age.setDesAge(cpDescricaoTarefa.getText());
-        col.setEquCol(this.codAgeEqu);
+        this.colaborador.setEquCol(this.codAgeEqu);
 
         AgendaEquipeDao ageEDao = new AgendaEquipeDao();
         try {
-            ageEDao.alterar(age, col);
+            ageEDao.alterar(age, this.colaborador);
             JOptionPane.showMessageDialog(null,"Tarefa da Equipe Atualizada com Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Falha ao Atualizar a Tarefa da Equipe");
@@ -355,18 +367,18 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
          this.popularTabela();
     }//GEN-LAST:event_painelListagemAgendaComponentShown
 private void popularTabela () {
-        Colaborador col = new Colaborador();
         AgendaEquipeDao ageE = new AgendaEquipeDao ();
         List<Agenda> listaAgenda;
         try {
-            listaAgenda= ageE.listarAgenda();
+            listaAgenda= ageE.listarAgenda(this.colaborador.getEquCol());
             
         DefaultTableModel model = (DefaultTableModel) tblListagemAgenda.getModel();
         List<Object> lista = new ArrayList<Object> ();
         
+      
         for(int i =0 ; i < listaAgenda.size(); i++) {
              Agenda a = listaAgenda.get(i);
-             lista.add(new Object[]{a.getCriAge(), a.getComAge(),
+             lista.add(new Object[]{ this.colaborador.getEquCol() ,a.getCriAge(), a.getComAge(),
                  a.getTitAge(),a.getDesAge()});
     }
         

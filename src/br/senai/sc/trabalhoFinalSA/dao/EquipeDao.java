@@ -61,11 +61,12 @@ public class EquipeDao extends ConnectionFactory {
     
     public void alterar(Equipe equi) throws SQLException {
         
-        String sql = "update equipe set nomEqu = ?, desEqu = ?";
+        String sql = "update equipe set nomEqu =?, desEqu = ? where codEqu = ?";
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
             st.setString(1, equi.getNomEqu());
             st.setString(2, equi.getDesEqu());
+            st.setInt(3, equi.getCodEqu());
             
             st.execute();
             st.close();
@@ -88,7 +89,7 @@ public class EquipeDao extends ConnectionFactory {
                 Equipe equi = new Equipe();
                 equi.setCodEqu(rs.getInt("codEqu"));
                 equi.setNomEqu(rs.getString("nomEqu"));
-                equi.setDesEqu("desEqu");
+                equi.setDesEqu(rs.getString("desEqu"));
                
                 equipes.add(equi);
                 
@@ -103,22 +104,23 @@ public class EquipeDao extends ConnectionFactory {
         return equipes;
     }
     
-    public Equipe getEquipe(int codcli) throws SQLException {
+    public Equipe getEquipe(int codEqu) throws SQLException {
         String sql = "select * from equipe where codEqu = ?";
      Equipe equi = null;
         
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setInt(1, codcli);
+            st.setInt(1, codEqu);
             try (ResultSet rs = st.executeQuery()) {
                 if (rs.next()) {
                     
-                     equi = new Equipe();
+                equi = new Equipe();
                 equi.setCodEqu(rs.getInt("codEqu"));
                 equi.setNomEqu(rs.getString("nomEqu"));
-                equi.setDesEqu("desEqu");
+                equi.setDesEqu(rs.getString("desEqu"));
                 
                      }
             }
+            
             st.close();
         }
         

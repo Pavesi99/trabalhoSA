@@ -305,8 +305,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         CadastroEquipe ce = new CadastroEquipe();
 
         ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);
+        
 
-        ListagemAgendaEquipe lae = new ListagemAgendaEquipe();
+        ListagemAgendaEquipe lae = new ListagemAgendaEquipe(this.colaborador);
 
         painelPrincipal.add(painelLogin, "telaPadrao");
         painelPrincipal.add(listar, "painelListagem");

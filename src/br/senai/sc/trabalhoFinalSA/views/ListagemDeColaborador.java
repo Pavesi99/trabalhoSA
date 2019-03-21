@@ -368,7 +368,7 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
     private void painelListagemComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_painelListagemComponentShown
     }
     private void popularTabela(){
-        System.out.println("pasouaki");
+        
         ColaboradorDao col = new ColaboradorDao();
         List<Colaborador> listaColaborador;
         try {
