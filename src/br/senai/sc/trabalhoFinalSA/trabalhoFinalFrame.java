@@ -22,9 +22,12 @@ import br.senai.sc.trabalhoFinalSA.views.PainelCadastrarTarefa;
 import br.senai.sc.trabalhoFinalSA.views.TelaPadrao;
 
 import java.awt.CardLayout;
+import java.awt.Image;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /**
@@ -39,6 +42,12 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     public trabalhoFinalFrame() {
         initComponents();
         this.cl = (CardLayout) painelPrincipal.getLayout();
+        
+       menuInicio.setVisible(false);
+       menuManterColaborador.setVisible(false);
+       menuManterEquipe.setVisible(false);
+       menuConsultarAgenda.setVisible(false);
+       menuSenha.setVisible(false);
     }
 
     /**
@@ -55,9 +64,11 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         LabelTituloLogin = new javax.swing.JLabel();
         LabelUsuario = new javax.swing.JLabel();
         cpUsuario = new javax.swing.JTextField();
-        LabelSenha = new javax.swing.JLabel();
         cpSenha = new javax.swing.JTextField();
+        LabelSenha = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         BarraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
         menuManterColaborador = new javax.swing.JMenu();
@@ -74,28 +85,41 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         menuVerAgenda = new javax.swing.JMenu();
         menuAgendaColaborador = new javax.swing.JMenuItem();
         menuAgendaEquipe = new javax.swing.JMenuItem();
-        manuSenha = new javax.swing.JMenu();
+        menuSenha = new javax.swing.JMenu();
         menuAlterSenha = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        painelPrincipal.setSize(new java.awt.Dimension(1400, 1600));
         painelPrincipal.setLayout(new java.awt.CardLayout());
 
-        LabelTituloLogin.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        LabelTituloLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabelTituloLogin.setText("GESTÃO DE PESSOAS");
+        painelLogin.setSize(new java.awt.Dimension(1400, 600));
+        painelLogin.setLayout(null);
 
-        LabelUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LabelTituloLogin.setFont(new java.awt.Font("Ultra", 1, 24)); // NOI18N
+        LabelTituloLogin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        painelLogin.add(LabelTituloLogin);
+        LabelTituloLogin.setBounds(10, 40, 527, 0);
+
+        LabelUsuario.setFont(new java.awt.Font("Ultra", 1, 14)); // NOI18N
         LabelUsuario.setText("Usuário:");
+        painelLogin.add(LabelUsuario);
+        LabelUsuario.setBounds(200, 250, 80, 30);
 
         cpUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cpUsuarioActionPerformed(evt);
             }
         });
+        painelLogin.add(cpUsuario);
+        cpUsuario.setBounds(280, 250, 330, 30);
+        painelLogin.add(cpSenha);
+        cpSenha.setBounds(280, 280, 330, 30);
 
-        LabelSenha.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        LabelSenha.setFont(new java.awt.Font("Ultra", 1, 14)); // NOI18N
         LabelSenha.setText("Senha:");
+        painelLogin.add(LabelSenha);
+        LabelSenha.setBounds(210, 280, 70, 30);
 
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
@@ -103,48 +127,18 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 btnEntrarActionPerformed(evt);
             }
         });
+        painelLogin.add(btnEntrar);
+        btnEntrar.setBounds(490, 340, 81, 29);
 
-        javax.swing.GroupLayout painelLoginLayout = new javax.swing.GroupLayout(painelLogin);
-        painelLogin.setLayout(painelLoginLayout);
-        painelLoginLayout.setHorizontalGroup(
-            painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LabelTituloLogin, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(painelLoginLayout.createSequentialGroup()
-                .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(painelLoginLayout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(painelLoginLayout.createSequentialGroup()
-                                .addComponent(LabelUsuario)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cpUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(painelLoginLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(LabelSenha)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cpSenha))))
-                    .addGroup(painelLoginLayout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(btnEntrar)))
-                .addContainerGap(160, Short.MAX_VALUE))
-        );
-        painelLoginLayout.setVerticalGroup(
-            painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelLoginLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(LabelTituloLogin)
-                .addGap(59, 59, 59)
-                .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelUsuario)
-                    .addComponent(cpUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(painelLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabelSenha)
-                    .addComponent(cpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addComponent(btnEntrar)
-                .addContainerGap(223, Short.MAX_VALUE))
-        );
+        jLabel2.setFont(new java.awt.Font("Symbol", 1, 48)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Gestao de Pessoas");
+        painelLogin.add(jLabel2);
+        jLabel2.setBounds(0, 130, 800, 90);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sc/trabalhoFinalSA/126996-entenda-a-importancia-da-gestao-de-pessoas-no-ambiente-empresarial-1280x640.jpg"))); // NOI18N
+        painelLogin.add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 400);
 
         painelPrincipal.add(painelLogin, "card2");
 
@@ -253,7 +247,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
         BarraMenu.add(menuConsultarAgenda);
 
-        manuSenha.setText("Senha");
+        menuSenha.setText("Senha");
 
         menuAlterSenha.setText("Alterar senha");
         menuAlterSenha.addActionListener(new java.awt.event.ActionListener() {
@@ -261,9 +255,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 menuAlterSenhaActionPerformed(evt);
             }
         });
-        manuSenha.add(menuAlterSenha);
+        menuSenha.add(menuAlterSenha);
 
-        BarraMenu.add(manuSenha);
+        BarraMenu.add(menuSenha);
 
         setJMenuBar(BarraMenu);
 
@@ -271,15 +265,15 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 772, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 359, Short.MAX_VALUE)
+            .addGap(0, 383, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE))
         );
 
         pack();
@@ -313,7 +307,7 @@ ListagemDeColaborador listar = new ListagemDeColaborador(0);
         ExcluirColaborador ec = new ExcluirColaborador();
         ListagemEquipe le = new ListagemEquipe();
         CadastroEquipe ce = new CadastroEquipe();
-        TelaPadrao padrao = new TelaPadrao();
+        TelaPadrao padrao = new TelaPadrao(this.colaborador);
         ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);
         
 
@@ -475,8 +469,9 @@ ListagemDeColaborador listar = new ListagemDeColaborador(0);
     private javax.swing.JButton btnEntrar;
     private javax.swing.JTextField cpSenha;
     private javax.swing.JTextField cpUsuario;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuItem manuAlterarCadastro;
-    private javax.swing.JMenu manuSenha;
     private javax.swing.JMenuItem menuAdicionarTarefaColaborador;
     private javax.swing.JMenuItem menuAdicionarTarefaEquipe;
     private javax.swing.JMenuItem menuAgendaColaborador;
@@ -490,6 +485,7 @@ ListagemDeColaborador listar = new ListagemDeColaborador(0);
     private javax.swing.JMenuItem menuListarEquipe;
     private javax.swing.JMenu menuManterColaborador;
     private javax.swing.JMenu menuManterEquipe;
+    private javax.swing.JMenu menuSenha;
     private javax.swing.JMenu menuTarefas;
     private javax.swing.JMenu menuVerAgenda;
     private javax.swing.JPanel painelLogin;
