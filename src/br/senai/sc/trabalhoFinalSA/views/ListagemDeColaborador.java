@@ -371,12 +371,7 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
 
     }
 
-
-        
-
-
     private void popularTabela() {
-
 
         ColaboradorDao col = new ColaboradorDao();
         List<Colaborador> listaColaborador;
@@ -447,8 +442,8 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
         col.setEmaCol(campoEmail.getText());
         col.setEstCol(1);
         col.setEquCol(1);
-        String cod=LabelCodigo.getText();
-        int codigo=Integer.parseInt(cod);
+        String cod = LabelCodigo.getText();
+        int codigo = Integer.parseInt(cod);
         col.setCodCol(codigo);
         ColaboradorDao coDao = new ColaboradorDao();
 
@@ -486,12 +481,15 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
     }//GEN-LAST:event_campoSelecaoTipoColaboradorActionPerformed
 
     private void TblListagemColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblListagemColaboradorMouseClicked
-        if (this.listar == 1) {
-            int linha = TblListagemColaborador.getSelectedRow();
 
+        int linha = TblListagemColaborador.getSelectedRow();
+
+        String codigo = TblListagemColaborador.getValueAt(linha, 0).toString();
+        int codigoCliente = Integer.parseInt(codigo);
+        
+        if (this.listar == 1) {
             if (linha != -1) {
-                String codigo = TblListagemColaborador.getValueAt(linha, 0).toString();
-                int codigoCliente = Integer.parseInt(codigo);
+
                 try {
                     this.SetClienteTabelaEdicao(codigoCliente);
                 } catch (SQLException ex) {
@@ -501,6 +499,26 @@ public class ListagemDeColaborador extends javax.swing.JPanel {
                 this.cl.show(this, "painelEdicao");
             }
     }//GEN-LAST:event_TblListagemColaboradorMouseClicked
+        else if (this.listar == 3) {
+
+            Object[] options = {"Sim", "Não"};
+            int opcaoSelecionada = JOptionPane.showOptionDialog(null, "Deseja Realmente Eliminar Este Colaborador ?", "Atenção!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
+            if (opcaoSelecionada == 0) {
+                ColaboradorDao colDao = new ColaboradorDao();
+                try {
+                    colDao.eliminar(codigoCliente);
+                    this.limparTabela();
+                    this.cl.show(this, "painelListagem");
+                } catch (SQLException ex) {
+                    
+                }
+            }
+            this.limparTabela();
+            this.popularTabela();
+            this.add(painelListagem, "painellist");
+            this.cl.show(this, "painellist");
+        }
     }
 
     private void SetClienteTabelaEdicao(int codigo) throws SQLException {

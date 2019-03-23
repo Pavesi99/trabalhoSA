@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 public class ColaboradorDao extends ConnectionFactory {
 
@@ -98,10 +97,10 @@ public class ColaboradorDao extends ConnectionFactory {
 
     public void eliminar(int estCol) throws SQLException {
 
-        String sql = "update colaborador set estCol = 2";
-//estatus = 0 significa que o colaborador esta inativel
+        String sql = "update colaborador set estCol = 0 where codCol =?";
+        System.out.println("eee  "+estCol);
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
-            st.setInt(2, estCol);
+            st.setInt(1, estCol);
             st.execute();
             st.close();
         }
@@ -111,7 +110,6 @@ public class ColaboradorDao extends ConnectionFactory {
     }
 
     public void alterar(Colaborador col) throws SQLException {
-        System.out.println("aaaa"+col.getCodCol());
         String sql = "update colaborador set nomCol = ?, ruaCol = ?, baiCol = ?, "
                 + "numCol = ?, cepCol = ?, cidCol = ?, celCol = ?, dddCol = ?,"
                 + "tipCol = ?, emaCol = ?, utiCol = ?,"
