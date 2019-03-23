@@ -5,17 +5,22 @@
  */
 package br.senai.sc.trabalhoFinalSA.views;
 
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
+import javax.swing.JLabel;
+
 /**
  *
  * @author Aluno
  */
 public class TelaPadrao extends javax.swing.JPanel {
 
-    /**
-     * Creates new form TelaPadrao
-     */
-    public TelaPadrao() {
+    
+    private Colaborador colaborador;
+    public TelaPadrao(Colaborador colaborador) {
         initComponents();
+        
+        jLabelNomeUsuario.setText(this.colaborador.getNomCol());
+        
     }
 
     /**
@@ -29,34 +34,34 @@ public class TelaPadrao extends javax.swing.JPanel {
 
         labeTitulo = new javax.swing.JLabel();
         labelVercao = new javax.swing.JLabel();
+        jLabelNomeUsuario = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
-        labeTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        labeTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labeTitulo.setText("Trabalho Final");
+        setLayout(null);
+
+        labeTitulo.setFont(new java.awt.Font("Ultra", 1, 48)); // NOI18N
+        labeTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labeTitulo.setText("Bem Vindo");
+        add(labeTitulo);
+        labeTitulo.setBounds(90, 0, 710, 110);
 
         labelVercao.setText("1.0.0");
+        add(labelVercao);
+        labelVercao.setBounds(760, 380, 32, 16);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(labeTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(labelVercao))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(labeTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 221, Short.MAX_VALUE)
-                .addComponent(labelVercao))
-        );
+        jLabelNomeUsuario.setFont(new java.awt.Font("Ultra", 0, 24)); // NOI18N
+        add(jLabelNomeUsuario);
+        jLabelNomeUsuario.setBounds(30, 150, 770, 80);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sc/trabalhoFinalSA/views/controladoria.jpg"))); // NOI18N
+        add(jLabel1);
+        jLabel1.setBounds(0, 0, 800, 400);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabelNomeUsuario;
     private javax.swing.JLabel labeTitulo;
     private javax.swing.JLabel labelVercao;
     // End of variables declaration//GEN-END:variables
