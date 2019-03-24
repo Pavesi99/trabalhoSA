@@ -42,12 +42,12 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     public trabalhoFinalFrame() {
         initComponents();
         this.cl = (CardLayout) painelPrincipal.getLayout();
-        
-       menuInicio.setVisible(false);
-       menuManterColaborador.setVisible(false);
-       menuManterEquipe.setVisible(false);
-       menuConsultarAgenda.setVisible(false);
-       menuSenha.setVisible(false);
+
+        menuInicio.setVisible(false);
+        menuManterColaborador.setVisible(false);
+        menuManterEquipe.setVisible(false);
+        menuConsultarAgenda.setVisible(false);
+        menuSenha.setVisible(false);
     }
 
     /**
@@ -90,10 +90,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        painelPrincipal.setSize(new java.awt.Dimension(1400, 1600));
         painelPrincipal.setLayout(new java.awt.CardLayout());
 
-        painelLogin.setSize(new java.awt.Dimension(1400, 600));
         painelLogin.setLayout(null);
 
         LabelTituloLogin.setFont(new java.awt.Font("Ultra", 1, 24)); // NOI18N
@@ -128,17 +126,17 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             }
         });
         painelLogin.add(btnEntrar);
-        btnEntrar.setBounds(490, 340, 81, 29);
+        btnEntrar.setBounds(490, 340, 63, 23);
 
-        jLabel2.setFont(new java.awt.Font("Symbol", 1, 48)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Gestao de Pessoas");
         painelLogin.add(jLabel2);
-        jLabel2.setBounds(0, 130, 800, 90);
+        jLabel2.setBounds(10, 120, 800, 90);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sc/trabalhoFinalSA/126996-entenda-a-importancia-da-gestao-de-pessoas-no-ambiente-empresarial-1280x640.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sc/senai/trabalhoFinalSA/imagens/ImagemLogin.jpg"))); // NOI18N
         painelLogin.add(jLabel1);
-        jLabel1.setBounds(0, 0, 800, 400);
+        jLabel1.setBounds(0, 0, 800, 390);
 
         painelPrincipal.add(painelLogin, "card2");
 
@@ -290,8 +288,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
-ListagemDeColaborador listar = new ListagemDeColaborador(0);
- painelPrincipal.add(listar, "painelListagem");
+        ListagemDeColaborador listar = new ListagemDeColaborador(0);
+        painelPrincipal.add(listar, "painelListagem");
         this.cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagem");
     }//GEN-LAST:event_menuListarColaboradorActionPerformed
@@ -309,14 +307,12 @@ ListagemDeColaborador listar = new ListagemDeColaborador(0);
         CadastroEquipe ce = new CadastroEquipe();
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);
-        
 
         ListagemAgendaEquipe lae = new ListagemAgendaEquipe(this.colaborador);
 
         painelPrincipal.add(padrao, "telaPadrao");
         painelPrincipal.add(painelLogin, "telaLogin");
-       
-       
+
         painelPrincipal.add(cadastro, "painelCadastro");
         painelPrincipal.add(lae, "painelListagemAgendaEquipe");
         painelPrincipal.add(ec, "painelExcluir");
@@ -347,10 +343,22 @@ ListagemDeColaborador listar = new ListagemDeColaborador(0);
 
                 colaborador.SetarUltimoAcesso(codigo);
 
-                JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
                 cpSenha.setText(null);
                 cpUsuario.setText(null);
                 this.autenticarPaineis();
+                this.cl.show(painelPrincipal, "telaPadrao");
+
+                if (this.colaborador.getTipCol() == 1) {
+                    menuInicio.setVisible(true);
+                    menuManterColaborador.setVisible(true);
+                    menuManterEquipe.setVisible(true);
+                    menuConsultarAgenda.setVisible(true);
+                    menuSenha.setVisible(true);
+                } else {
+                    menuInicio.setVisible(true);
+                    menuConsultarAgenda.setVisible(true);
+                    menuSenha.setVisible(true);
+                }
             }
 
         } catch (SQLException ex) {
@@ -402,10 +410,8 @@ ListagemDeColaborador listar = new ListagemDeColaborador(0);
 
     private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
 
- 
-        
         ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);
-      painelPrincipal.add(listarEAlterar, "painelListagemAlt");
+        painelPrincipal.add(listarEAlterar, "painelListagemAlt");
         this.cl = (CardLayout) painelPrincipal.getLayout();
         cl.show(painelPrincipal, "painelListagemAlt");
     }//GEN-LAST:event_manuAlterarCadastroActionPerformed
