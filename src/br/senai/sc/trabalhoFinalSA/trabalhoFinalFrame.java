@@ -18,6 +18,7 @@ import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemEquipe;
 import br.senai.sc.trabalhoFinalSA.views.PainelAlterarSenha;
 import br.senai.sc.trabalhoFinalSA.views.PainelCadastrarTarefa;
+import br.senai.sc.trabalhoFinalSA.views.PainelCadastroEquipe;
 import br.senai.sc.trabalhoFinalSA.views.TelaPadrao;
 
 import java.awt.CardLayout;
@@ -34,18 +35,16 @@ import javax.swing.JOptionPane;
  * @author Aluno
  */
 public class trabalhoFinalFrame extends javax.swing.JFrame {
-    
+
     private Colaborador colaborador;
     private CardLayout cl;
-    
+
     public trabalhoFinalFrame() {
         initComponents();
         this.cl = (CardLayout) painelPrincipal.getLayout();
 
         this.BarraMenu.setVisible(false);
 
-
-      
     }
 
     /**
@@ -133,6 +132,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         painelLogin.add(jLabel2);
         jLabel2.setBounds(10, 120, 800, 90);
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sc/senai/trabalhoFinalSA/imagens/ImagemLogin.jpg"))); // NOI18N
         painelLogin.add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 390);
@@ -270,9 +270,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 772, Short.MAX_VALUE)
+            .addGap(0, 787, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 772, Short.MAX_VALUE))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 787, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,14 +293,13 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void menuAgendaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaEquipeActionPerformed
         ListagemAgendaEquipe lae = new ListagemAgendaEquipe(this.colaborador);
         painelPrincipal.add(lae, "painelListagemAgendaEquipe");
-        
+
         this.cl.show(painelPrincipal, "painelListagemAgendaEquipe");
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
         ListagemDeColaborador listar = new ListagemDeColaborador(0);
         painelPrincipal.add(listar, "painelListagem");
-
 
         this.cl = (CardLayout) painelPrincipal.getLayout();
 
@@ -310,60 +309,54 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void cpUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpUsuarioActionPerformed
-    
+
     private void autenticarPaineis() {
-this.cpSenha.setVisible(false);
-this.cpUsuario.setVisible(false);
-this.btnEntrar.setVisible(false);
-this.LabelSenha.setVisible(false);
-this.LabelUsuario.setVisible(false);
+        this.cpSenha.setVisible(false);
+        this.cpUsuario.setVisible(false);
+        this.btnEntrar.setVisible(false);
+        this.LabelSenha.setVisible(false);
+        this.LabelUsuario.setVisible(false);
         this.BarraMenu.setVisible(true);
         if (this.colaborador.getTipCol() == 2) {
             this.menuColaborador.setVisible(false);
             this.menuCadastrarEquipe.setVisible(false);
             this.menuAdicionarTarefaEquipe.setVisible(false);
         }
-        
+
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         painelPrincipal.add(padrao, "padrao");
         this.cl.show(painelPrincipal, "padrao");
 
-
-
     }
-    
+
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         ColaboradorDao col = new ColaboradorDao();
         ObterData od = new ObterData();
-              
+
         try {
             Colaborador c = col.checar(cpUsuario.getText(), cpSenha.getText());
-            
+
             if (c == null) {
                 JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
             } else {
-                
+
                 this.colaborador = c;
-                
+
                 int codigo = this.colaborador.getCodCol();
                 ColaboradorDao colaborador = new ColaboradorDao();
-                
+
                 colaborador.SetarUltimoAcesso(codigo);
 
-                
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
-
-
 
                 cpSenha.setText(null);
                 cpUsuario.setText(null);
                 this.autenticarPaineis();
                 this.cl.show(painelPrincipal, "telaPadrao");
 
-               
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -383,9 +376,14 @@ this.LabelUsuario.setVisible(false);
     }//GEN-LAST:event_menuListarEquipeActionPerformed
 
     private void menuCadastrarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarEquipeActionPerformed
-        CadastroEquipe ce = new CadastroEquipe();
+        //CadastroEquipe ce = new CadastroEquipe();
+        PainelCadastroEquipe ce = null;
+        try {
+            ce = new PainelCadastroEquipe();
+        } catch (SQLException ex) {
+            Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         painelPrincipal.add(ce, "painelCadastroEquipe");
-        
         this.cl.show(painelPrincipal, "painelCadastroEquipe");
     }//GEN-LAST:event_menuCadastrarEquipeActionPerformed
 
@@ -408,13 +406,11 @@ this.LabelUsuario.setVisible(false);
         this.cl.show(painelPrincipal, "painelCadastrarTarefa");
 
     }//GEN-LAST:event_menuAdicionarTarefaEquipeActionPerformed
-    
+
 
     private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
 
-        
         ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);//parametro  1  lista e da opcao de altear
-
 
         painelPrincipal.add(listarEAlterar, "painelListagemAlt");
         this.cl = (CardLayout) painelPrincipal.getLayout();

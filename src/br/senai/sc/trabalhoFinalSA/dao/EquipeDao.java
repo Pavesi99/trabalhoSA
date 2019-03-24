@@ -129,12 +129,29 @@ public class EquipeDao extends ConnectionFactory {
     }
 
     public int codigoUltimaEquipeSalva() throws SQLException {
-        List<Equipe> equipes = null;
-        equipes = this.listarEquipes();
-        int n = equipes.size();
-        Equipe eq = equipes.get(n);
+        
+         String sql = "select * from equipe order by codequ desc limit 1 ";
+        
+         Equipe equi = null;
 
-        return eq.getCodEqu();
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+        
+            try (ResultSet rs = st.executeQuery()) {
+                if (rs.next()) {
+
+                    equi = new Equipe();
+                    equi.setCodEqu(rs.getInt("codEqu"));
+                    equi.setNomEqu(rs.getString("nomEqu"));
+                    equi.setDesEqu(rs.getString("desEqu"));
+
+                }
+            }
+
+            st.close();
+        }
+
+        this.con.close();
+        return equi.getCodEqu();
 
     }
 

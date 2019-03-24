@@ -17,11 +17,11 @@ public class TelaPadrao extends javax.swing.JPanel {
 
     
     private Colaborador colaborador;
-    public TelaPadrao(Colaborador colaborador) {
+    public TelaPadrao(Colaborador colaborado) {
         initComponents();
-        
+        this.colaborador=colaborado;
         jLabelNomeUsuario.setText(this.colaborador.getNomCol());
-        
+       
     }
 
     /**

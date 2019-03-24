@@ -24,12 +24,12 @@ public class PainelCadastroEquipe extends javax.swing.JPanel {
 
     private int codigoEquipe;
     public PainelCadastroEquipe() throws SQLException {
-   
         initComponents();
         EquipeDao ee=new EquipeDao();
         int cod= ee.codigoUltimaEquipeSalva();
         this.codigoEquipe=cod;
         labelEquipe.setText("Equipe: "+cod);
+
         this.popularTabelaSemEquipe();
     }
     private void limparTabela() {
@@ -155,7 +155,7 @@ public class PainelCadastroEquipe extends javax.swing.JPanel {
         
     }//GEN-LAST:event_tabelaColaboradoresSemEquipeMouseClicked
 private void popularTabelaSemEquipe() {
-
+this.limparTabela();
         ColaboradorDao col = new ColaboradorDao();
         List<Colaborador> listaColaborador;
         try {
