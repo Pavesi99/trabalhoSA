@@ -23,10 +23,8 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
     private CardLayout cl;
     private Colaborador colaborador;
 
-    public PainelCadastrarTarefa(Colaborador colaborador,String painel) {
+    public PainelCadastrarTarefa(Colaborador colaborador, String painel) {
         initComponents();
-
-        
 
         this.cl = (CardLayout) this.getLayout();
         this.add(CadastroTarefaColaborador, "painelCadastroTarefaColaborador");
@@ -111,13 +109,13 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         LabelDataDeFinalizacao1.setText("Data de Entrega:");
 
         try {
-            cpDataCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
+            cpDataCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            cpDataFinalizacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("       ##/##/####")));
+            cpDataFinalizacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -151,13 +149,8 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             .addComponent(LabelTituloCadastroDeTarefa1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
                 .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(LabelDataDeFinalizacao1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataFinalizacao, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroTarefaEquipeLayout.createSequentialGroup()
-                        .addGap(373, 373, 373)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalvarEquipe))
                     .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
                         .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -173,21 +166,28 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
                         .addComponent(jScrollPane2))
                     .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(LabelDataDeCriacao1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(LabelTituloTarefa)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpTituloTarefa)))
+                        .addComponent(cpTituloTarefa))
+                    .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
+                        .addGroup(CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CadastroTarefaEquipeLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(labelCodigoEquipe)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cpCodEqu))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CadastroTarefaEquipeLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(LabelDataDeFinalizacao1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cpDataFinalizacao))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CadastroTarefaEquipeLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(LabelDataDeCriacao1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cpDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(CadastroTarefaEquipeLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(labelCodigoEquipe)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cpCodEqu, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CadastroTarefaEquipeLayout.setVerticalGroup(
             CadastroTarefaEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,13 +234,13 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         LabelDataDeFinalizacao2.setText("Data de Entrega:");
 
         try {
-            cpDataCriacao2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
+            cpDataCriacao2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            cpDataFinalizacao2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("       ##/##/####")));
+            cpDataFinalizacao2.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -273,23 +273,6 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
             CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(LabelTituloCadastroDeTarefa2, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
             .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
-                        .addComponent(LabelDataDeCriacao2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataCriacao2, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
-                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(LabelDataDeFinalizacao2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cpDataFinalizacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
-                        .addComponent(LabelTituloTarefa2)
-                        .addGap(18, 18, 18)
-                        .addComponent(cpTituloTarefa2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
                 .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroTarefaColaboradorLayout.createSequentialGroup()
                         .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,9 +293,27 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
                                 .addComponent(btnSalvarColaborador))
                             .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
                                 .addComponent(labelCodigoColaborador)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cpCodCol, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cpCodCol, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                            .addComponent(LabelDataDeCriacao2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cpDataCriacao2))
+                        .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                            .addGap(20, 20, 20)
+                            .addComponent(LabelDataDeFinalizacao2)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cpDataFinalizacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(CadastroTarefaColaboradorLayout.createSequentialGroup()
+                            .addComponent(LabelTituloTarefa2)
+                            .addGap(18, 18, 18)
+                            .addComponent(cpTituloTarefa2))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CadastroTarefaColaboradorLayout.setVerticalGroup(
             CadastroTarefaColaboradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,47 +355,14 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
 
- Agenda age = new Agenda();
-
-        age.setCriAge(cpTituloTarefa.getText());
-        age.setDesAge(cpDescricaoTarefa.getText());
-        String data = cpDataCriacao.getText();
-        String[] date = data.split("/");
-        data = date[2] + "-" + date[1] + "-" + date[0];
-        age.setCriAge(data);
-        
-        
-        String data2 = cpDataFinalizacao.getText();
-        String[] date2 = data2.split("/");
-        data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
-        age.setComAge(data2);
-       
-
-        
-
-        AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
-        
-       // ageDao.inserir(age, col);
-        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
-            
-           
-          
-        
-           
-
-
     }//GEN-LAST:event_btnSalvarActionPerformed
-
-    private void btnSalvar1ActionPerformed(java.awt.event.ActionEvent evt) {
-
-    }
 
     private void btnSalvarEquipeActionPerformed(java.awt.event.ActionEvent evt) {
         Agenda age = new Agenda();
-        int col = 0;
+        int col = 1;
         int equ = 1;
         String aux;
-        age.setCriAge(cpTituloTarefa.getText());
+        age.setTitAge(cpTituloTarefa.getText());
         age.setDesAge(cpDescricaoTarefa.getText());
         String data = cpDataCriacao.getText();
         String[] date = data.split("/");
@@ -406,21 +374,15 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
         age.setComAge(data2);
 
-        aux = cpCodCol.getText();
-        if (aux == null) {
+        aux = cpCodEqu.getText();
+        System.out.println(aux);
+        if (aux.equals("")) {
             equ = this.colaborador.getEquCol();
         } else {
             equ = Integer.parseInt(aux);
         }
 
-
         AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
-
-
-       // ageDao.inserir(age, col);
-        JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
-                                              
-
 
         try {
             ageDao.inserir(age, col, equ);
@@ -435,30 +397,30 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
     private void btnSalvarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarColaboradorActionPerformed
 
         Agenda age = new Agenda();
-        int col = 0;
+        int col = 1;
         int equ = 1;
         String aux;
-        age.setCriAge(cpTituloTarefa.getText());
-        age.setDesAge(cpDescricaoTarefa.getText());
-        String data = cpDataCriacao.getText();
+        age.setTitAge(cpTituloTarefa2.getText());
+        age.setDesAge(cpDescricaoTarefa2.getText());
+        String data = cpDataCriacao2.getText();
         String[] date = data.split("/");
         data = date[2] + "-" + date[1] + "-" + date[0];
         age.setCriAge(data);
 
-        String data2 = cpDataFinalizacao.getText();
+        String data2 = cpDataFinalizacao2.getText();
         String[] date2 = data2.split("/");
         data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
         age.setComAge(data2);
-        System.out.println("Passou aqui");
-        aux = cpCodEqu.getText();
-        if (aux == null) {
+
+        aux = cpCodCol.getText();
+        if (aux.equals("")) {
             col = this.colaborador.getCodCol();
         } else {
             col = Integer.parseInt(aux);
         }
 
         AgendaColaboradorDao ageDao = new AgendaColaboradorDao();
-        System.out.println("chegou aqui");
+
         try {
             ageDao.inserir(age, col, equ);
             JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");

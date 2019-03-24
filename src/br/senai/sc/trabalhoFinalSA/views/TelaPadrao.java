@@ -6,6 +6,7 @@
 package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
+import br.senai.sc.trabalhoFinalSA.trabalhoFinalFrame;
 import javax.swing.JLabel;
 
 /**
@@ -49,11 +50,11 @@ public class TelaPadrao extends javax.swing.JPanel {
         add(labelVercao);
         labelVercao.setBounds(760, 380, 32, 16);
 
-        jLabelNomeUsuario.setFont(new java.awt.Font("Ultra", 0, 24)); // NOI18N
+        jLabelNomeUsuario.setFont(new java.awt.Font("Ultra", 0, 48)); // NOI18N
         add(jLabelNomeUsuario);
-        jLabelNomeUsuario.setBounds(30, 150, 770, 80);
+        jLabelNomeUsuario.setBounds(30, 110, 770, 80);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/senai/sc/trabalhoFinalSA/views/controladoria.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sc/senai/trabalhoFinalSA/imagens/ImagemTelaPadrao.jpg"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 800, 400);
     }// </editor-fold>//GEN-END:initComponents
