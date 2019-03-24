@@ -31,13 +31,14 @@ import javax.swing.JOptionPane;
  * @author Aluno
  */
 public class trabalhoFinalFrame extends javax.swing.JFrame {
-
+    
     private Colaborador colaborador;
     private CardLayout cl;
-
+    
     public trabalhoFinalFrame() {
         initComponents();
         this.cl = (CardLayout) painelPrincipal.getLayout();
+        this.BarraMenu.setVisible(false);
     }
 
     /**
@@ -59,7 +60,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         btnEntrar = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
         menuInicio = new javax.swing.JMenu();
-        menuManterColaborador = new javax.swing.JMenu();
+        menuColaborador = new javax.swing.JMenu();
         menuCadastrarColaborador = new javax.swing.JMenuItem();
         menuListarColaborador = new javax.swing.JMenuItem();
         manuAlterarCadastro = new javax.swing.JMenuItem();
@@ -156,7 +157,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         });
         BarraMenu.add(menuInicio);
 
-        menuManterColaborador.setText("Colaborador");
+        menuColaborador.setText("Colaborador");
 
         menuCadastrarColaborador.setText("Cadastrar ");
         menuCadastrarColaborador.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +165,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 menuCadastrarColaboradorActionPerformed(evt);
             }
         });
-        menuManterColaborador.add(menuCadastrarColaborador);
+        menuColaborador.add(menuCadastrarColaborador);
 
         menuListarColaborador.setText("Listar ");
         menuListarColaborador.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,7 +178,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 menuListarColaboradorActionPerformed(evt);
             }
         });
-        menuManterColaborador.add(menuListarColaborador);
+        menuColaborador.add(menuListarColaborador);
 
         manuAlterarCadastro.setText("Editar cadastro");
         manuAlterarCadastro.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +186,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 manuAlterarCadastroActionPerformed(evt);
             }
         });
-        menuManterColaborador.add(manuAlterarCadastro);
+        menuColaborador.add(manuAlterarCadastro);
 
         menuExcluirColaborador.setText("Excluir cadastro");
         menuExcluirColaborador.addActionListener(new java.awt.event.ActionListener() {
@@ -193,9 +194,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
                 menuExcluirColaboradorActionPerformed(evt);
             }
         });
-        menuManterColaborador.add(menuExcluirColaborador);
+        menuColaborador.add(menuExcluirColaborador);
 
-        BarraMenu.add(menuManterColaborador);
+        BarraMenu.add(menuColaborador);
 
         menuManterEquipe.setText("Equipe");
 
@@ -302,7 +303,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void menuAgendaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaEquipeActionPerformed
         ListagemAgendaEquipe lae = new ListagemAgendaEquipe(this.colaborador);
         painelPrincipal.add(lae, "painelListagemAgendaEquipe");
-
+        
         this.cl.show(painelPrincipal, "painelListagemAgendaEquipe");
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
 
@@ -315,39 +316,46 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void cpUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpUsuarioActionPerformed
-
+    
     private void autenticarPaineis() {
-
+        
+        this.BarraMenu.setVisible(true);
+        if (this.colaborador.getTipCol() == 2) {
+            this.menuColaborador.setVisible(false);
+            this.menuCadastrarEquipe.setVisible(false);
+            this.menuAdicionarTarefaEquipe.setVisible(false);
+        }
+        
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         painelPrincipal.add(padrao, "padrao");
         this.cl.show(painelPrincipal, "padrao");
     }
-
+    
 
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         ColaboradorDao col = new ColaboradorDao();
         ObterData od = new ObterData();
-
+              
         try {
             Colaborador c = col.checar(cpUsuario.getText(), cpSenha.getText());
-
+            
             if (c == null) {
                 JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
             } else {
-
+                
                 this.colaborador = c;
-
+                
                 int codigo = this.colaborador.getCodCol();
                 ColaboradorDao colaborador = new ColaboradorDao();
-
+                
                 colaborador.SetarUltimoAcesso(codigo);
-
+                
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
                 cpSenha.setText(null);
                 cpUsuario.setText(null);
                 this.autenticarPaineis();
             }
-
+            
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -362,16 +370,14 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     private void menuListarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarEquipeActionPerformed
         ListagemEquipe le = new ListagemEquipe();
-
         painelPrincipal.add(le, "painelListagemEquipe");
-
         this.cl.show(painelPrincipal, "painelListagemEquipe");
     }//GEN-LAST:event_menuListarEquipeActionPerformed
 
     private void menuCadastrarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarEquipeActionPerformed
         CadastroEquipe ce = new CadastroEquipe();
         painelPrincipal.add(ce, "painelCadastroEquipe");
-
+        
         this.cl.show(painelPrincipal, "painelCadastroEquipe");
     }//GEN-LAST:event_menuCadastrarEquipeActionPerformed
 
@@ -394,10 +400,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         this.cl.show(painelPrincipal, "painelCadastrarTarefa");
 
     }//GEN-LAST:event_menuAdicionarTarefaEquipeActionPerformed
-
+    
 
     private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
-
+        
         ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);//parametro  1  lista e da opcao de altear
         painelPrincipal.add(listarEAlterar, "painelListagemAlt");
         this.cl = (CardLayout) painelPrincipal.getLayout();
@@ -414,12 +420,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         painelPrincipal.add(padrao, "telaPadrao");
-
         this.cl.show(painelPrincipal, "telaPadrao");
     }//GEN-LAST:event_menuInicioMouseClicked
 
     private void menuExcluirColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExcluirColaboradorActionPerformed
-
         ListagemDeColaborador excluirCadastro = new ListagemDeColaborador(3);
         painelPrincipal.add(excluirCadastro, "painelListagem");
         this.cl.show(painelPrincipal, "painelListagem");
@@ -478,12 +482,12 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAlterSenha;
     private javax.swing.JMenuItem menuCadastrarColaborador;
     private javax.swing.JMenuItem menuCadastrarEquipe;
+    private javax.swing.JMenu menuColaborador;
     private javax.swing.JMenu menuConsultarAgenda;
     private javax.swing.JMenuItem menuExcluirColaborador;
     private javax.swing.JMenu menuInicio;
     private javax.swing.JMenuItem menuListarColaborador;
     private javax.swing.JMenuItem menuListarEquipe;
-    private javax.swing.JMenu menuManterColaborador;
     private javax.swing.JMenu menuManterEquipe;
     private javax.swing.JMenu menuTarefas;
     private javax.swing.JMenu menuVerAgenda;

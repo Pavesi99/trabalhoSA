@@ -13,15 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Aluno
- */
-public class CadastroEquipe extends javax.swing.JPanel {
 
-    /**
-     * Creates new form CadastroEquipe
-     */
+public class CadastroEquipe extends javax.swing.JPanel {
+   
     private CardLayout cl;
     public CadastroEquipe() {
         initComponents();
@@ -132,6 +126,14 @@ public class CadastroEquipe extends javax.swing.JPanel {
             Logger.getLogger(CadastroEquipe.class.getName()).log(Level.SEVERE,
                     null, ex);
             
+        }
+        try {
+            PainelCadastroEquipe c=new PainelCadastroEquipe();
+     
+        this.cl.show(c, "painelCadastro");
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CadastroEquipe.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnSalvarActionPerformed
 

@@ -12,7 +12,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuInicioMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuManterColaborador">
+        <Menu class="javax.swing.JMenu" name="menuColaborador">
           <Properties>
             <Property name="text" type="java.lang.String" value="Colaborador"/>
           </Properties>

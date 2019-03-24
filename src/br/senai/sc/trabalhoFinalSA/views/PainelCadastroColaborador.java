@@ -332,55 +332,61 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
     }//GEN-LAST:event_campoSelecaoTipoColaboradorActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-  
-        if(validarCampos()){
-        
-        
-        Colaborador col = new Colaborador();
 
-        col.setNomCol(campoNome.getText());
-        String data = campoFormatadoNascimento.getText();
-        String[] date = data.split("/");
-        data = date[2] + "-" + date[1] + "-" + date[0];
-        col.setDatCol(data);
-        String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
-        if (tipo == "Gestor") {
-            col.setTipCol(1);
-        } else {
-            col.setTipCol(2);
-        }
+        if (validarCampos()) {
 
-        col.setCidCol(campoCidade.getText());
+            Colaborador col = new Colaborador();
 
-        col.setBaiCol(campoBairro.getText());
-        col.setRuaCol(campoRua.getText());
+            col.setNomCol(campoNome.getText());
+            String data = campoFormatadoNascimento.getText();
 
-        String cep = campoFormatadoCep.getText();
-        cep = cep.replaceAll("[^0-9]", "");
+            String[] date = data.split("/");
+            data = date[2] + "-" + date[1] + "-" + date[0];
 
-        col.setCepCol(Integer.parseInt(cep));
-        String num = "" + campoEnderecoNumero.getText();
-        num = num.replaceAll("[^0-9]", "");
-        col.setNumCol(Integer.parseInt(num));
+            col.setDatCol(data);
+            String tipo = campoSelecaoTipoColaborador.getSelectedItem().toString();
+            String funcao = "";
+            if (tipo == "Gestor") {
+                funcao = "Gestor";
+                col.setTipCol(1);
+            } else {
+                col.setTipCol(2);
+            }
 
-        String ddd = campoFormatadoDD.getText();
-        ddd = ddd.replaceAll("[^0-9]", "");
+            col.setCidCol(campoCidade.getText());
 
-        col.setDddCol(Integer.parseInt(ddd));
-        String celular = campoFormatadoTelefone.getText();
-        celular = celular.replaceAll("[^0-9]", "");
-       
-        col.setCelCol(Integer.parseInt(celular));
-        col.setEmaCol(campoEmail.getText());
-        col.setUsuCol(campoUsuario.getText());
-        col.setSenCol(labelSenhaPadrao.getText());
-        col.setEstCol(1);
-        col.setEquCol(1);
-        ColaboradorDao coDao = new ColaboradorDao();
+            col.setBaiCol(campoBairro.getText());
+            col.setRuaCol(campoRua.getText());
+
+            String cep = campoFormatadoCep.getText();
+
+            cep = cep.replaceAll("[^0-9]", "");
+
+            col.setCepCol(Integer.parseInt(cep));
+
+            String num = "" + campoEnderecoNumero.getText();
+            num = num.replaceAll("[^0-9]", "");
+
+            col.setNumCol(Integer.parseInt(num));
+
+            String ddd = campoFormatadoDD.getText();
+            ddd = ddd.replaceAll("[^0-9]", "");
+
+            col.setDddCol(Integer.parseInt(ddd));
+            String celular = campoFormatadoTelefone.getText();
+            celular = celular.replaceAll("[^0-9]", "");
+
+            col.setCelCol(Integer.parseInt(celular));
+            col.setEmaCol(campoEmail.getText());
+            col.setUsuCol(campoUsuario.getText());
+            col.setSenCol(labelSenhaPadrao.getText());
+            col.setEstCol(1);
+            col.setEquCol(1);
+            ColaboradorDao coDao = new ColaboradorDao();
 
             EmailWrapper confirmar = new EmailWrapper();
             String mensagem = "Confirme seus dados:" + "\nNome: " + campoNome.getText() + "\tData de nascimento: " + data
-                    + "\nFuncao: " + campoSelecaoTipoColaborador.getToolTipText() + "\nCidade: " + campoCidade.getText()
+                    + "\nFuncao: " + funcao + "\nCidade: " + campoCidade.getText()
                     + "\tCep: " + campoFormatadoCep.getText() + "\nBairro: " + campoBairro.getText() + "\tRua: " + campoRua.getText()
                     + "\tNumero: " + campoEnderecoNumero.getText() + "\nTelefone: (" + campoFormatadoDD.getText() + ") " + campoFormatadoTelefone
                     + "\tEmail: " + campoEmail.getText() + "\nUsuario: " + campoUsuario.getText() + "\tSenha: " + labelSenhaPadrao.getText()
@@ -388,50 +394,87 @@ public class PainelCadastroColaborador extends javax.swing.JPanel {
             String remetente = "Remetente@remetente";
             String asunto = "Confirmacao e cadastro";
             String destinatario = campoEmail.getText();
-            
-        try {
-            coDao.inserir(col);
-            confirmar.enviar(remetente, destinatario, asunto, mensagem);
-            JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
-            
-            limparCampos();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Falha ao salvar cliente");
-            Logger.getLogger(PainelCadastroColaborador.class.getName()).log(Level.SEVERE, null, ex);
+          
+            try {
+                coDao.inserir(col);
+                confirmar.enviar(remetente, destinatario, asunto, mensagem);
+                JOptionPane.showMessageDialog(null, "Cadastro salvo com susesso");
+
+                limparCampos();
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Falha ao salvar cliente");
+                Logger.getLogger(PainelCadastroColaborador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
-    }
 
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private boolean validarCampos() {
-       
-        String nome=campoNome.getText();
-            if(nome.trim().equals("")){
-              JOptionPane.showMessageDialog(null,"Informe o nome"); 
-              return false;
-            }
-            String nascimento=campoFormatadoNascimento.getText();
-           
-            if (nascimento.trim().equals("")){
-                campoFormatadoNascimento.setText("00/00/0000");
-               
-               return false;
-            }
-            String email=campoEmail.getText();
-            if(email.trim()==""){
-                 JOptionPane.showMessageDialog(null,"Informe o Email");
-                  return false;
-            }
-            String usuario=campoUsuario.getText();
-            if(usuario.trim()==""){
-                 JOptionPane.showMessageDialog(null,"Informe o nome de usuario"); 
-                  return false;
-            }
-                
-        
-        
-        return true;
-        
+
+        String nome = campoNome.getText();
+        if (nome.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Informe o nome");
+            return false;
+        }
+        String nascimento = campoFormatadoNascimento.getText();
+        nascimento = nascimento.replaceAll("[^0-9]", "");
+
+       if (nascimento.trim().equals("")) {
+            campoFormatadoNascimento.setText("00000000");
+            return false;
+        }
+        String cidade = campoCidade.getText();
+        if (cidade.trim() =="") {
+            JOptionPane.showMessageDialog(null, "Informe sua cidade");
+            return false;
+        }
+        String cep = campoFormatadoCep.getText();
+        cep = cep.replaceAll("[^0-9]", "");
+
+        if (cep.trim() == "") {
+            campoFormatadoCep.setText("00000000");
+            return false;
+        }
+        String bairro = campoBairro.getText();
+        if (bairro.trim() == "") {
+            JOptionPane.showMessageDialog(null, "Informe um bairro");
+            return false;
+        }
+
+        String rua = campoRua.getText();
+        if (rua.trim() == "") {
+            campoRua.setText("null");
+        }
+
+        String EnderecoNumero = campoEnderecoNumero.getText();
+        if (EnderecoNumero.trim() == "") {
+            campoEnderecoNumero.setText("00");
+        }
+        String DDD = campoFormatadoDD.getText();
+        DDD = DDD.replaceAll("[^0-9]", "");
+        if (DDD.trim() == "") {
+            JOptionPane.showMessageDialog(null, "Informe um DDD");
+            return false;
+        }
+        String telefone = campoFormatadoTelefone.getText();
+        telefone = telefone.replaceAll("[^0-9]", "");
+        if (telefone.trim() == "") {
+            JOptionPane.showMessageDialog(null, "Informe um Telefone");
+            return false;
+        }
+        String email = campoEmail.getText();
+        if (email.trim() == "") {
+            JOptionPane.showMessageDialog(null, "Informe o Email");
+            return false;
+        }
+        String usuario = campoUsuario.getText();
+        if (usuario.trim() == "") {
+            JOptionPane.showMessageDialog(null, "Informe o nome de usuario");
+            return false;
+        } else {
+            return true;
+        }
     }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limparCampos();

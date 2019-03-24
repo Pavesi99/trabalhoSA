@@ -248,4 +248,106 @@ public class ColaboradorDao extends ConnectionFactory {
         this.con.close();
 
     }
+  
+  
+   public void cadastrarEquipe(int codColaborador,int codEquipe) throws SQLException {
+
+        String sql = "update colaborador set equCol = ? where codCol =?";
+       
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+            st.setInt(1,codEquipe );
+            st.setInt(2, codColaborador);
+            st.execute();
+            st.close();
+        }
+
+        this.con.close();
+
+    }
+   
+       public List<Colaborador> listarColaboradorParaCadastroEquipe() throws SQLException {
+        String sql = "select * from colaborador where equCol=1";
+        List<Colaborador> colaboradores = null;
+
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+            ResultSet rs = st.executeQuery();
+
+            colaboradores = new ArrayList<Colaborador>();
+
+            while (rs.next()) {
+                Colaborador col = new Colaborador();
+                col.setCodCol(rs.getInt("codCol"));
+                col.setNomCol(rs.getString("nomCol"));
+                col.setRuaCol(rs.getString("ruaCol"));
+                col.setBaiCol(rs.getString("baiCol"));
+                col.setNumCol(rs.getInt("numCol"));
+
+                col.setCepCol(rs.getInt("cepCol"));
+                col.setCidCol(rs.getString("cidCol"));
+                col.setCelCol(rs.getInt("celCol"));
+                col.setDddCol(rs.getInt("dddCol"));
+                col.setTipCol(rs.getInt("tipCol"));
+                col.setUsuCol(rs.getString("usuCol"));
+                col.setSenCol(rs.getString("senCol"));
+                col.setEmaCol(rs.getString("emaCol"));
+                col.setUtiCol(rs.getString("utiCol"));
+                col.setDatCol(rs.getString("datCol"));
+                col.setEstCol(rs.getInt("estCol"));
+
+                colaboradores.add(col);
+            }
+
+            rs.close();
+            st.close();
+
+        }
+
+        this.con.close();
+        return colaboradores;
+    }
+      
+ 
+
+    public List<Colaborador> listarColaboradoresEquipe(int equipe) throws SQLException {
+        String sql = "select * from colaborador where equCol= ? ";
+        List<Colaborador> colaboradores = null;
+
+        try (PreparedStatement st = this.con.prepareStatement(sql)) {
+            st.setInt(1,equipe );
+            ResultSet rs = st.executeQuery();
+
+            colaboradores = new ArrayList<Colaborador>();
+
+            while (rs.next()) {
+                Colaborador col = new Colaborador();
+                col.setCodCol(rs.getInt("codCol"));
+                col.setNomCol(rs.getString("nomCol"));
+                col.setRuaCol(rs.getString("ruaCol"));
+                col.setBaiCol(rs.getString("baiCol"));
+                col.setNumCol(rs.getInt("numCol"));
+
+                col.setCepCol(rs.getInt("cepCol"));
+                col.setCidCol(rs.getString("cidCol"));
+                col.setCelCol(rs.getInt("celCol"));
+                col.setDddCol(rs.getInt("dddCol"));
+                col.setTipCol(rs.getInt("tipCol"));
+                col.setUsuCol(rs.getString("usuCol"));
+                col.setSenCol(rs.getString("senCol"));
+                col.setEmaCol(rs.getString("emaCol"));
+                col.setUtiCol(rs.getString("utiCol"));
+                col.setDatCol(rs.getString("datCol"));
+                col.setEstCol(rs.getInt("estCol"));
+
+                colaboradores.add(col);
+            }
+
+            rs.close();
+            st.close();
+
+        }
+
+        this.con.close();
+        return colaboradores;
+    }  
+
 }
