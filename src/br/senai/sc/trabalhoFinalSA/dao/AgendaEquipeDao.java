@@ -42,11 +42,7 @@ public class AgendaEquipeDao extends ConnectionFactory {
 
     }
 
-     public void eliminar(String comAge, String criAge, String desAge, String titAge, int codEqu) throws SQLException {
-
-         Equipe equ = new Equipe();
-         Colaborador col = new Colaborador();
-         codEqu = col.getEquCol();
+     public void eliminar(String criAge, String comAge, String titAge, String desAge, int codEqu) throws SQLException {
          
         String sql = "delete from agenda where criAge = ? and comAge = ? and titAge = ? and desAge = ?"
                 + " and codEqu = ? ";
@@ -68,18 +64,18 @@ public class AgendaEquipeDao extends ConnectionFactory {
 
     public void alterar(Agenda age, Colaborador equCol) throws SQLException {
 
-        String sql = "update agenda set criAge = ?, comAge = ?, titAge = ?, desAge = ? where criAge = ? and"
+        String sql = "update agenda set criAge = ?, comAge = ?, titAge = ?, desAge = ? where criAge = ? and "
                 + "comAge = ? and titAge = ? and desAge = ? and codEqu = ? ";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
            st.setString(1, age.getCriAge());
-           st.setString(2, age.getTitAge());
-           st.setString(3, age.getDesAge());
-           st.setString(4, age.getComAge());
+           st.setString(2, age.getComAge());
+           st.setString(3, age.getTitAge());
+           st.setString(4, age.getDesAge());
            st.setString(5, age.getCriAge());
-           st.setString(6, age.getTitAge());
-           st.setString(7, age.getDesAge());
-           st.setString(8, age.getComAge());
+            st.setString(6, age.getComAge());
+           st.setString(7, age.getTitAge());
+           st.setString(8, age.getDesAge());
            st.setInt(9, equCol.getEquCol());
 
             st.execute();
@@ -126,8 +122,7 @@ public class AgendaEquipeDao extends ConnectionFactory {
   
      public Agenda getAgendaEquipe(int codEqu) throws SQLException {
          
-         Colaborador col = new Colaborador();
-         codEqu = col.getEquCol();
+ 
         String sql = "select * from agenda where codEqu = ?";
         Agenda agenda = null;
  

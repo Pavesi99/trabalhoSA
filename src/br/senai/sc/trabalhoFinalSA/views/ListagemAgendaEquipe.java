@@ -137,13 +137,13 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         LabelDataDeFinalizacao.setText("Data de Entrega:");
 
         try {
-            cpDataCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("      ##/##/####")));
+            cpDataCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
 
         try {
-            cpDataFinalizacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("       ##/##/####")));
+            cpDataFinalizacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -278,20 +278,21 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         try {
    
             Agenda agenda = ageE.getAgendaEquipe(codEquCol);
-           String data = cpDataCriacao.getText();
-           data = data.replace( "-" , "");
-           data = data.replace( "/" , "");
+       
+           String data = agenda.getCriAge();
+        String[] date = data.split("-");
+        data = date[2] + "" + date[1] + "" + date[0];
            agenda.setCriAge(data);
         
-        String data2 = cpDataFinalizacao.getText();
-        data2 = data2.replace( "-" , "");
-        data2 = data2.replace( "/" , "");
+        String data2 = agenda.getComAge();
+        String[] date2 = data2.split("-");
+        data2 = date2[2] + "" + date2[1] + "" + date2[0];
         agenda.setComAge(data2);
            String titulo = agenda.getTitAge();
             String des = agenda.getDesAge();
             System.out.println(titulo+des);
-            cpDataCriacao.setText(data);
-            cpDataFinalizacao.setText(data2);
+            cpDataCriacao.setText(agenda.getCriAge());
+            cpDataFinalizacao.setText(agenda.getComAge());
             cpTituloTarefa.setText(titulo);
             cpDescricaoTarefa.setText(des);
          
@@ -310,10 +311,22 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
         Agenda age = new Agenda();
         
-        age.setCriAge(cpDataCriacao.getText());
-        age.setComAge(cpDataFinalizacao.getText());
+         String data = cpDataCriacao.getText();
+        String[] date = data.split("/");
+        data = date[2] + "-" + date[1] + "-" + date[0];
+                 age.setCriAge(data);
+                
+        
+         String data2 =  cpDataFinalizacao.getText();
+        String[] date2 = data2.split("/");
+        data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
+          age.setComAge(data2);
+       
+         
         age.setTitAge(cpTituloTarefa.getText());
+         
         age.setDesAge(cpDescricaoTarefa.getText());
+  
         this.colaborador.setEquCol(this.codAgeEqu);
 
         AgendaEquipeDao ageEDao = new AgendaEquipeDao();
@@ -326,6 +339,7 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
                 null, ex);
 
         }
+        this.limparTabela();
         this.cl  = (CardLayout) this.getLayout();
         cl.show(this, "painelListagemAgenda");
     }//GEN-LAST:event_btnEditarActionPerformed
@@ -356,7 +370,25 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
      
         if (opcaoSelecionada ==0){
             AgendaEquipeDao ageEDao = new AgendaEquipeDao();
+           
+           //this.criAge = cpDataCriacao.getText();
+           //this.comAge = cpDataFinalizacao.getText();
+           this.titAge = cpTituloTarefa.getText();
+           this.desAge = cpDescricaoTarefa.getText();
+           this.codAgeEqu = this.colaborador.getEquCol();
+           
+         String data = cpDataCriacao.getText();
+        String[] date = data.split("/");
+        data = date[2] + "-" + date[1] + "-" + date[0];
+                 this.criAge = data;
+        
+         String data2 =  cpDataFinalizacao.getText();
+        String[] date2 = data2.split("/");
+        data2 = date2[2] + "-" + date2[1] + "-" + date2[0];
+           this.comAge = data2;
+      
              try {
+                 System.out.println(this.criAge+this.comAge+this.titAge+this.desAge+this.codAgeEqu);
                  ageEDao.eliminar(this.criAge,this.comAge, this.titAge, this.desAge, this.codAgeEqu);
                  this.limparTabela(); 
                  this.cl.show(this,"painelListagemAgenda");
