@@ -16,11 +16,12 @@ import javax.swing.JLabel;
 public class TelaPadrao extends javax.swing.JPanel {
 
     
-   
-    public TelaPadrao(Colaborador colaborador)  {
+    private Colaborador colaborador;
+    public TelaPadrao(Colaborador colaborado) {
         initComponents();
-     
-        jLabelNomeUsuario.setText( colaborador.getNomCol());
+        this.colaborador=colaborado;
+        jLabelNomeUsuario.setText(this.colaborador.getNomCol());
+       
     }
 
     /**
@@ -47,7 +48,7 @@ public class TelaPadrao extends javax.swing.JPanel {
 
         labelVercao.setText("1.0.0");
         add(labelVercao);
-        labelVercao.setBounds(760, 380, 26, 14);
+        labelVercao.setBounds(760, 380, 32, 16);
 
         jLabelNomeUsuario.setFont(new java.awt.Font("Ultra", 0, 48)); // NOI18N
         add(jLabelNomeUsuario);

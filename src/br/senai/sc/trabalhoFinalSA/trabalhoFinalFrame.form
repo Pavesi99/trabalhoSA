@@ -12,7 +12,7 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="menuInicioMouseClicked"/>
           </Events>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="menuManterColaborador">
+        <Menu class="javax.swing.JMenu" name="menuColaborador">
           <Properties>
             <Property name="text" type="java.lang.String" value="Colaborador"/>
           </Properties>
@@ -40,6 +40,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="manuAlterarCadastroActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="menuExcluirColaborador">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Excluir cadastro"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuExcluirColaboradorActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>
@@ -161,9 +169,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="772" max="32767" attributes="0"/>
+          <EmptySpace min="0" pref="787" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Component id="painelPrincipal" alignment="0" pref="772" max="32767" attributes="0"/>
+              <Component id="painelPrincipal" alignment="0" pref="787" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -277,6 +285,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/br/sc/senai/trabalhoFinalSA/imagens/ImagemLogin.jpg"/>
                 </Property>
