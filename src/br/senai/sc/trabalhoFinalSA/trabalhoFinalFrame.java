@@ -19,7 +19,6 @@ import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemEquipe;
 import br.senai.sc.trabalhoFinalSA.views.PainelAlterarSenha;
 import br.senai.sc.trabalhoFinalSA.views.PainelCadastrarTarefa;
-import br.senai.sc.trabalhoFinalSA.views.PainelCadastroEquipe;
 import br.senai.sc.trabalhoFinalSA.views.TelaPadrao;
 
 import java.awt.CardLayout;
@@ -312,11 +311,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cpUsuarioActionPerformed
 
     private void autenticarPaineis() {
-        this.cpSenha.setVisible(false);
-        this.cpUsuario.setVisible(false);
-        this.btnEntrar.setVisible(false);
-        this.LabelSenha.setVisible(false);
-        this.LabelUsuario.setVisible(false);
+       
         this.BarraMenu.setVisible(true);
         if (this.colaborador.getTipCol() == 2) {
             this.menuColaborador.setVisible(false);
@@ -324,12 +319,6 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             this.menuAdicionarTarefaEquipe.setVisible(false);
         }
 
-
-        PainelCadastroColaborador cadastro = new PainelCadastroColaborador();
-        PainelAlterarSenha altSenha = new PainelAlterarSenha();
-        //ExcluirColaborador ec = new ExcluirColaborador();
-        ListagemEquipe le = new ListagemEquipe(this.colaborador);
-        CadastroEquipe ce = new CadastroEquipe();
 
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         painelPrincipal.add(padrao, "padrao");
@@ -384,13 +373,13 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuListarEquipeActionPerformed
 
     private void menuCadastrarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarEquipeActionPerformed
-        //CadastroEquipe ce = new CadastroEquipe();
-        PainelCadastroEquipe ce = null;
+        CadastroEquipe ce = null;
         try {
-            ce = new PainelCadastroEquipe();
+            ce = new CadastroEquipe();
         } catch (SQLException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
         painelPrincipal.add(ce, "painelCadastroEquipe");
         this.cl.show(painelPrincipal, "painelCadastroEquipe");
     }//GEN-LAST:event_menuCadastrarEquipeActionPerformed
