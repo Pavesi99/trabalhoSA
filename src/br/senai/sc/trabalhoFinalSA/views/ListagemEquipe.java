@@ -5,6 +5,7 @@
  */
 package br.senai.sc.trabalhoFinalSA.views;
 
+import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.dao.EquipeDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.modelo.Equipe;
@@ -28,14 +29,15 @@ public class ListagemEquipe extends javax.swing.JPanel {
      */
     private CardLayout cl;
     private int codEqu;
-Colaborador colaborador;
+    Colaborador colaborador;
+
     public ListagemEquipe(Colaborador colaborador) {
         initComponents();
-        this.colaborador =colaborador;
+        this.colaborador = colaborador;
         this.add(painelListagemEquipe, "painelListagemEquipe");
         this.add(painelEdicao, "painelEdicao");
-        
-        this.cl  = (CardLayout) this.getLayout();
+
+        this.cl = (CardLayout) this.getLayout();
         cl.show(this, "painelListagemEquipe");
     }
 
@@ -217,101 +219,100 @@ Colaborador colaborador;
         add(painelEdicao, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
-   
-    private void popularTabela () {
-         EquipeDao eq = new EquipeDao ();
+    private void popularTabela() {
+        EquipeDao eq = new EquipeDao();
         List<Equipe> listaEquipe;
         try {
             listaEquipe = eq.listarEquipes();
-            
-        DefaultTableModel model = (DefaultTableModel) tblListagemEquipe.getModel();
-        List<Object> lista = new ArrayList<Object> ();
-        
-        for(int i =0 ; i < listaEquipe.size(); i++) {
-             Equipe c = listaEquipe.get(i);
-             lista.add(new Object[]{c.getCodEqu(), c.getNomEqu(), c.getDesEqu()});
-    }
-        
-        for(int idx = 0; idx < lista.size(); idx++) {
-            model.addRow((Object []) lista.get(idx));
-        }
-        
+
+            DefaultTableModel model = (DefaultTableModel) tblListagemEquipe.getModel();
+            List<Object> lista = new ArrayList<Object>();
+
+            for (int i = 0; i < listaEquipe.size(); i++) {
+                Equipe c = listaEquipe.get(i);
+                lista.add(new Object[]{c.getCodEqu(), c.getNomEqu(), c.getDesEqu()});
+            }
+
+            for (int idx = 0; idx < lista.size(); idx++) {
+                model.addRow((Object[]) lista.get(idx));
+            }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao Obter as Equipes do Banco de Dados!");
             Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
         }
-           
+
     }
-    
+
     private void cpNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpNomeActionPerformed
 
-     
-     private void preencherFormulario(int codigoEquipe){
+    private void preencherFormulario(int codigoEquipe) {
         EquipeDao equ = new EquipeDao();
-        
+
         try {
             Equipe equipe = equ.getEquipe(codigoEquipe);
             cpNome.setText(equipe.getNomEqu());
             cpDescricao.setText(equipe.getDesEqu());
-         
-           
-           
+
         } catch (SQLException ex) {
             Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         this.codEqu = codigoEquipe;
     }
-    
-    
+
+
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
- 
+
         Equipe equ = new Equipe();
         equ.setNomEqu(cpNome.getText());
         equ.setDesEqu(cpDescricao.getText());
         equ.setCodEqu(this.codEqu);
-  
 
         EquipeDao equDao = new EquipeDao();
         try {
             equDao.alterar(equ);
-            JOptionPane.showMessageDialog(null,"Cadastro da Equipe Atualizado com Sucesso!");
+            JOptionPane.showMessageDialog(null, "Cadastro da Equipe Atualizado com Sucesso!");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null,"Falha ao Atualizar o Cadastro da Equipe");
+            JOptionPane.showMessageDialog(null, "Falha ao Atualizar o Cadastro da Equipe");
             Logger.getLogger(CadastroEquipe.class.getName()).log(Level.SEVERE,
-                null, ex);
+                    null, ex);
 
         }
-        this.cl  = (CardLayout) this.getLayout();
+        this.cl = (CardLayout) this.getLayout();
         cl.show(this, "painelListagemEquipe");
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
-         this.cl  = (CardLayout) this.getLayout();
+        this.cl = (CardLayout) this.getLayout();
         cl.show(this, "painelListagemEquipe");
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-      
+
         Object[] options = {"Sim", "Não"};
         int opcaoSelecionada = JOptionPane.showOptionDialog(null, "Deseja realmente eliminar esta equipe ?", "Atenção!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]);
+
         
-        if (opcaoSelecionada ==0){
+          
+
+        if (opcaoSelecionada == 0) {
             EquipeDao equDao = new EquipeDao();
             Equipe equ = new Equipe();
-             try {
-               
-                 System.out.println(this.codEqu);
-                 equDao.eliminar(this.codEqu);
-                 this.limparTabela(); 
-                 this.cl  = (CardLayout) this.getLayout();
-                 this.cl.show(this,"painelListagemEquipe");
-             } catch (SQLException ex) {
-                     JOptionPane.showMessageDialog(null,"Não é possivel excluir a equipe!");
-                 Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
-             }
+            try {
+
+                System.out.println(this.codEqu);
+
+                equDao.eliminar(this.codEqu);
+                this.limparTabela();
+                this.cl = (CardLayout) this.getLayout();
+                this.cl.show(this, "painelListagemEquipe");
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Não é possivel excluir a equipe!");
+                Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
@@ -324,18 +325,18 @@ Colaborador colaborador;
     }//GEN-LAST:event_tblListagemEquipeComponentShown
 
     private void tblListagemEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListagemEquipeMouseClicked
-         
+
         int linha = tblListagemEquipe.getSelectedRow();
-        
-        if (linha!= -1) {
+
+        if (linha != -1) {
             String codigo = tblListagemEquipe.getValueAt(linha, 0).toString();
             int codigoEquipe = Integer.parseInt(codigo);
             this.preencherFormulario(codigoEquipe);
             this.limparTabela();
-            this.cl  = (CardLayout) this.getLayout();
-            this.cl.show(this,"painelEdicao" );
+            this.cl = (CardLayout) this.getLayout();
+            this.cl.show(this, "painelEdicao");
         }
-      
+
     }//GEN-LAST:event_tblListagemEquipeMouseClicked
 
     private void limparTabela() {
@@ -343,7 +344,7 @@ Colaborador colaborador;
         ((DefaultTableModel) tblListagemEquipe.getModel()).setNumRows(0);
 
         tblListagemEquipe.updateUI();
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditar;
