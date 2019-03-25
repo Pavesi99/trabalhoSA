@@ -9,7 +9,7 @@ import br.sc.senai.Utilidades.ObterData;
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.views.CadastroEquipe;
-import br.senai.sc.trabalhoFinalSA.views.ExcluirColaborador;
+
 import br.senai.sc.trabalhoFinalSA.views.ListagemAgendaColaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemAgendaEquipe;
 import br.senai.sc.trabalhoFinalSA.views.ListagemDeColaborador;
@@ -19,6 +19,7 @@ import br.senai.sc.trabalhoFinalSA.views.PainelCadastroColaborador;
 import br.senai.sc.trabalhoFinalSA.views.ListagemEquipe;
 import br.senai.sc.trabalhoFinalSA.views.PainelAlterarSenha;
 import br.senai.sc.trabalhoFinalSA.views.PainelCadastrarTarefa;
+import br.senai.sc.trabalhoFinalSA.views.PainelCadastroEquipe;
 import br.senai.sc.trabalhoFinalSA.views.TelaPadrao;
 
 import java.awt.CardLayout;

@@ -85,11 +85,11 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Código da Tarefa", "Data de Criação", "Data de Entrega", "Título", "Descrição"
+                "Código da Equipe", "Data de Criação", "Data de Entrega", "Título", "Descrição"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -273,19 +273,19 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
 
         private void preencherFormulario(int codEquCol){
         AgendaEquipeDao ageE = new AgendaEquipeDao();
-        Agenda age = new Agenda();
+
     
         try {
    
             Agenda agenda = ageE.getAgendaEquipe(codEquCol);
            String data = cpDataCriacao.getText();
-       data = data.replace( "-" , "");
-       data = data.replace( "/" , "");
-        agenda.setCriAge(data);
+           data = data.replace( "-" , "");
+           data = data.replace( "/" , "");
+           agenda.setCriAge(data);
         
         String data2 = cpDataFinalizacao.getText();
-       data2 = data2.replace( "-" , "");
-       data2 = data2.replace( "/" , "");
+        data2 = data2.replace( "-" , "");
+        data2 = data2.replace( "/" , "");
         agenda.setComAge(data2);
            String titulo = agenda.getTitAge();
             String des = agenda.getDesAge();
@@ -361,6 +361,7 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
                  this.limparTabela(); 
                  this.cl.show(this,"painelListagemAgenda");
              } catch (SQLException ex) {
+             
                  Logger.getLogger(ListagemAgendaEquipe.class.getName()).log(Level.SEVERE, null, ex);
              }
         }
