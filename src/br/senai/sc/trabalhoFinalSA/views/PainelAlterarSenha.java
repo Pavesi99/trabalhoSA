@@ -42,6 +42,8 @@ public class PainelAlterarSenha extends javax.swing.JPanel {
         campoConfirmaNovaSenha = new javax.swing.JPasswordField();
         btnSalvar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(204, 204, 204));
+
         labelAlterarSenha.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         labelAlterarSenha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labelAlterarSenha.setText("Alterar senha");
@@ -86,21 +88,21 @@ public class PainelAlterarSenha extends javax.swing.JPanel {
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelNovaSenha)
-                        .addGap(18, 18, 18)
-                        .addComponent(campoNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelConfirmarSenha)
-                        .addGap(18, 18, 18)
-                        .addComponent(campoConfirmaNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelUsuario)
                             .addComponent(jLabel1))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(campoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                            .addComponent(campoSenha))))
+                            .addComponent(campoSenha)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelNovaSenha)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labelConfirmarSenha)
+                        .addGap(18, 18, 18)
+                        .addComponent(campoConfirmaNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(79, Short.MAX_VALUE))
             .addComponent(labelAlterarSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -121,15 +123,15 @@ public class PainelAlterarSenha extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(campoSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelNovaSenha)
                     .addComponent(campoNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelConfirmarSenha)
                     .addComponent(campoConfirmaNovaSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                .addGap(28, 28, 28)
                 .addComponent(btnSalvar)
                 .addContainerGap())
         );

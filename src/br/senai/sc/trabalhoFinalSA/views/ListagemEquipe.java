@@ -6,6 +6,7 @@
 package br.senai.sc.trabalhoFinalSA.views;
 
 import br.senai.sc.trabalhoFinalSA.dao.EquipeDao;
+import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
 import br.senai.sc.trabalhoFinalSA.modelo.Equipe;
 import java.awt.CardLayout;
 import java.sql.SQLException;
@@ -27,10 +28,10 @@ public class ListagemEquipe extends javax.swing.JPanel {
      */
     private CardLayout cl;
     private int codEqu;
-
-    public ListagemEquipe() {
+Colaborador colaborador;
+    public ListagemEquipe(Colaborador colaborador) {
         initComponents();
-        
+        this.colaborador =colaborador;
         this.add(painelListagemEquipe, "painelListagemEquipe");
         this.add(painelEdicao, "painelEdicao");
         
@@ -299,7 +300,10 @@ public class ListagemEquipe extends javax.swing.JPanel {
         
         if (opcaoSelecionada ==0){
             EquipeDao equDao = new EquipeDao();
+            Equipe equ = new Equipe();
              try {
+               
+                 System.out.println(this.codEqu);
                  equDao.eliminar(this.codEqu);
                  this.limparTabela(); 
                  this.cl  = (CardLayout) this.getLayout();

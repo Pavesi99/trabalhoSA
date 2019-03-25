@@ -303,7 +303,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         PainelCadastroColaborador cadastro = new PainelCadastroColaborador();
         PainelAlterarSenha altSenha = new PainelAlterarSenha();
         ExcluirColaborador ec = new ExcluirColaborador();
-        ListagemEquipe le = new ListagemEquipe();
+        ListagemEquipe le = new ListagemEquipe(this.colaborador);
         CadastroEquipe ce = new CadastroEquipe();
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);

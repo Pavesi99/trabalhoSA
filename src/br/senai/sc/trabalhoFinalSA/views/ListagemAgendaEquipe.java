@@ -276,22 +276,24 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         Agenda age = new Agenda();
     
         try {
-        String data = cpDataCriacao.getText();
+   
+            Agenda agenda = ageE.getAgendaEquipe(codEquCol);
+           String data = cpDataCriacao.getText();
        data = data.replace( "-" , "");
        data = data.replace( "/" , "");
-        age.setCriAge(data);
+        agenda.setCriAge(data);
         
         String data2 = cpDataFinalizacao.getText();
        data2 = data2.replace( "-" , "");
        data2 = data2.replace( "/" , "");
-        age.setCriAge(data2);
-        
-        
-            Agenda agenda = ageE.getAgendaEquipe(codEquCol);
+        agenda.setComAge(data2);
+           String titulo = agenda.getTitAge();
+            String des = agenda.getDesAge();
+            System.out.println(titulo+des);
             cpDataCriacao.setText(data);
             cpDataFinalizacao.setText(data2);
-            cpTituloTarefa.setText(agenda.getTitAge());
-            cpDescricaoTarefa.setText(agenda.getDesAge());
+            cpTituloTarefa.setText(titulo);
+            cpDescricaoTarefa.setText(des);
          
            
            
@@ -336,6 +338,7 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
             int codigoAgenda = Integer.parseInt(codigo);
             this.preencherFormulario(codigoAgenda);
             this.limparTabela();
+            this.cl  = (CardLayout) this.getLayout();
             this.cl.show(this,"painelEdicao" );
         }
       
