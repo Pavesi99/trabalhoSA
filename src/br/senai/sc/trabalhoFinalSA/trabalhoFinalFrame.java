@@ -5,6 +5,7 @@
  */
 package br.senai.sc.trabalhoFinalSA;
 
+import br.sc.senai.Utilidades.GerenciaDeDados;
 import br.sc.senai.Utilidades.ObterData;
 import br.senai.sc.trabalhoFinalSA.dao.ColaboradorDao;
 import br.senai.sc.trabalhoFinalSA.modelo.Colaborador;
@@ -345,12 +346,14 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         ColaboradorDao col = new ColaboradorDao();
         ObterData od = new ObterData();
+        GerenciaDeDados gd = new GerenciaDeDados();
 
         try {
             Colaborador c = col.checar(cpUsuario.getText(), cpSenha.getText());
 
             if (c == null) {
                 JOptionPane.showMessageDialog(null, "ERRO AO AUTENTICAR");
+                 
             } else {
 
                 this.colaborador = c;
@@ -362,8 +365,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
 
-                cpSenha.setText(null);
-                cpUsuario.setText(null);
+               gd.criarPastaColaborador();
+              // gd.salvarColaborador(this.colaborador, false);
                 this.autenticarPaineis();
                 this.cl.show(painelPrincipal, "telaPadrao");
 
