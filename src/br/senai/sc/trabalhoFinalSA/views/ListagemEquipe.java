@@ -309,6 +309,7 @@ Colaborador colaborador;
                  this.cl  = (CardLayout) this.getLayout();
                  this.cl.show(this,"painelListagemEquipe");
              } catch (SQLException ex) {
+                     JOptionPane.showMessageDialog(null,"Não é possivel excluir a equipe!");
                  Logger.getLogger(ListagemEquipe.class.getName()).log(Level.SEVERE, null, ex);
              }
         }
