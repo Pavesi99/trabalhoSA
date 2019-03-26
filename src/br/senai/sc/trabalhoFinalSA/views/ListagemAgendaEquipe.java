@@ -31,6 +31,8 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
  private int codAgeEqu;
  private String criAge, comAge, titAge, desAge;
  private Colaborador colaborador;
+  Agenda agendaAntiga = new Agenda();
+ 
     
     public ListagemAgendaEquipe(Colaborador colaborador) {
         initComponents();
@@ -271,14 +273,15 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
        
     }//GEN-LAST:event_tblListagemAgendaComponentShown
 
-        private void preencherFormulario(int codEquCol){
+        private void preencherFormulario(int codEquCol, String criAge, String comAge, String titAge, String desAge){
         AgendaEquipeDao ageE = new AgendaEquipeDao();
-
+        
     
         try {
-   
-            Agenda agenda = ageE.getAgendaEquipe(codEquCol);
-       
+             Agenda age = new Agenda();
+            Agenda agenda = ageE.getAgendaEquipe(codEquCol, criAge, comAge, titAge, desAge);
+          
+            
            String data = agenda.getCriAge();
         String[] date = data.split("-");
         data = date[2] + "" + date[1] + "" + date[0];
@@ -295,7 +298,20 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
             cpDataFinalizacao.setText(agenda.getComAge());
             cpTituloTarefa.setText(titulo);
             cpDescricaoTarefa.setText(des);
-         
+            
+        String data3 = cpDataCriacao.getText();;
+        String[] date3 = data3.split("/");
+        data3 = date3[2] + "-" + date3[1] + "-" + date3[0];
+           this.agendaAntiga.setCriAge(data3);
+        
+        String data4 =  cpDataFinalizacao.getText();
+        String[] date4 = data4.split("/");
+        data4 = date4[2] + "-" + date4[1] + "-" + date4[0];
+        this.agendaAntiga.setComAge(data4);
+          
+         this.agendaAntiga.setTitAge(cpTituloTarefa.getText());
+         this.agendaAntiga.setDesAge(cpDescricaoTarefa.getText());
+          System.out.println(age.getCriAge()+age.getComAge()+age.getTitAge()+age.getDesAge());
            
            
         } catch (SQLException ex) {
@@ -328,10 +344,12 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         age.setDesAge(cpDescricaoTarefa.getText());
   
         this.colaborador.setEquCol(this.codAgeEqu);
-
+        System.out.println(this.agendaAntiga.getCriAge()+agendaAntiga.getComAge()+agendaAntiga.getDesAge()+agendaAntiga.getTitAge()+this.colaborador.getEquCol());
         AgendaEquipeDao ageEDao = new AgendaEquipeDao();
+        
+        
         try {
-            ageEDao.alterar(age, this.colaborador);
+            ageEDao.alterar(age, this.colaborador,this.agendaAntiga );
             JOptionPane.showMessageDialog(null,"Tarefa da Equipe Atualizada com Sucesso!");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null,"Falha ao Atualizar a Tarefa da Equipe");
@@ -349,8 +367,12 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         
         if (linha!= -1) {
             String codigo = tblListagemAgenda.getValueAt(linha, 0).toString();
+            String dataCriacao = tblListagemAgenda.getValueAt(linha, 1).toString();
+            String dataFinalizacao = tblListagemAgenda.getValueAt(linha, 2).toString();
+            String tituloTarefa = tblListagemAgenda.getValueAt(linha, 3).toString();
+            String descricaoTarefa = tblListagemAgenda.getValueAt(linha, 4).toString();
             int codigoAgenda = Integer.parseInt(codigo);
-            this.preencherFormulario(codigoAgenda);
+            this.preencherFormulario(codigoAgenda, dataCriacao, dataFinalizacao, tituloTarefa, descricaoTarefa);
             this.limparTabela();
             this.cl  = (CardLayout) this.getLayout();
             this.cl.show(this,"painelEdicao" );
@@ -371,8 +393,7 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
         if (opcaoSelecionada ==0){
             AgendaEquipeDao ageEDao = new AgendaEquipeDao();
            
-           //this.criAge = cpDataCriacao.getText();
-           //this.comAge = cpDataFinalizacao.getText();
+           
            this.titAge = cpTituloTarefa.getText();
            this.desAge = cpDescricaoTarefa.getText();
            this.codAgeEqu = this.colaborador.getEquCol();
@@ -388,7 +409,6 @@ public class ListagemAgendaEquipe extends javax.swing.JPanel {
            this.comAge = data2;
       
              try {
-                 System.out.println(this.criAge+this.comAge+this.titAge+this.desAge+this.codAgeEqu);
                  ageEDao.eliminar(this.criAge,this.comAge, this.titAge, this.desAge, this.codAgeEqu);
                  this.limparTabela(); 
                  this.cl.show(this,"painelListagemAgenda");
