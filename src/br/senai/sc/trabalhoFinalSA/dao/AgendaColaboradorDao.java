@@ -21,7 +21,7 @@ public class AgendaColaboradorDao extends ConnectionFactory {
     public void inserir(Agenda age, int col, int equ) throws SQLException {
 
         String sql = "insert into agenda "
-                + "(criAge, comAge,codCol,codEqu, titAge, desAge) "
+                + "(criAge, comAge,codCol,codEqu, titAge, desAge)"
                 + "values (?, ?, ?, ?, ?, ?);";
 
         try (PreparedStatement st = this.con.prepareStatement(sql)) {
@@ -29,7 +29,6 @@ public class AgendaColaboradorDao extends ConnectionFactory {
             st.setString(2, age.getComAge());
             st.setInt(3, col);
             st.setInt(4, equ);
-
             st.setString(5, age.getTitAge());
             st.setString(6, age.getDesAge());
 

@@ -25,7 +25,9 @@ import br.senai.sc.trabalhoFinalSA.views.TelaPadrao;
 
 import java.awt.CardLayout;
 import java.awt.Image;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -117,6 +119,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         painelLogin.add(LabelSenha);
         LabelSenha.setBounds(210, 280, 70, 30);
 
+        btnEntrar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnEntrar.setText("Entrar");
         btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +127,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             }
         });
         painelLogin.add(btnEntrar);
-        btnEntrar.setBounds(490, 340, 63, 23);
+        btnEntrar.setBounds(490, 340, 80, 23);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -143,7 +146,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/sc/senai/trabalhoFinalSA/imagens/ImagemLogin.jpg"))); // NOI18N
         painelLogin.add(jLabel1);
-        jLabel1.setBounds(0, 0, 760, 380);
+        jLabel1.setBounds(0, 0, 720, 380);
 
         painelPrincipal.add(painelLogin, "card2");
 
@@ -278,17 +281,17 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 707, Short.MAX_VALUE)
+            .addGap(0, 721, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 697, Short.MAX_VALUE)
+                    .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 379, Short.MAX_VALUE)
+            .addGap(0, 372, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
+                .addComponent(painelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
         );
 
         pack();
@@ -351,22 +354,24 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             } else {
 
                 this.colaborador = c;
-
+                ArrayList <Colaborador> arrayCol = new ArrayList();
                 int codigo = this.colaborador.getCodCol();
                 ColaboradorDao colaborador = new ColaboradorDao();
 
                 colaborador.SetarUltimoAcesso(codigo);
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
-
+                
                gd.criarPastaColaborador();
-              // gd.salvarColaborador(this.colaborador, false);
+               gd.salvarLog(this.colaborador, false);
                 this.autenticarPaineis();
                 this.cl.show(painelPrincipal, "telaPadrao");
 
             }
 
         } catch (SQLException ex) {
+            Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(trabalhoFinalFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         CardLayout cl = (CardLayout) painelPrincipal.getLayout();

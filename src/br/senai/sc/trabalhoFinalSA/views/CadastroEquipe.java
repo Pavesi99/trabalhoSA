@@ -88,6 +88,7 @@ public class CadastroEquipe extends javax.swing.JPanel {
         labelDescricao.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         labelDescricao.setText("Descrição:");
 
+        btnSalvar.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,9 +108,6 @@ public class CadastroEquipe extends javax.swing.JPanel {
                         .addComponent(labelCadastroEquipe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSeparator1)
                         .addComponent(jSeparator2)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroEquipeLayout.createSequentialGroup()
-                            .addComponent(btnSalvar)
-                            .addGap(56, 56, 56))
                         .addGroup(CadastroEquipeLayout.createSequentialGroup()
                             .addGap(59, 59, 59)
                             .addGroup(CadastroEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +118,11 @@ public class CadastroEquipe extends javax.swing.JPanel {
                                         .addComponent(cpDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(cpNome, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(0, 57, Short.MAX_VALUE)))))
-                    .addContainerGap()))
+                    .addContainerGap())
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CadastroEquipeLayout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(57, 57, 57)))
         );
         CadastroEquipeLayout.setVerticalGroup(
             CadastroEquipeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

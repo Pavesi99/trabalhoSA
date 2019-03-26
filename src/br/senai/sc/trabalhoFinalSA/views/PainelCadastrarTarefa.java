@@ -387,11 +387,17 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         try {
             ageDao.inserir(age, col, equ);
             JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+            cpCodEqu.setText(null);
+            cpDataFinalizacao.setText(null);
+            cpTituloTarefa.setText(null);
+            cpDescricaoTarefa.setText(null);
+            cpDataCriacao.setText(null);
+
         } catch (SQLException ex) {
             Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao salvar tarefa");
         }
-
+      
     }
 
     private void btnSalvarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarColaboradorActionPerformed
@@ -424,6 +430,11 @@ public class PainelCadastrarTarefa extends javax.swing.JPanel {
         try {
             ageDao.inserir(age, col, equ);
             JOptionPane.showMessageDialog(null, "Tarefa salva com susesso");
+            cpCodCol.setText(null);
+            cpDataFinalizacao2.setText(null);
+            cpTituloTarefa2.setText(null);
+            cpDescricaoTarefa2.setText(null);
+            cpDataCriacao2.setText(null);
         } catch (SQLException ex) {
             Logger.getLogger(PainelCadastrarTarefa.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao salvar tarefa");

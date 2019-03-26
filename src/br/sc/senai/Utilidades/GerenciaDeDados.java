@@ -11,34 +11,7 @@ import java.util.ArrayList;
  */
 public class GerenciaDeDados {
 
-    public static void salvarColaborador(ArrayList<Colaborador> listaDeColaborador, boolean sobreescrever) throws IOException {
-        //Varrer o array
-        String conteudoCsv = "";
-        String linha = "";
-        for (int i = 0; i < listaDeColaborador.size(); i++) {
-            Colaborador cadastroColaborador = listaDeColaborador.get(i);
-            linha = cadastroColaborador.getCodCol() + ";" + cadastroColaborador.getNomCol() + ";"
-                    + cadastroColaborador.getCidCol() + ";" + cadastroColaborador.getNumCol() + ";"
-                    + cadastroColaborador.getBaiCol() + ";"
-                    + cadastroColaborador.getRuaCol() + ";" + cadastroColaborador.getCepCol() + ";"
-                    + cadastroColaborador.getEmaCol() + ";" + cadastroColaborador.getDddCol() + ";"
-                    + cadastroColaborador.getCelCol() + ";" + cadastroColaborador.getUsuCol() + ";"
-                    + cadastroColaborador.getSenCol() + ";" + cadastroColaborador.getTipCol() + ";"
-                    + cadastroColaborador.getUtiCol() + ";" + cadastroColaborador.getEquCol() + ";"
-                    + cadastroColaborador.getEstCol();
-
-            conteudoCsv = conteudoCsv + linha + "\n";
-        }
-        ManipulacaoDeArquivos arquivo = new ManipulacaoDeArquivos("C:/Users/Suporte/Desktop/Dados_Clientes", "cadastroDeColaboradores.csv");
-        if (sobreescrever) {
-            arquivo.sobreEscrever(conteudoCsv);
-
-        } else {
-            arquivo.gravar(conteudoCsv);
-        }
-
-    }
-
+   
     public static void criarPastaColaborador() {
         File CPasta = new File("C:/Users/Suporte/Desktop/Dados_Colaboradores");
         CPasta.mkdirs();
@@ -87,17 +60,17 @@ public class GerenciaDeDados {
         return listaDeColaborador;
     }
 
-    public static void salvarLog(ArrayList<Colaborador> listaDeColaborador, boolean sobreescrever) throws IOException {
+    public static void salvarLog(Colaborador cadastroColaborador, boolean sobreescrever) throws IOException {
         //Varrer o array
         String conteudoCsv = "";
         String linha = "";
-        for (int i = 0; i < listaDeColaborador.size(); i++) {
-            Colaborador cadastroColaborador = listaDeColaborador.get(i);
+       
+            
             linha = "O usuario -->" + cadastroColaborador.getUsuCol() + "<-- logou na data -->" + cadastroColaborador.getUtiCol();
 
             conteudoCsv = conteudoCsv + linha + "\n";
-        }
-        ManipulacaoDeArquivos arquivo = new ManipulacaoDeArquivos("C:/Users/Suporte/Desktop/Dados_Colaboradores", "registroDeLog.csv");
+        
+        ManipulacaoDeArquivos arquivo = new ManipulacaoDeArquivos("C:/Users/Suporte/Desktop/Dados_Colaboradores", "registroDeLog.txt");
         if (sobreescrever) {
             arquivo.sobreEscrever(conteudoCsv);
 
