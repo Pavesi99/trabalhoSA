@@ -24,7 +24,7 @@ public class EquipeDao extends ConnectionFactory {
     public EquipeDao() {
         this.con = this.getConnection();
     }
-// A revisar
+
 
     public void inserir(Equipe equ) throws SQLException {
 
@@ -128,6 +128,11 @@ public class EquipeDao extends ConnectionFactory {
         return equi;
     }
 
+       /**
+        * Pega a ultima equipe cadastrada
+        * @return o codigo da equipe
+        * @throws SQLException 
+        */
     public int codigoUltimaEquipeSalva() throws SQLException {
         
          String sql = "select * from equipe order by codequ desc limit 1 ";

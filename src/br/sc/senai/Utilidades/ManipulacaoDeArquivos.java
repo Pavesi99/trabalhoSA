@@ -69,17 +69,7 @@ public class ManipulacaoDeArquivos {
         return conteudo;
     }
 
-    public String lerEmString() throws IOException
-    {
-        String conteudoArquivo[] = this.ler();
-        String conteudo= "";
-        for(int i = 0;i<conteudoArquivo.length; i++)
-        {
-         conteudo = conteudo + conteudoArquivo[i]+"\n";   
-        }
-        return conteudo;
-         
-    }
+   
 }
 
 

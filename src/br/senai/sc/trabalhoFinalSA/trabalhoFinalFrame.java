@@ -296,20 +296,28 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        /**
+         * menu que adiciona e chama o painel para cadastrar o colaborador
+         */
+       
     private void menuCadastrarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarColaboradorActionPerformed
         PainelCadastroColaborador cadastro = new PainelCadastroColaborador();
         painelPrincipal.add(cadastro, "painelCadastro");
         this.cl.show(painelPrincipal, "painelCadastro");
     }//GEN-LAST:event_menuCadastrarColaboradorActionPerformed
 
+    /**
+         * menu que adiciona e chama o painel para listar as tarefas da equipe
+         */
     private void menuAgendaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaEquipeActionPerformed
         ListagemAgendaEquipe lae = new ListagemAgendaEquipe(this.colaborador);
         painelPrincipal.add(lae, "painelListagemAgendaEquipe");
 
         this.cl.show(painelPrincipal, "painelListagemAgendaEquipe");
     }//GEN-LAST:event_menuAgendaEquipeActionPerformed
-
+  /**
+         * menu que adiciona e chama o painel para listar os colaboradores 
+         */
     private void menuListarColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuListarColaboradorActionPerformed
         ListagemDeColaborador listar = new ListagemDeColaborador(0);
         painelPrincipal.add(listar, "painelListagem");
@@ -323,6 +331,9 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cpUsuarioActionPerformed
 
+    /**
+     * Analiza se o tipo de colaborador e inicializa a tela de login
+     */
     private void autenticarPaineis() {
 
         this.BarraMenu.setVisible(true);
@@ -339,13 +350,22 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     }
 
-
+    /**
+     * Seta a data de acesso do usuario no banco de dados,
+     * Verifica se o login é valido e manda para o "telaPadrao"
+     * @param evt 
+     */
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         ColaboradorDao col = new ColaboradorDao();
         ObterData od = new ObterData();
         GerenciaDeDados gd = new GerenciaDeDados();
 
         try {
+             int codigo = this.colaborador.getCodCol();
+                ColaboradorDao colaborador = new ColaboradorDao();
+
+                colaborador.SetarUltimoAcesso(codigo);
+            
             Colaborador c = col.checar(cpUsuario.getText(), cpSenha.getText());
 
             if (c == null) {
@@ -354,11 +374,8 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
             } else {
 
                 this.colaborador = c;
-                ArrayList <Colaborador> arrayCol = new ArrayList();
-                int codigo = this.colaborador.getCodCol();
-                ColaboradorDao colaborador = new ColaboradorDao();
-
-                colaborador.SetarUltimoAcesso(codigo);
+               
+               
 
                 JOptionPane.showMessageDialog(null, "AUTENTICADO COM SUCESSO");
                 
@@ -379,6 +396,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEntrarActionPerformed
 
+   
     private void menuListarColaboradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuListarColaboradorMouseClicked
 
     }//GEN-LAST:event_menuListarColaboradorMouseClicked
@@ -389,6 +407,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         this.cl.show(painelPrincipal, "painelListagemEquipe");
     }//GEN-LAST:event_menuListarEquipeActionPerformed
 
+     /**
+     * Mostra o painel de cadastrar a equipe
+     * @param evt 
+     */
     private void menuCadastrarEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCadastrarEquipeActionPerformed
         CadastroEquipe ce = null;
         try {
@@ -401,18 +423,30 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         this.cl.show(painelPrincipal, "painelCadastroEquipe");
     }//GEN-LAST:event_menuCadastrarEquipeActionPerformed
 
+    /**
+     * chama o painel para alterar a senha do colaborador
+     * @param evt 
+     */
     private void menuAlterSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAlterSenhaActionPerformed
         PainelAlterarSenha altSenha = new PainelAlterarSenha();
         painelPrincipal.add(altSenha, "alterarSenha");
         cl.show(painelPrincipal, "alterarSenha");
     }//GEN-LAST:event_menuAlterSenhaActionPerformed
 
+    /**
+     * Chama o painel de listagem dos colaboradores
+     * @param evt 
+     */
     private void menuAgendaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAgendaColaboradorActionPerformed
         ListagemAgendaColaborador agenCol = new ListagemAgendaColaborador(this.colaborador);
         painelPrincipal.add(agenCol, "painelagendaCol");
         cl.show(painelPrincipal, "painelagendaCol");
     }//GEN-LAST:event_menuAgendaColaboradorActionPerformed
 
+    /**
+     * Chama o painel para cadastro da tarefa da equipe
+     * @param evt 
+     */
     private void menuAdicionarTarefaEquipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaEquipeActionPerformed
         String painel = "equipe";
         PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador, painel);
@@ -421,7 +455,10 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_menuAdicionarTarefaEquipeActionPerformed
 
-
+/**
+ * Chama o painel para alterar os dados do colaborador
+ * @param evt 
+ */
     private void manuAlterarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manuAlterarCadastroActionPerformed
 
         ListagemDeColaborador listarEAlterar = new ListagemDeColaborador(1);//parametro  1  lista e da opcao de altear
@@ -431,19 +468,30 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
         cl.show(painelPrincipal, "painelListagemAlt");
     }//GEN-LAST:event_manuAlterarCadastroActionPerformed
 
+    /**
+     * Chama o painel para cadastrar a tarefa do colaborador
+     * @param evt 
+     */
     private void menuAdicionarTarefaColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAdicionarTarefaColaboradorActionPerformed
         String painel = "colaborador";
         PainelCadastrarTarefa ct = new PainelCadastrarTarefa(this.colaborador, painel);
         painelPrincipal.add(ct, "painelCadastrarTarefa");
         cl.show(painelPrincipal, "painelCadastrarTarefa");
     }//GEN-LAST:event_menuAdicionarTarefaColaboradorActionPerformed
-
+    /**
+     * Chama a "telaPadrao"
+     * @param evt 
+     */
     private void menuInicioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuInicioMouseClicked
         TelaPadrao padrao = new TelaPadrao(this.colaborador);
         painelPrincipal.add(padrao, "telaPadrao");
         this.cl.show(painelPrincipal, "telaPadrao");
     }//GEN-LAST:event_menuInicioMouseClicked
 
+    /**
+     * Chama a listagem de colaboradores para excluir
+     * @param evt 
+     */
     private void menuExcluirColaboradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuExcluirColaboradorActionPerformed
         ListagemDeColaborador excluirCadastro = new ListagemDeColaborador(3);
         painelPrincipal.add(excluirCadastro, "painelListagem");
@@ -451,7 +499,7 @@ public class trabalhoFinalFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_menuExcluirColaboradorActionPerformed
 
     private void cpSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpSenhaActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cpSenhaActionPerformed
 
     /**

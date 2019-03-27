@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,10 +19,18 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
+/**
+ * 
+ * @author Aluno
+ */
 public class CadastroEquipe extends javax.swing.JPanel {
     private int codigoEquipe;
     private CardLayout cl;
+    /**
+     * Pega o codigo da ultima equipe cadastrada e printa ela somando mais um
+     * @param cod codigo da ultima equipe
+     * @throws SQLException 
+     */
     public CadastroEquipe() throws SQLException {
 
     
@@ -35,6 +44,9 @@ public class CadastroEquipe extends javax.swing.JPanel {
 
         
     }
+    /**
+     * Limpa as duas tabelas e de colaboradores sem equipe e na equipe
+     */
     private void limparTabela() {
         ((DefaultTableModel) tabelaColaboradoresSemEquipe.getModel()).setNumRows(0);
         tabelaColaboradoresSemEquipe.updateUI();
@@ -243,6 +255,10 @@ public class CadastroEquipe extends javax.swing.JPanel {
         add(PainelCadastroEquipe, "card3");
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Adiciona a nova equipe ao banco de dados e vai para tela para adicionar os colaboradores
+     * @param evt  
+     */
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         Equipe equ = new Equipe();
         equ.setNomEqu(cpNome.getText());
@@ -268,6 +284,10 @@ public class CadastroEquipe extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_cpNomeActionPerformed
 
+    /**
+     * Adiciona o colaborador a nova equipe
+     * @param evt 
+     */
     private void tabelaColaboradoresSemEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaColaboradoresSemEquipeMouseClicked
         int linha = tabelaColaboradoresSemEquipe.getSelectedRow();
         String codigo = tabelaColaboradoresSemEquipe.getValueAt(linha, 0).toString();
@@ -284,6 +304,10 @@ public class CadastroEquipe extends javax.swing.JPanel {
 
     }//GEN-LAST:event_tabelaColaboradoresSemEquipeMouseClicked
 
+    /**
+     * Remove o colaborador da equipe
+     * @param evt 
+     */
     private void tabelaColaboradoresDaNovaEquipeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaColaboradoresDaNovaEquipeMouseClicked
          int linha = tabelaColaboradoresDaNovaEquipe.getSelectedRow();
         String codigo = tabelaColaboradoresDaNovaEquipe.getValueAt(linha, 0).toString();
@@ -299,7 +323,10 @@ public class CadastroEquipe extends javax.swing.JPanel {
         this.popularTabelaSemEquipe();
 
     }//GEN-LAST:event_tabelaColaboradoresDaNovaEquipeMouseClicked
-private void popularTabelaSemEquipe() {
+/**
+ * Agrega os valores a tabela de colaboradores sem equipe
+ */
+    private void popularTabelaSemEquipe() {
 
         ColaboradorDao col = new ColaboradorDao();
         List<Colaborador> listaColaborador;
@@ -324,6 +351,9 @@ private void popularTabelaSemEquipe() {
             Logger.getLogger(ListagemDeColaborador.class.getName()).log(Level.SEVERE, null, ex);
         }
 }
+    /**
+     *  Agrega os valores a tabela de colaboradores que estão na equipe
+     */
 private void popularTabelaEquipeAtual() {
 
         ColaboradorDao cool = new ColaboradorDao();

@@ -249,7 +249,12 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
   
-  
+  /**
+   *  Adiciona o colaborador na nova equipe
+   * @param codColaborador codigo do colaborador   
+   * @param codEquipe codigo da equipe
+   * @throws SQLException 
+   */
    public void cadastrarEquipe(int codColaborador,int codEquipe) throws SQLException {
 
         String sql = "update colaborador set equCol = ? where codCol =?";
@@ -265,6 +270,11 @@ public class ColaboradorDao extends ConnectionFactory {
 
     }
    
+   /**
+    * Lista os colaboradores disponiveis para serem adicionados a nova equipe
+    * @return Colaboradores disponiveis(Sem Equipe)
+    * @throws SQLException 
+    */
        public List<Colaborador> listarColaboradorParaCadastroEquipe() throws SQLException {
         String sql = "select * from colaborador where equCol=1";
         List<Colaborador> colaboradores = null;
@@ -307,7 +317,12 @@ public class ColaboradorDao extends ConnectionFactory {
     }
       
  
-
+/**
+ * Lista os colaboradores que foram adicionados a nova equipe 
+ * @param equipe codigoda equipe
+ * @return Colaboradores que fazem parte da nova equipe
+ * @throws SQLException 
+ */
     public List<Colaborador> listarColaboradoresEquipe(int equipe) throws SQLException {
         String sql = "select * from colaborador where equCol= ? ";
         List<Colaborador> colaboradores = null;

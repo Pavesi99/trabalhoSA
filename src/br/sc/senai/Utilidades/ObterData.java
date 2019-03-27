@@ -30,11 +30,7 @@ public class ObterData {
   
 }
      
-       public void inserirData(){
-        
-        
-            
-        }
+     
     
         }
 
